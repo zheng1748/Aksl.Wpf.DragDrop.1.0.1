@@ -124,7 +124,6 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
         #region DragDropItemMouseMove Event
         private void DragDropItemMouseMove(object sender, MouseEventArgs e)
         {
-           
         }
         #endregion
 
