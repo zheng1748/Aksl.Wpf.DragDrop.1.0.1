@@ -1,0 +1,20 @@
+﻿Aksl.Modules.HamburgerMenuNavigationSideBar
+
+
+library
+C#
+.cs
+C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\SideBars\HamburgerMenuNavigationSideBar\obj\Debug\net8.0-windows8.0\
+Aksl.Modules.HamburgerMenuNavigationSideBar
+none
+false
+TRACE;DEBUG;NET;NET8_0;NETCOREAPP
+
+8-1288095199
+
+23440270027
+211-1562927679
+DragDrop\DragDropItemView.xaml;DragDrop\DragDropView .xaml;Views\GroupedMenusView.xaml;Views\GroupedMenuView.xaml;Views\HamburgerMenuNavigationSideBarHubView.xaml;Views\MenuContentView.xaml;Views\MenuItemHeader.xaml;Views\MenuItemView.xaml;
+
+False
+

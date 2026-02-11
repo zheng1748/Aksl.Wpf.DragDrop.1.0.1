@@ -42,7 +42,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     Height = 0,
                     Width = 0,
                     Stroke = new SolidColorBrush(Colors.Red),
-                    StrokeDashArray = new(){ 2d, 4d },
+                    StrokeDashArray = new() { 2d, 4d },
                     Fill = new SolidColorBrush(Color.FromScRgb(0x40, 0x00, 0xA0, 0xFF)),
                     Visibility = Visibility.Collapsed
                 };
@@ -79,7 +79,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 
             DragDropItems.Add(dragDropItemViewModel);
 
-           var element= e.Source as ItemsControl;
+            var element = e.Source as ItemsControl;
             //VisualTreeFinder visualTreeFinder = new();
             //var childs = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(element);
             //var nodeView = childs.FirstOrDefault(d => (d is XNodeView)) as XNodeView;
@@ -198,8 +198,8 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     var childs = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(element);
                     mainCanvas = childs.FirstOrDefault(d => (d is System.Windows.Controls.Canvas) && (d as System.Windows.Controls.Canvas).Name == "MainCanvas") as System.Windows.Controls.Canvas;
                     var selectionRectangle = childs.FirstOrDefault(d => (d is Shape) && (d as Shape).Name == "SelectionRectangle") as Rectangle;
-                    DragDropItemViewModel selectionRectangleViewModel = DragDropItems.FirstOrDefault(dd =>(dd.ViewElement is Shape) && (dd.ViewElement as Shape).Name == "SelectionRectangle");
-                   
+                    DragDropItemViewModel selectionRectangleViewModel = DragDropItems.FirstOrDefault(dd => (dd.ViewElement is Shape) && (dd.ViewElement as Shape).Name == "SelectionRectangle");
+
                     selectionRectangle.Visibility = Visibility.Visible;
                     selectionRectangle.Width = 0;
                     selectionRectangle.Height = 0;
@@ -229,7 +229,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 
             System.Windows.Controls.Canvas mainCanvas;
 
-            if (_selectedRectangleStartPoint.HasValue && e.LeftButton == MouseButtonState.Pressed )
+            if (_selectedRectangleStartPoint.HasValue && e.LeftButton == MouseButtonState.Pressed)
             {
                 DragMovedRectangle();
             }
@@ -259,7 +259,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     selectionRectangle.Width = width;
                     selectionRectangle.Height = height;
 
-                  //  Debug.Print($"Width:{selectionRectangleViewModel.Width} Height:{selectionRectangleViewModel.Height}");
+                    //  Debug.Print($"Width:{selectionRectangleViewModel.Width} Height:{selectionRectangleViewModel.Height}");
                 }
             }
         }
@@ -297,7 +297,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                 mainCanvas.ReleaseMouseCapture();
                 Mouse.Capture(null);
 
-                _selectedRectangleStartPoint=null;
+                _selectedRectangleStartPoint = null;
             }
         }
         #endregion

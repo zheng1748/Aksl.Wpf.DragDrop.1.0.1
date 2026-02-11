@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "9rItyZAAoPn6bhrO8oU4jqesVESQwj+EzMU6op8fhChVoUDuUE+UpN/MmXSmAAj9nXvG9vtOChW+Hq3p+WrA9w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Toolkits\\Prism Library\\Prism.Wpf\\Prism.Wpf.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\zheng\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.77\\microsoft.xaml.behaviors.wpf.1.1.77.nupkg.sha512"
+  ],
+  "logs": []
+}
