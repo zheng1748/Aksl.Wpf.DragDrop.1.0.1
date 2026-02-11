@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MenuItem Id="0"
+		  Name="Yellows"
+		  Title="Root"
+		  Level="0">
+	<MenuItem Id="2"
+			  Name="Yellower"
+			  Title="Yellow"
+			  Level="2"
+			  IsCacheable="True"
+			  IconKind="Yen"
+			  ItemType="Item"
+			  ModuleName="YellowsModule"
+			  ViewName="Aksl.Modules.Yellows.Views.YellowView,Aksl.Modules.Yellows"
+			  Width="100"
+			  Height="100">
+	</MenuItem>
+	<MenuItem Id="2"
+			  Name="YellowGreener"
+			  Title="YellowGreen"
+			  Level="2"
+			  IsCacheable="True"
+			  IconKind="Greenhouse"
+			  ItemType="Item"
+			  ModuleName="YellowsModule"
+			  ViewName="Aksl.Modules.Yellows.Views.YellowGreenView,Aksl.Modules.Yellows"
+			  Width="100"
+			  Height="100">
+	</MenuItem>
+</MenuItem>
+
+

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MenuItem Id="0"
+		  Name="Blues"
+		  Title="Root"
+		  Level="0" >
+	<MenuItem Id="2"
+			  Name="Bluer"
+			  Title="Blue"
+			  Level="1"
+			  IsCacheable="False"
+			  IconKind="BluetoothAudio"
+			  ItemType="Item"
+			  ModuleName="BluesModule"
+			  ViewName="Aksl.Modules.Blues.Views.BlueView,Aksl.Modules.Blues"
+			  Width="100"
+			  Height="100">
+	</MenuItem>
+	<MenuItem Id="2"
+			  Name="LightBluer"
+			  Title="Light Blue"
+			  Level="1"
+			  IsCacheable="False"
+			  IconKind="BluetoothAudio"
+			  ItemType="Item"
+			  ModuleName="BluesModule"
+			  ViewName="Aksl.Modules.Blues.Views.LightBlueView,Aksl.Modules.Blues"
+			  Width="100"
+			  Height="100">
+	</MenuItem>
+</MenuItem>
+
+

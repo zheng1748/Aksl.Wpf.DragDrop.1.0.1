@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MenuItem Id="0"
+		  Name="Blacks"
+		  Title="Root"
+		  Level="0" >
+	<MenuItem Id="2"
+			  Name="Blacker"
+			  Title="Black"
+			  Level="1"
+			  IsCacheable="True"
+			  IconKind="BlackMesa"
+			  ItemType="Item"
+			  ModuleName="BlacksModule"
+			  ViewName="Aksl.Modules.Blacks.Views.BlackView,Aksl.Modules.Blacks"
+			  Width="100"
+			  Height="100">
+	</MenuItem>
+	<MenuItem Id="32"
+			  Name="Silver"
+			  Title="Silver"
+			  Level="1"
+			  IsCacheable="True"
+			  IconKind="SilverwareKnife"
+			  ItemType="Item"
+			  ModuleName="BlacksModule"
+			  ViewName="Aksl.Modules.Blacks.Views.SilverView,Aksl.Modules.Blacks"
+			  Width="100"
+			  Height="100">
+	</MenuItem>
+</MenuItem>
+
+

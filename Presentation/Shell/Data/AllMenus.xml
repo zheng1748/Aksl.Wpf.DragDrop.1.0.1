@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MenuItem Id="0"
+		  Title="根"
+		  Name="All"
+		  Level="0" >
+	<MenuItem Id="1"
+			  Name="BlacksManager"
+			  Title="Blacks"
+			  Level="1"
+			  IsHome="True"
+			  IconKind="Blackboard"
+			  ItemType="Item"
+			  ModuleName=""
+			  ViewName=""
+		      IsNextNavigation="True"
+			  NavigationName="Blacks">
+	</MenuItem>
+	<MenuItem Id="1"
+			  Name="BluesManager"
+			  Title="Blues"
+			  Level="1"
+			  IconKind="PhoneBluetooth"
+			  ItemType="Item"
+			  IsCacheable="True"
+			  ModuleName=""
+			  IsNextNavigation="True"
+			  NavigationName="Blues">
+	</MenuItem>
+	<MenuItem Id="2"
+			  Name="YellowsManager"
+			  Title="Yellows"
+			  Level="1"
+			  IconKind="SignYield"
+			  ItemType="Item"
+			  IsCacheable="True"
+			  ModuleName=""
+			  IsNextNavigation="True"
+			  NavigationName="Yellows">
+	</MenuItem>
+	<MenuItem Id="2"
+			  Name="RedsManager"
+			  Title="FunctionNode"
+			  Level="1"
+			  IconKind="AccountArrowDown"
+			  ItemType="Item"
+			  IsCacheable="True"
+			  ModuleName=""
+			  IsNextNavigation="True"
+			  NavigationName="Reds">
+	</MenuItem>
+</MenuItem>

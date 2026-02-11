@@ -1,0 +1,271 @@
+﻿<UserControl x:Class="Aksl.Views.XNodeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ei="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:prism="http://prismlibrary.com/"
+             mc:Ignorable="d"
+             d:DesignHeight="160"
+             d:DesignWidth="240"
+             Name="XNoder">
+    <UserControl.Resources>
+        
+        <Storyboard x:Key="PolylineMarginOutStoryboard">
+            <ThicknessAnimation Storyboard.TargetName="p1"
+                                Storyboard.TargetProperty="Margin"
+                                Duration="0:0:0.2"
+                                From="8,8,0,0"
+                                To="0,0,0,0"
+                                AutoReverse="True">
+            </ThicknessAnimation>
+            <ThicknessAnimation Storyboard.TargetName="p2"
+                                Storyboard.TargetProperty="Margin"
+                                Duration="0:0:0.2"
+                                From="0,8,8,0"
+                                To="0,0,0,0"
+                                AutoReverse="True">
+            </ThicknessAnimation>
+            <ThicknessAnimation Storyboard.TargetName="p3"
+                                Storyboard.TargetProperty="Margin"
+                                Duration="0:0:0.2"
+                                From="8,0,0,8"
+                                To="0,0,0,0"
+                                AutoReverse="True">
+            </ThicknessAnimation>
+            <ThicknessAnimation Storyboard.TargetName="p4"
+                                Storyboard.TargetProperty="Margin"
+                                Duration="0:0:0.2"
+                                From="0,0,8,8"
+                                To="0,0,0,0"
+                                AutoReverse="True">
+            </ThicknessAnimation>
+        </Storyboard>
+        
+        <Storyboard x:Key="PolylineMarginInStoryboard">
+            <ThicknessAnimation Storyboard.TargetName="p1"
+                                Storyboard.TargetProperty="Margin"
+                                Duration="0:0:0.2"
+                                From="0,0,0,0"
+                                To="8,8,0,0"
+                                AutoReverse="False">
+            </ThicknessAnimation>
+            <ThicknessAnimation Storyboard.TargetName="p2"
+                                Storyboard.TargetProperty="Margin"
+                                Duration="0:0:0.2"
+                                From="0,0,0,0"
+                                To="0,8,8,0"
+                                AutoReverse="False">
+            </ThicknessAnimation>
+            <ThicknessAnimation Storyboard.TargetName="p3"
+                                Storyboard.TargetProperty="Margin"
+                                Duration="0:0:0.2"
+                                From="0,0,0,0"
+                                To="8,0,0,8"
+                                AutoReverse="False">
+            </ThicknessAnimation>
+            <ThicknessAnimation Storyboard.TargetName="p4"
+                                Storyboard.TargetProperty="Margin"
+                                Duration="0:0:0.2"
+                                From="0,0,0,0"
+                                To="0,0,8,8"
+                                AutoReverse="False">
+            </ThicknessAnimation>
+        </Storyboard>
+
+        <Storyboard x:Key="PolylineColorOutStoryboard">
+            <ColorAnimation Storyboard.TargetName="p1"
+                            Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)"
+                            From="Goldenrod"
+                            To="Blue"
+                            Duration="0:0:0.2"
+                            AutoReverse="True">
+            </ColorAnimation>
+            <ColorAnimation Storyboard.TargetName="p2"
+                            Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)"
+                            From="Goldenrod"
+                            To="Blue"
+                            Duration="0:0:0.2"
+                            AutoReverse="True">
+            </ColorAnimation>
+            <ColorAnimation Storyboard.TargetName="p3"
+                            Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)"
+                            From="Goldenrod"
+                            To="Blue"
+                            Duration="0:0:0.2"
+                            AutoReverse="True">
+            </ColorAnimation>
+            <ColorAnimation Storyboard.TargetName="p4"
+                            Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)"
+                            From="Goldenrod"
+                            To="Blue"
+                            Duration="0:0:0.2"
+                            AutoReverse="True">
+            </ColorAnimation>
+        </Storyboard>
+
+        <Storyboard x:Key="PolylineColorInStoryboard">
+            <ColorAnimation Storyboard.TargetName="p1"
+                            Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)"
+                            To="Blue"
+                            Duration="0:0:0.2"
+                            AutoReverse="False">
+            </ColorAnimation>
+            <ColorAnimation Storyboard.TargetName="p2"
+                            Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)"
+                            To="Blue"
+                            Duration="0:0:0.2"
+                            AutoReverse="False">
+            </ColorAnimation>
+            <ColorAnimation Storyboard.TargetName="p3"
+                            Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)"
+                            To="Blue"
+                            Duration="0:0:0.2"
+                            AutoReverse="False">
+            </ColorAnimation>
+            <ColorAnimation Storyboard.TargetName="p4"
+                            Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)"
+                            To="Blue"
+                            Duration="0:0:0.2"
+                            AutoReverse="False">
+            </ColorAnimation>
+        </Storyboard>
+    </UserControl.Resources>
+    <ei:Interaction.Triggers>
+        <ei:EventTrigger EventName="MouseEnter">
+            <!--<ei:ChangePropertyAction PropertyName="BorderVisible"
+                                     TargetObject="{Binding ElementName=XNoder}"
+                                     Value="Visible">
+            </ei:ChangePropertyAction>-->
+            <ei:CallMethodAction TargetObject="{Binding}"
+                                 MethodName="ExecuteMouseEnter" />
+            <ei:ControlStoryboardAction ControlStoryboardOption="Play"
+                                        Storyboard="{StaticResource PolylineMarginOutStoryboard}" />
+            <ei:ControlStoryboardAction ControlStoryboardOption="Play"
+                                        Storyboard="{StaticResource PolylineColorOutStoryboard}" />
+        </ei:EventTrigger>
+        <ei:EventTrigger EventName="MouseLeave">
+            <ei:CallMethodAction TargetObject="{Binding}"
+                                 MethodName="ExecuteMouseLeave" />
+            <!--<ei:ControlStoryboardAction ControlStoryboardOption="Play"
+                                        Storyboard="{StaticResource PolylineMarginInStoryboard}" />
+            <ei:ControlStoryboardAction ControlStoryboardOption="Play"
+                                        Storyboard="{StaticResource PolylineColorInStoryboard}" />
+            <ei:ChangePropertyAction PropertyName="BorderVisible"
+                                     TargetObject="{Binding ElementName=XNoder}"
+                                     Value="Collapsed">
+            </ei:ChangePropertyAction>-->
+        </ei:EventTrigger>
+        <ei:EventTrigger EventName="MouseLeftButtonDown">
+            <ei:CallMethodAction TargetObject="{Binding}"
+                                 MethodName="ExecuteMouseLeftButtonDown" />
+            <!--<ei:ChangePropertyAction PropertyName="Focused"
+                                     TargetObject="{Binding ElementName=XNoder}"
+                                     Value="True">
+            </ei:ChangePropertyAction>-->
+        </ei:EventTrigger>
+        <!--<ei:DataTrigger Binding="{Binding Path=Focused,Mode=OneWay,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}"
+                        Comparison="Equal"
+                        Value="False">
+            <ei:ChangePropertyAction PropertyName="BorderVisible"
+                                     TargetObject="{Binding ElementName=XNoder}"
+                                     Value="Collapsed">
+            </ei:ChangePropertyAction>
+        </ei:DataTrigger>
+        <ei:DataTrigger Binding="{Binding Path=Focused,Mode=OneWay,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}"
+                        Comparison="Equal"
+                        Value="True">
+            <ei:ChangePropertyAction PropertyName="BorderVisible"
+                                     TargetObject="{Binding ElementName=XNoder}"
+                                     Value="Visibility">
+            </ei:ChangePropertyAction>
+        </ei:DataTrigger>-->
+    </ei:Interaction.Triggers>
+    <!--<UserControl.Triggers>
+        <EventTrigger RoutedEvent="UIElement.MouseEnter">
+            <BeginStoryboard  Storyboard="{StaticResource PolylineOutStoryboard}" />
+        </EventTrigger>
+        --><!--<EventTrigger RoutedEvent="UIElement.MouseLeave">
+            <BeginStoryboard  Storyboard="{StaticResource PolylineInStoryboard}" />
+        </EventTrigger>--><!--
+    </UserControl.Triggers>-->
+
+    <Grid>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Border Background="{Binding Path=HeaderBackgroundColor,Mode=OneWay,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}"
+                    Padding="6,0,6,0">
+                <Label Foreground="{Binding Path=HeaderForegroundColor,Mode=OneWay,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}"
+                       Content="{Binding Content,RelativeSource={RelativeSource AncestorType=UserControl}}" />
+            </Border>
+            <Border Grid.Row="1"
+                    Background="{Binding Path=ContentBackgroundColor,Mode=OneWay,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}"
+                    BorderBrush="LightBlue"
+                    BorderThickness="2,0,2,2">
+            </Border>
+        </Grid>
+
+        <Polyline Name="p1"
+                  Margin="0"
+                  Visibility="{Binding Path=BorderVisible,Mode=OneWay,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}"
+                  Points="0 15,0 0,15 0"
+                  Stroke="Blue"
+                  StrokeThickness="{Binding Path=LineWidth,Mode=OneWay,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top">
+        </Polyline>
+        <Polyline Name="p2"
+                  Margin="0"
+                  Visibility="{Binding Path=BorderVisible,Mode=OneWay,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}"
+                  Points="-15 0,0 0,0 15"
+                  Stroke="Blue"
+                  StrokeThickness="{Binding Path=LineWidth,Mode=OneWay,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}"
+                  HorizontalAlignment="Right"
+                  VerticalAlignment="Top">
+        </Polyline>
+        <Polyline Name="p3"
+                  Margin="0"
+                  Visibility="{Binding Path=BorderVisible,Mode=OneWay,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}"
+                  Points="0 -15,0 0,15 0"
+                  Stroke="Blue"
+                  StrokeThickness="{Binding Path=LineWidth,Mode=OneWay,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Bottom">
+        </Polyline>
+        <Polyline Name="p4"
+                  Margin="0"
+                  Visibility="{Binding Path=BorderVisible,Mode=OneWay,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}"
+                  Points="0 -15,0 0,-15 0"
+                  Stroke="Blue"
+                  StrokeThickness="{Binding Path=LineWidth,Mode=OneWay,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}"
+                  HorizontalAlignment="Right"
+                  VerticalAlignment="Bottom">
+        </Polyline>
+
+        <Border x:Name="InputNode"
+                Width="20"
+                Height="20"
+                Background="DarkGreen"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Margin="0,15,0,0">
+        </Border>
+        <Border x:Name="OutputNode"
+                Width="20"
+                Height="20"
+                Background="Blue"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="0,15,0,0">
+            <ei:Interaction.Triggers>
+                <ei:EventTrigger EventName="MouseLeftButtonDown">
+                    <ei:CallMethodAction TargetObject="{Binding}"
+                                         MethodName="ExecuteOutputNodeMouseLeftButtonDown" />
+                </ei:EventTrigger>
+            </ei:Interaction.Triggers>
+        </Border>
+    </Grid>
+</UserControl>
