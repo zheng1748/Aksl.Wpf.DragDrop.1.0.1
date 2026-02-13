@@ -18,12 +18,14 @@ using Aksl.Modules.HamburgerMenuNavigationSideBar.Views;
 using Prism.Unity;
 using Prism;
 using System.Windows.Media.Animation;
+using System.Collections.Generic;
 
 namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 {
     public class DragDropViewModel : BindableBase
     {
         #region Members
+        private List<DragDropItemViewModel> _selectedDragDropItems;
         private DragDropItemViewModel _selectedDragDropItem;
         private readonly UIElement _canvas;
         private Point? _selectedRectangleStartPoint;
@@ -34,6 +36,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
         public DragDropViewModel()
         {
             DragDropItems = new();
+            _selectedDragDropItems = new();
 
             AddSelectionRectangle();
             void AddSelectionRectangle()
@@ -174,14 +177,23 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                             if (_selectedDragDropItem is not null && _selectedDragDropItem != ddivm)
                             {
                                 var previewSelectedDragDropItem = _selectedDragDropItem;
+                              
+                                VisualTreeFinder visualTreeFinder = new();
+                                var childsInDragDropItemView = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(previewSelectedDragDropItem.OriginalElement);
+                                var previewSelectedNodeView = childsInDragDropItemView.FirstOrDefault(d => (d is XNodeView)) as XNodeView;
+                                var previewSelectedNodeModel = previewSelectedNodeView.DataContext as XNodeViewModel;
+
                                 previewSelectedDragDropItem.IsSelected = false;
+                                previewSelectedNodeModel.IsFocused = false;
 
                                 _selectedDragDropItem = ddivm;
                             }
+
+                           // _selectedDragDropItems.Add(ddivm);
                         }
                         else
                         {
-
+                           // _selectedDragDropItems.Remove(ddivm);
                         }
                     }
                 }
@@ -201,22 +213,22 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 
                 void CreateContextMenu()
                 {
-                    var popupMenu = new ContextMenu();
+                    var contextMenu = new ContextMenu();
 
                     MenuItem deleteNodeMenuItem = new MenuItem() { Header = "Delete Node" };
                     deleteNodeMenuItem.Click += (sender, e) =>
                     {
-
                         DragDropItems.Remove(_selectedDragDropItem);
 
+                        contextMenu.Items.Remove(deleteNodeMenuItem);
+                        PopupMenu = null;
                     };
-                    popupMenu.Items.Add(deleteNodeMenuItem);
+                    contextMenu.Items.Add(deleteNodeMenuItem);
 
-                    PopupMenu = popupMenu;
+                    PopupMenu = contextMenu;
                 }
             }
         }
-
         #endregion
 
         #region MouseLeftButtonDown Event
@@ -230,8 +242,8 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
             {
                 VisualTreeFinder visualTreeFinder = new();
 
-                var childs = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(_selectedDragDropItem.OriginalElement);
-                var selectedNodeView = childs.FirstOrDefault(d => (d is XNodeView)) as XNodeView;
+                var childsInDragDropItemView = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(_selectedDragDropItem.OriginalElement);
+                var selectedNodeView =childsInDragDropItemView.FirstOrDefault(d => (d is XNodeView)) as XNodeView;
                 var selectedNodeModel = selectedNodeView.DataContext as XNodeViewModel;
 
                 _selectedDragDropItem.IsSelected = false;

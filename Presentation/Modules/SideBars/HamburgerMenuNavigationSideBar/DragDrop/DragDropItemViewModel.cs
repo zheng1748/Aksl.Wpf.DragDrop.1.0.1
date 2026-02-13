@@ -169,7 +169,8 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
             StartPoint = e.GetPosition(OriginalElement);
             //canvas?.CaptureMouse();
             OriginalElement.CaptureMouse();
-            IsSelected = true;
+
+            IsSelected =true;
 
             e.Handled = true;
         }
@@ -247,7 +248,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
         {
             Debug.Print($"DragDropItemView:MouseLeftButtonUp");
 
-            if (IsSelected && this.IsDown)
+            if (IsSelected && this.IsDown && this.IsDragging)
             {
                 DragFinished();
             }
