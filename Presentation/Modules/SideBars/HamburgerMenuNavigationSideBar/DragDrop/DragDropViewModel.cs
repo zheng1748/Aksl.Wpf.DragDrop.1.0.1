@@ -25,7 +25,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
     public class DragDropViewModel : BindableBase
     {
         #region Members
-        private List<DragDropItemViewModel> _selectedDragDropItems;
+        private List<DragDropItemViewModel> _isFocusedDragDropItems;
         private DragDropItemViewModel _selectedDragDropItem;
         private readonly UIElement _canvas;
         private Point? _selectedRectangleStartPoint;
@@ -36,7 +36,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
         public DragDropViewModel()
         {
             DragDropItems = new();
-            _selectedDragDropItems = new();
+            _isFocusedDragDropItems = new();
 
             AddSelectionRectangle();
             void AddSelectionRectangle()
@@ -94,6 +94,57 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
             var nodeModel = nodeView.DataContext as XNodeViewModel;
             nodeModel.OutputNodeMouseLeftButtonDown += OutputNodeMouseLeftButtonDown;
         }
+        private void AddPropertyChanged(DragDropItemViewModel dragDropItemViewModel)
+        {
+            dragDropItemViewModel.PropertyChanged += (sender, e) =>
+            {
+                if (sender is DragDropItemViewModel ddivm)
+                {
+                    if (e.PropertyName == nameof(DragDropItemViewModel.IsSelected))
+                    {
+                        if (ddivm.IsSelected)
+                        {
+                            if (_selectedDragDropItem is null)
+                            {
+                                _selectedDragDropItem = ddivm;
+                            }
+
+                            if (_selectedDragDropItem is not null && _selectedDragDropItem != ddivm)
+                            {
+                                var previewSelectedDragDropItem = _selectedDragDropItem;
+
+                                //VisualTreeFinder visualTreeFinder = new();
+                                //var childsInDragDropItemView = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(previewSelectedDragDropItem.OriginalElement);
+                                //var previewSelectedNodeView = childsInDragDropItemView.FirstOrDefault(d => (d is XNodeView)) as XNodeView;
+                                //var previewSelectedNodeModel = previewSelectedNodeView.DataContext as XNodeViewModel;
+
+                                previewSelectedDragDropItem.IsSelected = false;
+                                //   previewSelectedNodeModel.IsFocused = false;
+
+                                _selectedDragDropItem = ddivm;
+                            }
+                        }
+                        else
+                        {
+                        }
+
+                        if (!_isFocusedDragDropItems.Any(dd => dd == ddivm))
+                        {
+                            VisualTreeFinder visualTreeFinder = new();
+                            var childsInDragDropItemView = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(ddivm.OriginalElement);
+                            var nodeView = childsInDragDropItemView.FirstOrDefault(d => (d is XNodeView)) as XNodeView;
+                            var nodeModel = nodeView.DataContext as XNodeViewModel;
+
+                            if (nodeModel.IsFocused)
+                            {
+                                _isFocusedDragDropItems.Add(ddivm);
+                            }
+                        }
+                    }
+                }
+            };
+        }
+        #endregion
 
         #region OutputNode MouseLeftButtonDown Event
         private void OutputNodeMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -159,48 +210,6 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
         }
         #endregion
 
-        private void AddPropertyChanged(DragDropItemViewModel dragDropItemViewModel)
-        {
-            dragDropItemViewModel.PropertyChanged += (sender, e) =>
-            {
-                if (sender is DragDropItemViewModel ddivm)
-                {
-                    if (e.PropertyName == nameof(DragDropItemViewModel.IsSelected))
-                    {
-                        if (ddivm.IsSelected)
-                        {
-                            if (_selectedDragDropItem is null)
-                            {
-                                _selectedDragDropItem = ddivm;
-                            }
-
-                            if (_selectedDragDropItem is not null && _selectedDragDropItem != ddivm)
-                            {
-                                var previewSelectedDragDropItem = _selectedDragDropItem;
-                              
-                                VisualTreeFinder visualTreeFinder = new();
-                                var childsInDragDropItemView = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(previewSelectedDragDropItem.OriginalElement);
-                                var previewSelectedNodeView = childsInDragDropItemView.FirstOrDefault(d => (d is XNodeView)) as XNodeView;
-                                var previewSelectedNodeModel = previewSelectedNodeView.DataContext as XNodeViewModel;
-
-                                previewSelectedDragDropItem.IsSelected = false;
-                                previewSelectedNodeModel.IsFocused = false;
-
-                                _selectedDragDropItem = ddivm;
-                            }
-
-                           // _selectedDragDropItems.Add(ddivm);
-                        }
-                        else
-                        {
-                           // _selectedDragDropItems.Remove(ddivm);
-                        }
-                    }
-                }
-            };
-        }
-        #endregion
-
         #region MouseRightButtonDown Event
         public void ExecuteMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -238,19 +247,50 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 
             System.Windows.Controls.Canvas mainCanvas=default;
 
+            var otherDragDropItems = _isFocusedDragDropItems.Where(dd => dd != _selectedDragDropItem).ToList();
+            if (otherDragDropItems.Any())
+            {
+                foreach (var ddim in otherDragDropItems)
+                {
+                    var nodeModel=  FindNodeModel(ddim.ViewElement);
+                    if (nodeModel is not null)
+                    {
+                        nodeModel.IsFocused = false;
+                    }
+                }
+            }
+
             if (_selectedDragDropItem is not null && (!_selectedDragDropItem.IsDown || !_selectedDragDropItem.IsDragging))
             {
-                VisualTreeFinder visualTreeFinder = new();
-
-                var childsInDragDropItemView = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(_selectedDragDropItem.OriginalElement);
-                var selectedNodeView =childsInDragDropItemView.FirstOrDefault(d => (d is XNodeView)) as XNodeView;
-                var selectedNodeModel = selectedNodeView.DataContext as XNodeViewModel;
+                var nodeModel = FindNodeModel(_selectedDragDropItem.ViewElement);
+                if (nodeModel is not null)
+                {
+                    nodeModel.IsFocused = false;
+                }
 
                 _selectedDragDropItem.IsSelected = false;
                 _selectedDragDropItem = null;
 
-                selectedNodeModel.IsFocused = false;
+                return;
+            }
 
+            XNodeViewModel FindNodeModel(DependencyObject viewElement)
+            {
+                if (e.Source is ItemsControl  itemsControl)
+                {
+                    VisualTreeFinder visualTreeFinder = new();
+                    var childsInDragDropItemView = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(viewElement);
+                    var childsInNodeViewOwner = childsInDragDropItemView.FirstOrDefault(d => (d is XNodeView)) as XNodeView;
+                    var nodeModel = childsInNodeViewOwner.DataContext as XNodeViewModel;
+
+                    return nodeModel;
+                }
+
+                return null;
+            }
+
+            if ((_selectedDragDropItem is not null) && (_selectedDragDropItem.IsDown || _selectedDragDropItem.IsDragging))
+            {
                 return;
             }
 

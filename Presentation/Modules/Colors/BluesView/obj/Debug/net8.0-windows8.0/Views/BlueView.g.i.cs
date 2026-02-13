@@ -59,7 +59,7 @@ namespace Aksl.Modules.Blues.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Aksl.Modules.Blues;component/views/blueview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Aksl.Modules.Blues;V1.0.0.0;component/views/blueview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\BlueView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
