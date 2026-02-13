@@ -14,8 +14,4 @@
     <ProjectReference Include="..\..\Toolkits\Prism Library\Prism.Core\Prism.Core.csproj" />
   </ItemGroup>
   
-  <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
-  
 </Project>

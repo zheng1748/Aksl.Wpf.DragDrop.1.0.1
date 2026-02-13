@@ -12,6 +12,7 @@
 	
   <ItemGroup>
     <ProjectReference Include="..\..\..\Infrastructure\Aksl.Infrastructure\Aksl.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\Toolkits\Aksl.Toolkit\Aksl.Toolkit.csproj" />
     <ProjectReference Include="..\..\..\Toolkits\Prism Library\Prism.Core\Prism.Core.csproj" />
     <ProjectReference Include="..\..\..\Toolkits\Prism Library\Prism.Unity.Wpf\Prism.Unity.Wpf.csproj" />
     <ProjectReference Include="..\..\..\Toolkits\Prism Library\Prism.Wpf\Prism.Wpf.csproj" />

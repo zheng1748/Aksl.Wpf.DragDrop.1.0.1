@@ -21,7 +21,8 @@
         </Style>
 
         <ItemsPanelTemplate x:Key="dragDropItemsPanelTemplate">
-            <Canvas x:Name="MainCanvas">
+            <Canvas x:Name="MainCanvas"
+                   >
             </Canvas>
         </ItemsPanelTemplate>
 
@@ -31,12 +32,13 @@
     </UserControl.Resources>
 
     <ItemsControl x:Name="dragDropItemsControl"
-                   AllowDrop="True"
-                   Background="Transparent"
-                   ItemsSource="{Binding DragDropItems}"
-                   ItemsPanel="{StaticResource dragDropItemsPanelTemplate}"
-                   ItemContainerStyle="{Binding Source={StaticResource dragDropItemContainerStyle}}"
-                   ItemTemplate="{Binding Source={StaticResource dragDropDataTemplate}}">
+                  AllowDrop="True"
+                  Background="Transparent"
+                  ItemsSource="{Binding DragDropItems}"
+                  ItemsPanel="{StaticResource dragDropItemsPanelTemplate}"
+                  ItemContainerStyle="{Binding Source={StaticResource dragDropItemContainerStyle}}"
+                  ItemTemplate="{Binding Source={StaticResource dragDropDataTemplate}}"
+                  ContextMenu="{Binding Path=PopupMenu}">
         <ei:Interaction.Triggers>
             <ei:EventTrigger EventName="Drop">
                 <ei:CallMethodAction TargetObject="{Binding}"
@@ -53,6 +55,10 @@
             <ei:EventTrigger EventName="PreviewMouseLeftButtonUp">
                 <ei:CallMethodAction TargetObject="{Binding}"
                                      MethodName="ExecutePreviewMouseLeftButtonUp" />
+            </ei:EventTrigger>
+            <ei:EventTrigger EventName="MouseRightButtonDown">
+                <ei:CallMethodAction TargetObject="{Binding}"
+                                     MethodName="ExecuteMouseRightButtonDown" />
             </ei:EventTrigger>
         </ei:Interaction.Triggers>
     </ItemsControl>

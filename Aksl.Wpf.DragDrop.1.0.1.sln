@@ -41,7 +41,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YellowsView", "Presentation
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlacksView", "Presentation\Modules\Colors\BlacksView\BlacksView.csproj", "{5E63499C-F8AD-4A52-8B7A-52FD64EE91C0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedsView", "Presentation\Modules\Colors\RedsView\RedsView.csproj", "{093392D7-56AE-4EB4-845C-D4B66DFCAA6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionsView", "Presentation\Modules\Colors\RedsView\FunctionsView.csproj", "{093392D7-56AE-4EB4-845C-D4B66DFCAA6E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Views", "Presentation\Modules\Views\Views.csproj", "{0E2C3BB2-FB45-4BB9-9DB7-7F42AAF64FBA}"
 EndProject

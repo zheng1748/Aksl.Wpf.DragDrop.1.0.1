@@ -139,10 +139,10 @@
             </ei:ChangePropertyAction>-->
             <ei:CallMethodAction TargetObject="{Binding}"
                                  MethodName="ExecuteMouseEnter" />
-            <ei:ControlStoryboardAction ControlStoryboardOption="Play"
+            <!--<ei:ControlStoryboardAction ControlStoryboardOption="Play"
                                         Storyboard="{StaticResource PolylineMarginOutStoryboard}" />
             <ei:ControlStoryboardAction ControlStoryboardOption="Play"
-                                        Storyboard="{StaticResource PolylineColorOutStoryboard}" />
+                                        Storyboard="{StaticResource PolylineColorOutStoryboard}" />-->
         </ei:EventTrigger>
         <ei:EventTrigger EventName="MouseLeave">
             <ei:CallMethodAction TargetObject="{Binding}"
@@ -164,22 +164,6 @@
                                      Value="True">
             </ei:ChangePropertyAction>-->
         </ei:EventTrigger>
-        <!--<ei:DataTrigger Binding="{Binding Path=Focused,Mode=OneWay,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}"
-                        Comparison="Equal"
-                        Value="False">
-            <ei:ChangePropertyAction PropertyName="BorderVisible"
-                                     TargetObject="{Binding ElementName=XNoder}"
-                                     Value="Collapsed">
-            </ei:ChangePropertyAction>
-        </ei:DataTrigger>
-        <ei:DataTrigger Binding="{Binding Path=Focused,Mode=OneWay,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type UserControl}}}"
-                        Comparison="Equal"
-                        Value="True">
-            <ei:ChangePropertyAction PropertyName="BorderVisible"
-                                     TargetObject="{Binding ElementName=XNoder}"
-                                     Value="Visibility">
-            </ei:ChangePropertyAction>
-        </ei:DataTrigger>-->
     </ei:Interaction.Triggers>
     <!--<UserControl.Triggers>
         <EventTrigger RoutedEvent="UIElement.MouseEnter">

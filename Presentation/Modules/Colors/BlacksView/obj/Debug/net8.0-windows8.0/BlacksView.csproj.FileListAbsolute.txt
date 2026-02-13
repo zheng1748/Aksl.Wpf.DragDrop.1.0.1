@@ -63,3 +63,4 @@ C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Col
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Colors\BlacksView\obj\Debug\net8.0-windows8.0\refint\Aksl.Modules.Blacks.dll
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Colors\BlacksView\obj\Debug\net8.0-windows8.0\Aksl.Modules.Blacks.pdb
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Colors\BlacksView\obj\Debug\net8.0-windows8.0\ref\Aksl.Modules.Blacks.dll
+C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Colors\BlacksView\obj\Debug\net8.0-windows8.0\BlacksView.sourcelink.json

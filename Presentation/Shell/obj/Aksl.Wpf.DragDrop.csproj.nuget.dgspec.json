@@ -313,12 +313,12 @@
         }
       }
     },
-    "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\RedsView\\RedsView.csproj": {
+    "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\RedsView\\FunctionsView.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\RedsView\\RedsView.csproj",
-        "projectName": "Aksl.Modules.Reds",
-        "projectPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\RedsView\\RedsView.csproj",
+        "projectUniqueName": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\RedsView\\FunctionsView.csproj",
+        "projectName": "Aksl.Modules.Functions",
+        "projectPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\RedsView\\FunctionsView.csproj",
         "packagesPath": "C:\\Users\\zheng\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\RedsView\\obj\\",
         "projectStyle": "PackageReference",
@@ -615,6 +615,9 @@
               "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Infrastructure\\Aksl.Infrastructure\\Aksl.Infrastructure.csproj": {
                 "projectPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Infrastructure\\Aksl.Infrastructure\\Aksl.Infrastructure.csproj"
               },
+              "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Toolkits\\Aksl.Toolkit\\Aksl.Toolkit.csproj": {
+                "projectPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Toolkits\\Aksl.Toolkit\\Aksl.Toolkit.csproj"
+              },
               "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Toolkits\\Prism Library\\Prism.Core\\Prism.Core.csproj": {
                 "projectPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Toolkits\\Prism Library\\Prism.Core\\Prism.Core.csproj"
               },
@@ -699,8 +702,8 @@
               "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\BluesView\\BluesView.csproj": {
                 "projectPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\BluesView\\BluesView.csproj"
               },
-              "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\RedsView\\RedsView.csproj": {
-                "projectPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\RedsView\\RedsView.csproj"
+              "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\RedsView\\FunctionsView.csproj": {
+                "projectPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\RedsView\\FunctionsView.csproj"
               },
               "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\YellowsView\\YellowsView.csproj": {
                 "projectPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\YellowsView\\YellowsView.csproj"

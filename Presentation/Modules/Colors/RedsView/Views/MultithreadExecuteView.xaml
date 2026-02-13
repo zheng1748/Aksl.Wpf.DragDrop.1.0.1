@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="Aksl.Modules.Functions.Views.MultithreadExecuteView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:view="clr-namespace:Aksl.Views;assembly=Aksl.Views"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             Name="MultithreadExecuter"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <view:XNodeView DataContext="{Binding Path=NodeViewModel,Mode=OneWay}"
+                        HeaderBackgroundColor="{Binding Path=HeaderBackgroundColor,Mode=OneWay}"
+                        HeaderForegroundColor="{Binding Path=HeaderForegroundColor,Mode=OneWay}"
+                        ContentBackgroundColor="{Binding Path=ContentBackgroundColor,Mode=OneWay}"
+                        Content="{Binding Path=Content,Mode=OneWay}"
+                        BorderVisible="{Binding Path=BorderVisible,Mode=OneWay}"
+                        LineWidth="{Binding Path=LineWidth,Mode=OneWay}"
+                        Focusable="{Binding Path=IsFocused,Mode=TwoWay}">
+        </view:XNodeView >
+    </Grid>
+</UserControl>

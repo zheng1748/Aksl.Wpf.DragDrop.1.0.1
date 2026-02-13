@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8NS/KG5Razn9eJtDgBneSZcZ7dImDhs9nr4ks6yL6e+mMfSnciwoIdm9GcpAOnGvffoAltyM6CZg65kuxMrvbA==",
+  "dgSpecHash": "7H7d76zI/9/0DYiaywTFnnBQA7zAZQqHIms3gsj0sWWwWw85T2xDR2EWsYgow5haL9iJ4y+sP30qM1fOX9pbnQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\RedsView\\RedsView.csproj",
+  "projectFilePath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\RedsView\\FunctionsView.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\zheng\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.77\\microsoft.xaml.behaviors.wpf.1.1.77.nupkg.sha512",
     "C:\\Users\\zheng\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.2\\system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512",

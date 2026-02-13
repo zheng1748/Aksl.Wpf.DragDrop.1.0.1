@@ -1019,6 +1019,28 @@
           "Microsoft.WindowsDesktop.App.WPF"
         ]
       },
+      "Aksl.Modules.Functions/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Aksl.Infrastructure": "1.0.0",
+          "Aksl.Toolkit": "1.0.0",
+          "Aksl.Toolkit.Controls": "1.0.0",
+          "Aksl.Views": "1.0.0",
+          "Prism.Core": "1.0.0",
+          "Prism.Unity": "1.0.0",
+          "Prism.Wpf": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Aksl.Modules.Functions.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Aksl.Modules.Functions.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
       "Aksl.Modules.HamburgerMenuNavigationSideBar/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -1041,28 +1063,6 @@
         },
         "runtime": {
           "bin/placeholder/Aksl.Modules.HamburgerMenuNavigationSideBar.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.WindowsDesktop.App.WPF"
-        ]
-      },
-      "Aksl.Modules.Reds/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "dependencies": {
-          "Aksl.Infrastructure": "1.0.0",
-          "Aksl.Toolkit": "1.0.0",
-          "Aksl.Toolkit.Controls": "1.0.0",
-          "Aksl.Views": "1.0.0",
-          "Prism.Core": "1.0.0",
-          "Prism.Unity": "1.0.0",
-          "Prism.Wpf": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/Aksl.Modules.Reds.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Aksl.Modules.Reds.dll": {}
         },
         "frameworkReferences": [
           "Microsoft.WindowsDesktop.App.WPF"
@@ -1126,6 +1126,7 @@
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "Aksl.Infrastructure": "1.0.0",
+          "Aksl.Toolkit": "1.0.0",
           "Prism.Core": "1.0.0",
           "Prism.Unity": "1.0.0",
           "Prism.Wpf": "1.0.0"
@@ -2916,15 +2917,15 @@
       "path": "../Modules/Colors/BluesView/BluesView.csproj",
       "msbuildProject": "../Modules/Colors/BluesView/BluesView.csproj"
     },
+    "Aksl.Modules.Functions/1.0.0": {
+      "type": "project",
+      "path": "../Modules/Colors/RedsView/FunctionsView.csproj",
+      "msbuildProject": "../Modules/Colors/RedsView/FunctionsView.csproj"
+    },
     "Aksl.Modules.HamburgerMenuNavigationSideBar/1.0.0": {
       "type": "project",
       "path": "../Modules/SideBars/HamburgerMenuNavigationSideBar/HamburgerMenuNavigationSideBar.csproj",
       "msbuildProject": "../Modules/SideBars/HamburgerMenuNavigationSideBar/HamburgerMenuNavigationSideBar.csproj"
-    },
-    "Aksl.Modules.Reds/1.0.0": {
-      "type": "project",
-      "path": "../Modules/Colors/RedsView/RedsView.csproj",
-      "msbuildProject": "../Modules/Colors/RedsView/RedsView.csproj"
     },
     "Aksl.Modules.Yellows/1.0.0": {
       "type": "project",
@@ -2968,8 +2969,8 @@
       "Aksl.Modules.Account >= 1.0.0",
       "Aksl.Modules.Blacks >= 1.0.0",
       "Aksl.Modules.Blues >= 1.0.0",
+      "Aksl.Modules.Functions >= 1.0.0",
       "Aksl.Modules.HamburgerMenuNavigationSideBar >= 1.0.0",
-      "Aksl.Modules.Reds >= 1.0.0",
       "Aksl.Modules.Yellows >= 1.0.0",
       "Aksl.Toolkit >= 1.0.0",
       "Aksl.Toolkit.Controls >= 1.0.0",
@@ -3051,8 +3052,8 @@
             "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\BluesView\\BluesView.csproj": {
               "projectPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\BluesView\\BluesView.csproj"
             },
-            "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\RedsView\\RedsView.csproj": {
-              "projectPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\RedsView\\RedsView.csproj"
+            "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\RedsView\\FunctionsView.csproj": {
+              "projectPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\RedsView\\FunctionsView.csproj"
             },
             "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\YellowsView\\YellowsView.csproj": {
               "projectPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\YellowsView\\YellowsView.csproj"

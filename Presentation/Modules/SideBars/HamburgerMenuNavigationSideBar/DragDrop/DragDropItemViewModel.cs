@@ -143,9 +143,9 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
         #endregion
 
         #region MouseLeftButtonDown Event
-        public void ExecuteMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public void ExecuteMouseLeftButtonDown(object sender, MouseButtonEventArgs e) 
         {
-            Debug.Print($"DragDropItemView:MouseLeftButtonDown");
+           // Debug.Print($"DragDropItemView:MouseLeftButtonDown");
 
             System.Windows.Controls.Canvas canvas = null;
             FindCanvas();
@@ -182,7 +182,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 
             if (IsSelected && IsDown)
             {
-                System.Windows.Controls.Canvas canvas;
+                System.Windows.Controls.Canvas mainCanvas;
 
                 if (sender is FrameworkElement element)
                 {
@@ -191,7 +191,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     var itemsControl = visualTreeFinder.FindVisualParent<ItemsControl>(element);
 
                     var childs = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(itemsControl);
-                    canvas = childs.FirstOrDefault(d => (d is System.Windows.Controls.Canvas) && (d as System.Windows.Controls.Canvas).Name == "MainCanvas") as System.Windows.Controls.Canvas;
+                    mainCanvas = childs.FirstOrDefault(d => (d is System.Windows.Controls.Canvas) && (d as System.Windows.Controls.Canvas).Name == "MainCanvas") as System.Windows.Controls.Canvas;
 
                     if (!this.IsDragging)
                     {
@@ -211,7 +211,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 
                 void DragMoved()
                 {
-                    var currentPosition = Mouse.GetPosition(canvas);
+                    var currentPosition = Mouse.GetPosition(mainCanvas);
 
                     this.X = currentPosition.X - this.StartPoint.X;
                     this.Y = currentPosition.Y - this.StartPoint.Y;
@@ -222,18 +222,18 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     {
                         this.X = 0;
                     }
-                    if (this.X >= canvas.ActualWidth-this.Width)
+                    if (this.X >= mainCanvas.ActualWidth-this.Width)
                     {
-                        this.X = canvas.ActualWidth - this.Width;
+                        this.X = mainCanvas.ActualWidth - this.Width;
                     }
 
                     if (this.Y <= 0)
                     {
                         this.Y = 0;
                     }
-                    if (this.Y >= canvas.ActualHeight- this.Height)
+                    if (this.Y >= mainCanvas.ActualHeight- this.Height)
                     {
-                        this.Y = canvas.ActualHeight - this.Height;
+                        this.Y = mainCanvas.ActualHeight - this.Height;
                     }
                 }
             }

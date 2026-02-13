@@ -12,8 +12,8 @@
           "Aksl.Modules.Account": "1.0.0",
           "Aksl.Modules.Blacks": "1.0.0",
           "Aksl.Modules.Blues": "1.0.0",
+          "Aksl.Modules.Functions": "1.0.0",
           "Aksl.Modules.HamburgerMenuNavigationSideBar": "1.0.0",
-          "Aksl.Modules.Reds": "1.0.0",
           "Aksl.Modules.Yellows": "1.0.0",
           "Aksl.Toolkit": "1.0.0",
           "Aksl.Toolkit.Controls": "1.0.0",
@@ -52,8 +52,8 @@
           "Aksl.Modules.Account.Reference": "1.0.0.0",
           "Aksl.Modules.Blacks.Reference": "1.0.0.0",
           "Aksl.Modules.Blues.Reference": "1.0.0.0",
+          "Aksl.Modules.Functions.Reference": "1.0.0.0",
           "Aksl.Modules.HamburgerMenuNavigationSideBar.Reference": "1.0.0.0",
-          "Aksl.Modules.Reds.Reference": "1.0.0.0",
           "Aksl.Modules.Yellows.Reference": "1.0.0.0",
           "Aksl.Views.Reference": "1.0.0.0",
           "Prism.Unity.Wpf": "1.0.0.0"
@@ -599,6 +599,20 @@
           "Aksl.Modules.Blues.dll": {}
         }
       },
+      "Aksl.Modules.Functions/1.0.0": {
+        "dependencies": {
+          "Aksl.Infrastructure": "1.0.0",
+          "Aksl.Toolkit": "1.0.0",
+          "Aksl.Toolkit.Controls": "1.0.0",
+          "Aksl.Views": "1.0.0",
+          "Prism.Core": "1.0.0",
+          "Prism.Unity": "1.0.0",
+          "Prism.Wpf": "1.0.0"
+        },
+        "runtime": {
+          "Aksl.Modules.Functions.dll": {}
+        }
+      },
       "Aksl.Modules.HamburgerMenuNavigationSideBar/1.0.0": {
         "dependencies": {
           "Aksl.Infrastructure": "1.0.0",
@@ -616,20 +630,6 @@
         },
         "runtime": {
           "Aksl.Modules.HamburgerMenuNavigationSideBar.dll": {}
-        }
-      },
-      "Aksl.Modules.Reds/1.0.0": {
-        "dependencies": {
-          "Aksl.Infrastructure": "1.0.0",
-          "Aksl.Toolkit": "1.0.0",
-          "Aksl.Toolkit.Controls": "1.0.0",
-          "Aksl.Views": "1.0.0",
-          "Prism.Core": "1.0.0",
-          "Prism.Unity": "1.0.0",
-          "Prism.Wpf": "1.0.0"
-        },
-        "runtime": {
-          "Aksl.Modules.Reds.dll": {}
         }
       },
       "Aksl.Modules.Yellows/1.0.0": {
@@ -664,6 +664,7 @@
       "Aksl.Views/1.0.0": {
         "dependencies": {
           "Aksl.Infrastructure": "1.0.0",
+          "Aksl.Toolkit": "1.0.0",
           "Prism.Core": "1.0.0",
           "Prism.Unity": "1.0.0",
           "Prism.Wpf": "1.0.0"
@@ -720,17 +721,17 @@
           }
         }
       },
-      "Aksl.Modules.HamburgerMenuNavigationSideBar.Reference/1.0.0.0": {
+      "Aksl.Modules.Functions.Reference/1.0.0.0": {
         "runtime": {
-          "Aksl.Modules.HamburgerMenuNavigationSideBar.dll": {
+          "Aksl.Modules.Functions.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
       },
-      "Aksl.Modules.Reds.Reference/1.0.0.0": {
+      "Aksl.Modules.HamburgerMenuNavigationSideBar.Reference/1.0.0.0": {
         "runtime": {
-          "Aksl.Modules.Reds.dll": {
+          "Aksl.Modules.HamburgerMenuNavigationSideBar.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -1166,12 +1167,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Aksl.Modules.HamburgerMenuNavigationSideBar/1.0.0": {
+    "Aksl.Modules.Functions/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "Aksl.Modules.Reds/1.0.0": {
+    "Aksl.Modules.HamburgerMenuNavigationSideBar/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -1226,12 +1227,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Aksl.Modules.HamburgerMenuNavigationSideBar.Reference/1.0.0.0": {
+    "Aksl.Modules.Functions.Reference/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "Aksl.Modules.Reds.Reference/1.0.0.0": {
+    "Aksl.Modules.HamburgerMenuNavigationSideBar.Reference/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

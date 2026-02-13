@@ -126,6 +126,7 @@
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "Aksl.Infrastructure": "1.0.0",
+          "Aksl.Toolkit": "1.0.0",
           "Prism.Core": "1.0.0",
           "Prism.Unity": "1.0.0",
           "Prism.Wpf": "1.0.0"
@@ -386,9 +387,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\RedsView\\RedsView.csproj",
-      "projectName": "Aksl.Modules.Reds",
-      "projectPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\RedsView\\RedsView.csproj",
+      "projectUniqueName": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\RedsView\\FunctionsView.csproj",
+      "projectName": "Aksl.Modules.Functions",
+      "projectPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\RedsView\\FunctionsView.csproj",
       "packagesPath": "C:\\Users\\zheng\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\RedsView\\obj\\",
       "projectStyle": "PackageReference",

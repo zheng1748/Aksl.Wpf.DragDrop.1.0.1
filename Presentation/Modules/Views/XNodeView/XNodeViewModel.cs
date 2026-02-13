@@ -2,9 +2,11 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-
+using System.Windows.Media.Animation;
+using Aksl.Toolkit.UI;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -135,7 +137,23 @@ namespace Aksl.ViewModels
         {
             Debug.Print($"XNodeViewModel:MouseEnter");
 
-            BorderVisible = Visibility.Visible;
+            if (sender is UserControl uc)
+            {
+                if (!IsFocused)
+                {
+                    Storyboard polylineMarginOutStoryboard = (Storyboard)uc.Resources["PolylineMarginOutStoryboard"];
+                    Storyboard polylineColorOutStoryboard = (Storyboard)uc.Resources["PolylineColorOutStoryboard"];
+
+                    polylineMarginOutStoryboard.Begin();
+                    polylineColorOutStoryboard.Begin();
+                }
+            }
+
+            if (BorderVisible == Visibility.Collapsed)
+            {
+                BorderVisible = Visibility.Visible;
+            }
+           
         }
         #endregion
 

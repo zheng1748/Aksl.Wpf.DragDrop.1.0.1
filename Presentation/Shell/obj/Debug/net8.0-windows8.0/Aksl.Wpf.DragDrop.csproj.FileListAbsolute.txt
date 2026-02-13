@@ -50,7 +50,6 @@ C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Shell\bin\D
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Shell\bin\Debug\net8.0-windows8.0\Aksl.Modules.Blacks.dll
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Shell\bin\Debug\net8.0-windows8.0\Aksl.Modules.Blues.dll
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Shell\bin\Debug\net8.0-windows8.0\Aksl.Modules.HamburgerMenuNavigationSideBar.dll
-C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Shell\bin\Debug\net8.0-windows8.0\Aksl.Modules.Reds.dll
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Shell\bin\Debug\net8.0-windows8.0\Aksl.Modules.Yellows.dll
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Shell\bin\Debug\net8.0-windows8.0\Aksl.Toolkit.Controls.dll
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Shell\bin\Debug\net8.0-windows8.0\Aksl.Toolkit.dll
@@ -63,7 +62,6 @@ C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Shell\bin\D
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Shell\bin\Debug\net8.0-windows8.0\Aksl.Modules.Account.pdb
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Shell\bin\Debug\net8.0-windows8.0\Aksl.Modules.Blacks.pdb
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Shell\bin\Debug\net8.0-windows8.0\Aksl.Modules.Blues.pdb
-C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Shell\bin\Debug\net8.0-windows8.0\Aksl.Modules.Reds.pdb
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Shell\bin\Debug\net8.0-windows8.0\Aksl.Modules.Yellows.pdb
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Shell\bin\Debug\net8.0-windows8.0\Aksl.Modules.HamburgerMenuNavigationSideBar.pdb
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Shell\bin\Debug\net8.0-windows8.0\Prism.pdb
@@ -97,3 +95,5 @@ C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Shell\obj\D
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Shell\bin\Debug\net8.0-windows8.0\Aksl.Views.dll
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Shell\bin\Debug\net8.0-windows8.0\Aksl.Views.pdb
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Shell\obj\Debug\net8.0-windows8.0\Aksl.Wpf.DragDrop.sourcelink.json
+C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Shell\bin\Debug\net8.0-windows8.0\Aksl.Modules.Functions.dll
+C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Shell\bin\Debug\net8.0-windows8.0\Aksl.Modules.Functions.pdb

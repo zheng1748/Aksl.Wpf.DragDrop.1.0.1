@@ -9,6 +9,7 @@
       "Aksl.Views/1.0.0": {
         "dependencies": {
           "Aksl.Infrastructure": "1.0.0",
+          "Aksl.Toolkit": "1.0.0",
           "Prism.Core": "1.0.0",
           "Prism.Unity": "1.0.0",
           "Prism.Wpf": "1.0.0",
@@ -57,6 +58,17 @@
         },
         "runtime": {
           "Aksl.Infrastructure.dll": {}
+        }
+      },
+      "Aksl.Toolkit/1.0.0": {
+        "dependencies": {
+          "Microsoft.Xaml.Behaviors.Wpf": "1.1.77",
+          "Prism.Core": "1.0.0",
+          "Prism.Unity": "1.0.0",
+          "Prism.Wpf": "1.0.0"
+        },
+        "runtime": {
+          "Aksl.Toolkit.dll": {}
         }
       },
       "Prism.Core/1.0.0": {
@@ -135,6 +147,11 @@
       "hashPath": "unity.container.5.11.11.nupkg.sha512"
     },
     "Aksl.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Aksl.Toolkit/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

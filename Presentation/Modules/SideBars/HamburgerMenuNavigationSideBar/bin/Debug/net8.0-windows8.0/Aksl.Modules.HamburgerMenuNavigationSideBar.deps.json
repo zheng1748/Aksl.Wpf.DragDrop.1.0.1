@@ -133,6 +133,7 @@
       "Aksl.Views/1.0.0": {
         "dependencies": {
           "Aksl.Infrastructure": "1.0.0",
+          "Aksl.Toolkit": "1.0.0",
           "Prism.Core": "1.0.0",
           "Prism.Unity": "1.0.0",
           "Prism.Wpf": "1.0.0"

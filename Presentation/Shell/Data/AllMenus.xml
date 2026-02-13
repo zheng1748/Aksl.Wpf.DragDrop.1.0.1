@@ -38,14 +38,14 @@
 			  NavigationName="Yellows">
 	</MenuItem>
 	<MenuItem Id="2"
-			  Name="RedsManager"
-			  Title="FunctionNode"
+			  Name="FunctionManager"
+			  Title="函数节点"
 			  Level="1"
-			  IconKind="AccountArrowDown"
+			  IconKind="Function"
 			  ItemType="Item"
 			  IsCacheable="True"
 			  ModuleName=""
 			  IsNextNavigation="True"
-			  NavigationName="Reds">
+			  NavigationName="Functions">
 	</MenuItem>
 </MenuItem>

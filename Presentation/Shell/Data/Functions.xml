@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MenuItem Id="0"
+		  Name="Functions"
+		  Title="Root"
+		  Level="0" >
+	<MenuItem Id="2"
+			  Name="RelationOperationer"
+			  Title="关系运算"
+			  Level="1"
+			  IsCacheable="False"
+			  IconKind="GiftOpen"
+			  ItemType="Item"
+			  ModuleName="FunctionsModule"
+			  ViewName="Aksl.Modules.Functions.Views.RelationOperationView,Aksl.Modules.Functions"
+			  Width="240"
+			  Height="160">
+	</MenuItem>
+	<MenuItem Id="2"
+			  Name="MultithreadExecuter"
+			  Title="多线程执行"
+			  Level="1"
+			  IsCacheable="False"
+			  IconKind="SpiderThread"
+			  ItemType="Item"
+			  ModuleName="FunctionsModule"
+			  ViewName="Aksl.Modules.Functions.Views.MultithreadExecuteView,Aksl.Modules.Functions"
+			  Width="240"
+			  Height="160">
+	</MenuItem>
+</MenuItem>
+
+
