@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MenuItem Id="0"
+		  Name="FlowControls"
+		  Title="Root"
+		  Level="0">
+	<MenuItem Id="2"
+			  Name="CountCycler"
+			  Title="计数循环"
+			  Level="2"
+			  IsCacheable="True"
+			  IconKind="Counter"
+			  ItemType="Item"
+			  ModuleName="YellowsModule"
+			  ViewName="Aksl.Modules.FlowControls.Views.CountCycleView,Aksl.Modules.FlowControls"
+			  Width="240"
+			  Height="160">
+	</MenuItem>
+	<MenuItem Id="2"
+			  Name="Judgmenter"
+			  Title="判断"
+			  Level="2"
+			  IsCacheable="True"
+			  IconKind="Jump"
+			  ItemType="Item"
+			  ModuleName="YellowsModule"
+			  ViewName="Aksl.Modules.FlowControls.Views.JudgmentView,Aksl.Modules.FlowControls"
+			  Width="240"
+			  Height="160">
+	</MenuItem>
+</MenuItem>
+
+

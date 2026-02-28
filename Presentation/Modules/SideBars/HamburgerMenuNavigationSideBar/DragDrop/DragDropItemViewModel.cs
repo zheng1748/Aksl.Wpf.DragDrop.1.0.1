@@ -145,9 +145,9 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
         #region MouseLeftButtonDown Event
         public void ExecuteMouseLeftButtonDown(object sender, MouseButtonEventArgs e) 
         {
-           // Debug.Print($"DragDropItemView:MouseLeftButtonDown");
+            // Debug.Print($"DragDropItemView:MouseLeftButtonDown");
 
-            System.Windows.Controls.Canvas canvas = null;
+            System.Windows.Controls.Canvas mainCanvas;
             FindCanvas();
 
             void FindCanvas()
@@ -158,16 +158,16 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 
                     var itemsControl = visualTreeFinder.FindVisualParent<ItemsControl>(element);
 
-                    var childs = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(itemsControl);
-                    canvas = childs.FirstOrDefault(d => (d is System.Windows.Controls.Canvas) && (d as System.Windows.Controls.Canvas).Name == "MainCanvas") as System.Windows.Controls.Canvas;
+                    var childsInItemsControl = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(itemsControl);
+                    mainCanvas = childsInItemsControl.FirstOrDefault(d => (d is System.Windows.Controls.Canvas) && (d as System.Windows.Controls.Canvas).Name == "MainCanvas") as System.Windows.Controls.Canvas;
                 }
             }
 
             IsDown = true;
-            // StartPoint = e.GetPosition(canvas);
+            // StartPoint = e.GetPosition(mainCanvas);
             OriginalElement = e.Source as UIElement;
             StartPoint = e.GetPosition(OriginalElement);
-            //canvas?.CaptureMouse();
+            //mainCanvas?.CaptureMouse();
             OriginalElement.CaptureMouse();
 
             IsSelected =true;
@@ -191,8 +191,8 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 
                     var itemsControl = visualTreeFinder.FindVisualParent<ItemsControl>(element);
 
-                    var childs = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(itemsControl);
-                    mainCanvas = childs.FirstOrDefault(d => (d is System.Windows.Controls.Canvas) && (d as System.Windows.Controls.Canvas).Name == "MainCanvas") as System.Windows.Controls.Canvas;
+                    var childsInItemsControl = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(itemsControl);
+                    mainCanvas = childsInItemsControl.FirstOrDefault(d => (d is System.Windows.Controls.Canvas) && (d as System.Windows.Controls.Canvas).Name == "MainCanvas") as System.Windows.Controls.Canvas;
 
                     if (!this.IsDragging)
                     {
@@ -212,10 +212,10 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 
                 void DragMoved()
                 {
-                    var currentPosition = Mouse.GetPosition(mainCanvas);
+                    var mainCanvasPoint = Mouse.GetPosition(mainCanvas);
 
-                    this.X = currentPosition.X - this.StartPoint.X;
-                    this.Y = currentPosition.Y - this.StartPoint.Y;
+                    this.X = mainCanvasPoint.X - this.StartPoint.X;
+                    this.Y = mainCanvasPoint.Y - this.StartPoint.Y;
 
                     //Debug.Print($"X:{this.X} Y:{this.Y}");
                     // 一旦靠近Left或Top边缘就停止移动

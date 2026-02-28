@@ -21,8 +21,7 @@
         </Style>
 
         <ItemsPanelTemplate x:Key="dragDropItemsPanelTemplate">
-            <Canvas x:Name="MainCanvas"
-                   >
+            <Canvas x:Name="MainCanvas">
             </Canvas>
         </ItemsPanelTemplate>
 

@@ -121,6 +121,26 @@
           "Microsoft.WindowsDesktop.App.WPF"
         ]
       },
+      "Aksl.Views/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Aksl.Infrastructure": "1.0.0",
+          "Aksl.Toolkit": "1.0.0",
+          "Prism.Core": "1.0.0",
+          "Prism.Unity": "1.0.0",
+          "Prism.Wpf": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Aksl.Views.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Aksl.Views.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
       "Prism.Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -328,6 +348,11 @@
       "path": "../../../../Toolkits/Aksl.Toolkit.Controls/Aksl.Toolkit.Controls.csproj",
       "msbuildProject": "../../../../Toolkits/Aksl.Toolkit.Controls/Aksl.Toolkit.Controls.csproj"
     },
+    "Aksl.Views/1.0.0": {
+      "type": "project",
+      "path": "../../Views/Views.csproj",
+      "msbuildProject": "../../Views/Views.csproj"
+    },
     "Prism.Core/1.0.0": {
       "type": "project",
       "path": "../../../../Toolkits/Prism Library/Prism.Core/Prism.Core.csproj",
@@ -349,6 +374,7 @@
       "Aksl.Infrastructure >= 1.0.0",
       "Aksl.Toolkit >= 1.0.0",
       "Aksl.Toolkit.Controls >= 1.0.0",
+      "Aksl.Views >= 1.0.0",
       "Prism.Core >= 1.0.0",
       "Prism.Unity >= 1.0.0",
       "Prism.Wpf >= 1.0.0"
@@ -361,9 +387,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\YellowsView\\YellowsView.csproj",
-      "projectName": "Aksl.Modules.Yellows",
-      "projectPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\YellowsView\\YellowsView.csproj",
+      "projectUniqueName": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\YellowsView\\FlowControlsView.csproj",
+      "projectName": "Aksl.Modules.FlowControls",
+      "projectPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\YellowsView\\FlowControlsView.csproj",
       "packagesPath": "C:\\Users\\zheng\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Colors\\YellowsView\\obj\\",
       "projectStyle": "PackageReference",
@@ -388,6 +414,9 @@
           "projectReferences": {
             "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Infrastructure\\Aksl.Infrastructure\\Aksl.Infrastructure.csproj": {
               "projectPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Infrastructure\\Aksl.Infrastructure\\Aksl.Infrastructure.csproj"
+            },
+            "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Views\\Views.csproj": {
+              "projectPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Presentation\\Modules\\Views\\Views.csproj"
             },
             "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Toolkits\\Aksl.Toolkit.Controls\\Aksl.Toolkit.Controls.csproj": {
               "projectPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Toolkits\\Aksl.Toolkit.Controls\\Aksl.Toolkit.Controls.csproj"

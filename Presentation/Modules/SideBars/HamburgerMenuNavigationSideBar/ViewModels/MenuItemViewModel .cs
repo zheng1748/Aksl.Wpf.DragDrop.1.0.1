@@ -1,20 +1,30 @@
 ﻿using System;
 using System.Windows.Input;
 
-using Prism.Commands;
+using Prism;
 using Prism.Events;
-using Prism.Modularity;
+using Prism.Ioc;
 using Prism.Mvvm;
+using Prism.Unity;
+using Unity;
 
-using Aksl.Toolkit.Controls;
 using Aksl.Infrastructure;
+using Aksl.Toolkit.Controls;
+using Aksl.Toolkit.Services;
+using Aksl.Toolkit.UI;
+using System.Windows;
+using System.Diagnostics;
+using System.Windows.Documents;
+using Aksl.Views;
+using System.Linq;
 
 namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 {
     public class MenuItemViewModel : BindableBase
     {
         #region Members
-        protected readonly IEventAggregator _eventAggregator;
+        protected readonly IEventAggregator _eventAggregator; 
+        private readonly IDialogViewService _dialogViewService;
         private readonly MenuItem _menuItem;
         #endregion
 
@@ -22,6 +32,8 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
         public MenuItemViewModel(IEventAggregator eventAggregator, int groupIndex, int index, MenuItem menuItem)
         {
             _eventAggregator = eventAggregator;
+            _dialogViewService = (PrismApplication.Current as PrismApplicationBase).Container.Resolve<IDialogViewService>();
+
             GroupIndex = groupIndex;
             Index = index;
             _menuItem = menuItem;
@@ -73,10 +85,85 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
         }
         #endregion
 
-        #region Mouse Left Button Down Event
-        public void ExecuteDrag(object sender, MouseButtonEventArgs e)
+        #region Loaded Event
+        private AdornerLayer _adornerLayer = null;
+        public async void Loaded(object sender, RoutedEventArgs e)
         {
-            System.Windows.DragDrop.DoDragDrop(dragSource: (System.Windows.DependencyObject)sender, data: _menuItem, allowedEffects: System.Windows.DragDropEffects.Copy);
+            if (sender is System.Windows.Controls.UserControl uc)
+            {
+                try
+                {
+                    VisualTreeFinder visualTreeFinder = new();
+                    var listViewItem = visualTreeFinder.FindVisualParent<System.Windows.Controls.ListViewItem>(uc);
+
+                    if (listViewItem is not null)
+                    {
+                        //listViewItem.PreviewMouseLeftButtonDown += (sender, e) =>
+                        //{
+                        //    if (sender is System.Windows.Controls.ListViewItem listViewItem)
+                        //    {
+                        //        System.Windows.DragDrop.DoDragDrop(dragSource: (System.Windows.DependencyObject)sender, data: _menuItem, allowedEffects: System.Windows.DragDropEffects.Copy);
+                        //    }
+                        //};
+
+                        listViewItem.PreviewMouseMove += (sender, e) =>
+                        {
+                            if (sender is System.Windows.Controls.ListViewItem listViewItem)
+                            {
+                                var parents = visualTreeFinder.FindVisualParents<System.Windows.FrameworkElement>(listViewItem);
+                                var grids = parents.Where(d => (d is System.Windows.Controls.Grid));
+                                var rootGrid = grids.FirstOrDefault(d => d.Name== "HamburgerMenuLayoutGrid");
+
+                                var childsInListViewItem = visualTreeFinder.FindLogicalChilds<System.Windows.Controls.Label>(uc);
+                                var label = childsInListViewItem.FirstOrDefault(d => (d is System.Windows.Controls.Label)) as System.Windows.Controls.Label;
+
+                                //var adorner = new SimpleCircleAdorner(listViewItem);
+                                //_adornerLayer = AdornerLayer.GetAdornerLayer(rootGrid);
+                                //_adornerLayer.Add(adorner);
+
+                                DragDropAdorner adorner = new(listViewItem);
+                                _adornerLayer = AdornerLayer.GetAdornerLayer(rootGrid);
+                                _adornerLayer.Add(adorner);
+
+                                System.Windows.DragDrop.DoDragDrop(dragSource: (System.Windows.DependencyObject)sender, data: _menuItem, allowedEffects: System.Windows.DragDropEffects.Copy);
+
+                                _adornerLayer.Remove(adorner);
+                                _adornerLayer = null;
+                            }
+                        };
+
+                        listViewItem.QueryContinueDrag += (sender, e) =>
+                        {
+                            if (sender is System.Windows.Controls.ListViewItem listViewItem)
+                            {
+                                //Debug.Print($"QueryContinueDrag");
+                                _adornerLayer.Update();
+                            }
+                        };
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await _dialogViewService.AlertAsync(message: $"Loaded Error: \"{ex.Message}\"", title: "Error");
+                }
+            }
+        }
+        #endregion
+
+        #region Mouse Left Button Down Event
+        public async void ExecuteDrag(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                if (sender is System.Windows.Controls.UserControl uc)
+                {
+                    System.Windows.DragDrop.DoDragDrop(dragSource: (System.Windows.DependencyObject)sender, data: _menuItem, allowedEffects: System.Windows.DragDropEffects.Copy);
+                }
+            }
+            catch (Exception ex)
+            {
+                await _dialogViewService.AlertAsync(message: $"ExecuteDrop Error.: \"{ex.Message}\"", title: "Error");
+            }
         }
         #endregion
     }

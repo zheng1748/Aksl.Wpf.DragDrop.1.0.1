@@ -22,8 +22,8 @@
     <None Remove="Data\AllMenus.xml" />
     <None Remove="Data\Blacks.xml" />
     <None Remove="Data\Blues.xml" />
+    <None Remove="Data\FlowControls.xml" />
     <None Remove="Data\Functions.xml" />
-    <None Remove="Data\Yellows.xml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,7 +42,7 @@
     <Resource Include="Data\Functions.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Data\Yellows.xml">
+    <Resource Include="Data\FlowControls.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Data\Blues.xml">
@@ -102,7 +102,7 @@
     <ProjectReference Include="..\Modules\Colors\BlacksView\BlacksView.csproj" />
     <ProjectReference Include="..\Modules\Colors\BluesView\BluesView.csproj" />
     <ProjectReference Include="..\Modules\Colors\RedsView\FunctionsView.csproj" />
-    <ProjectReference Include="..\Modules\Colors\YellowsView\YellowsView.csproj" />
+    <ProjectReference Include="..\Modules\Colors\YellowsView\FlowControlsView.csproj" />
     <ProjectReference Include="..\Modules\SideBars\HamburgerMenuNavigationSideBar\HamburgerMenuNavigationSideBar.csproj" />
   </ItemGroup>
 

@@ -396,7 +396,7 @@
         </Style>
         
     </UserControl.Resources>
-    <Grid>
+    <Grid x:Name="HamburgerMenuLayoutGrid">
         <Grid Visibility="{Binding Path=IsLoading,Converter={StaticResource booleanNegationToVisibilityConverter}}">
             <Grid Background="WhiteSmoke">
 

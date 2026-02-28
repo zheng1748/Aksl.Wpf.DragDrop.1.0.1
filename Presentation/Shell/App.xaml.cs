@@ -33,10 +33,8 @@ using Aksl.Modules.HamburgerMenuNavigationSideBar;
 
 using Aksl.Modules.Account;
 
-using Aksl.Modules.Yellows;
-using Aksl.Modules.Blues;
-using Aksl.Modules.Blacks;
 using Aksl.Modules.Functions;
+using Aksl.Modules.FlowControls;
 
 namespace Aksl.Wpf.Unity
 {
@@ -67,7 +65,7 @@ namespace Aksl.Wpf.Unity
                 MenuService menuService = new(new List<string> {"pack://application:,,,/Aksl.Wpf.DragDrop;Component/Data/AllMenus.xml",
                                                                 "pack://application:,,,/Aksl.Wpf.DragDrop;Component/Data/Blacks.xml",
                                                                 "pack://application:,,,/Aksl.Wpf.DragDrop;Component/Data/Blues.xml",
-                                                                "pack://application:,,,/Aksl.Wpf.DragDrop;Component/Data/Yellows.xml",
+                                                                "pack://application:,,,/Aksl.Wpf.DragDrop;Component/Data/FlowControls.xml",
                                                                 "pack://application:,,,/Aksl.Wpf.DragDrop;Component/Data/Functions.xml",    
                                                                 });
                
@@ -100,13 +98,11 @@ namespace Aksl.Wpf.Unity
         {
             _ = moduleCatalog.AddModule(nameof(AccountModule), typeof(AccountModule).AssemblyQualifiedName, InitializationMode.WhenAvailable);
 
-            _ = moduleCatalog.AddModule(nameof(BlacksModule), typeof(BlacksModule).AssemblyQualifiedName, InitializationMode.WhenAvailable);
-            _ = moduleCatalog.AddModule(nameof(BluesModule), typeof(BluesModule).AssemblyQualifiedName, InitializationMode.WhenAvailable);
-            _ = moduleCatalog.AddModule(nameof(YellowsModule), typeof(YellowsModule).AssemblyQualifiedName, InitializationMode.WhenAvailable);
-            _ = moduleCatalog.AddModule(nameof(FunctionsModule), typeof(FunctionsModule).AssemblyQualifiedName, InitializationMode.WhenAvailable);
-
             _ = moduleCatalog.AddModule(typeof(HamburgerMenuNavigationSideBarModule).Name, typeof(HamburgerMenuNavigationSideBarModule).AssemblyQualifiedName, InitializationMode.WhenAvailable);
             _ = moduleCatalog.AddModule(typeof(ShellModule).Name, typeof(ShellModule).AssemblyQualifiedName, InitializationMode.WhenAvailable, typeof(HamburgerMenuNavigationSideBarModule).Name);
+
+            _ = moduleCatalog.AddModule(nameof(FlowControlsModule), typeof(FlowControlsModule).AssemblyQualifiedName, InitializationMode.WhenAvailable);
+            _ = moduleCatalog.AddModule(nameof(FunctionsModule), typeof(FunctionsModule).AssemblyQualifiedName, InitializationMode.WhenAvailable);
         }
 
         protected override Window CreateShell()

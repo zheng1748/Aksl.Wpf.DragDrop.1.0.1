@@ -106,6 +106,15 @@ namespace Aksl.Views
                 }
             }
         }
+
+        public ContextMenu PopupMenu
+        {
+            get => (ContextMenu)GetValue(PopupMenuProperty);
+            set => SetValue(PopupMenuProperty, value);
+        }
+
+        public static readonly DependencyProperty PopupMenuProperty =
+            DependencyProperty.Register("PopupMenu", typeof(ContextMenu), typeof(XNodeView), new PropertyMetadata(defaultValue: null, propertyChangedCallback: null));
         #endregion
     }
 }

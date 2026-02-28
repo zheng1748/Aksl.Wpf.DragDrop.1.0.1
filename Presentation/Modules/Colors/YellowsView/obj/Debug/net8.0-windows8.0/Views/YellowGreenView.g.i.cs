@@ -59,7 +59,7 @@ namespace Aksl.Modules.Yellows.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Aksl.Modules.Yellows;component/views/yellowgreenview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Aksl.Modules.FlowControls;V1.0.0.0;component/views/yellowgreenview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\YellowGreenView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -10,11 +10,15 @@
              d:DesignHeight="200"
              d:DesignWidth="500">
     <ei:Interaction.Triggers>
-        <ei:EventTrigger EventName="MouseLeftButtonDown"
-                         SourceObject="{Binding ElementName=hamburgerMenuNavigationSideBarMenuItem}">
+        <ei:EventTrigger EventName="Loaded"
+                         SourceObject="{Binding}">
+            <ei:CallMethodAction TargetObject="{Binding}"
+                                 MethodName="Loaded" />
+        </ei:EventTrigger>
+        <!--<ei:EventTrigger EventName="MouseLeftButtonDown">
             <ei:CallMethodAction TargetObject="{Binding}"
                                  MethodName="ExecuteDrag" />
-        </ei:EventTrigger>
+        </ei:EventTrigger>-->
     </ei:Interaction.Triggers>
     <UserControl.Resources>
 

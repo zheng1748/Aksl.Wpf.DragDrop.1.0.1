@@ -37,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HamburgerMenuNavigationSide
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BluesView", "Presentation\Modules\Colors\BluesView\BluesView.csproj", "{CD3184EB-107B-4A6F-874B-2E8E11ADE937}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YellowsView", "Presentation\Modules\Colors\YellowsView\YellowsView.csproj", "{917F671A-720D-4830-8359-E663CD8347B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlowControlsView", "Presentation\Modules\Colors\YellowsView\FlowControlsView.csproj", "{917F671A-720D-4830-8359-E663CD8347B7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlacksView", "Presentation\Modules\Colors\BlacksView\BlacksView.csproj", "{5E63499C-F8AD-4A52-8B7A-52FD64EE91C0}"
 EndProject

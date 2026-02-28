@@ -435,7 +435,7 @@
                 </LinearGradientBrush.GradientStops>
             </LinearGradientBrush>
         </Border.BorderBrush>-->
-        <Grid x:Name="layoutRootGrid"
+        <Grid x:Name="LayoutRootGrid"
               SnapsToDevicePixels="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="48" />

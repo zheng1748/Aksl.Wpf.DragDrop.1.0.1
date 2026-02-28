@@ -6,7 +6,8 @@
              xmlns:prism="http://prismlibrary.com/"
              xmlns:view="clr-namespace:Aksl.Views;assembly=Aksl.Views"
              mc:Ignorable="d"
-             d:DesignHeight="300"
+             d:DesignHeight="160"
+             d:DesignWidth="240"
              Name="OperationNoder"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
@@ -17,7 +18,8 @@
                         Content="{Binding Path=Content,Mode=OneWay}"
                         BorderVisible="{Binding Path=BorderVisible,Mode=OneWay}"
                         LineWidth="{Binding Path=LineWidth,Mode=OneWay}"
-                        Focusable="{Binding Path=IsFocused,Mode=TwoWay}">
+                        Focusable="{Binding Path=IsFocused,Mode=TwoWay}"
+                        PopupMenu="{Binding Path=PopupMenu,Mode=OneWay}">
         </view:XNodeView >
     </Grid>
 </UserControl>

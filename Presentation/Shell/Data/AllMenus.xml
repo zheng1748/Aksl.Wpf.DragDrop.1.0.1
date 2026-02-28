@@ -3,7 +3,7 @@
 		  Title="根"
 		  Name="All"
 		  Level="0" >
-	<MenuItem Id="1"
+	<!--<MenuItem Id="1"
 			  Name="BlacksManager"
 			  Title="Blacks"
 			  Level="1"
@@ -14,8 +14,8 @@
 			  ViewName=""
 		      IsNextNavigation="True"
 			  NavigationName="Blacks">
-	</MenuItem>
-	<MenuItem Id="1"
+	</MenuItem>-->
+	<!--<MenuItem Id="1"
 			  Name="BluesManager"
 			  Title="Blues"
 			  Level="1"
@@ -25,18 +25,7 @@
 			  ModuleName=""
 			  IsNextNavigation="True"
 			  NavigationName="Blues">
-	</MenuItem>
-	<MenuItem Id="2"
-			  Name="YellowsManager"
-			  Title="Yellows"
-			  Level="1"
-			  IconKind="SignYield"
-			  ItemType="Item"
-			  IsCacheable="True"
-			  ModuleName=""
-			  IsNextNavigation="True"
-			  NavigationName="Yellows">
-	</MenuItem>
+	</MenuItem>-->
 	<MenuItem Id="2"
 			  Name="FunctionManager"
 			  Title="函数节点"
@@ -47,5 +36,16 @@
 			  ModuleName=""
 			  IsNextNavigation="True"
 			  NavigationName="Functions">
+	</MenuItem>
+		<MenuItem Id="2"
+			  Name="FlowControlManager"
+			  Title="流程控制节点"
+			  Level="1"
+			  IconKind="WaterFlow"
+			  ItemType="Item"
+			  IsCacheable="True"
+			  ModuleName=""
+			  IsNextNavigation="True"
+			  NavigationName="FlowControls">
 	</MenuItem>
 </MenuItem>

@@ -93,6 +93,13 @@ namespace Aksl.ViewModels
                 }
             }
         }
+
+        private ContextMenu _popupMenu;
+        public ContextMenu PopupMenu
+        {
+            get => _popupMenu;
+            set => SetProperty(ref _popupMenu, value);
+        }
         #endregion
 
         #region Events

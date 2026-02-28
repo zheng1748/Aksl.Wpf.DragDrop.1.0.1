@@ -27,7 +27,7 @@
         </DataTemplate>
     </UserControl.Resources>
 
-    <Expander IsExpanded="False"
+    <Expander IsExpanded="True"
               ExpandDirection="Down"
               Background="{StaticResource headerBackground}">
         <Expander.Header>
