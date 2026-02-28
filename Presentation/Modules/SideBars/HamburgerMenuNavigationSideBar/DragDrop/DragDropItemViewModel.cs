@@ -130,7 +130,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 
         public UIElement OriginalElement { get; set; }
 
-        public SimpleCircleAdorner OverlayElement { get; set; }
+        public CircleAdorner OverlayElement { get; set; }
         #endregion
 
         #region Events

@@ -10,28 +10,25 @@ using System.Windows.Shapes;
 
 namespace Aksl.Modules.HamburgerMenuNavigationSideBar
 {
-    public class SimpleCircleAdorner : Adorner
+    public class CircleAdorner : Adorner
     {
         #region Members
         private readonly Rectangle _child;
-      
-       
         #endregion
 
         #region Constructors
         // Be sure to call the base class constructor.
-        public SimpleCircleAdorner(UIElement adornedElement) : base(adornedElement)
+        public CircleAdorner(UIElement adornedElement) : base(adornedElement)
         {
-            var brush = new VisualBrush(adornedElement);
+            VisualBrush brush = new (adornedElement);
 
-            _child = new Rectangle
+            _child = new ()
             {
                 Width = adornedElement.RenderSize.Width,
                 Height = adornedElement.RenderSize.Height
             };
 
-
-            var animation = new DoubleAnimation(0.3, 1, new Duration(TimeSpan.FromSeconds(1)))
+            DoubleAnimation animation = new(0.3, 1, new Duration(TimeSpan.FromSeconds(1)))
             {
                 AutoReverse = true,
                 RepeatBehavior = RepeatBehavior.Forever
