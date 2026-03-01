@@ -68,7 +68,7 @@ namespace Aksl.Modules.Functions.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Aksl.Modules.Functions;component/views/multithreadexecuteview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Aksl.Modules.Functions;V1.0.0.0;component/views/multithreadexecuteview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\MultithreadExecuteView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

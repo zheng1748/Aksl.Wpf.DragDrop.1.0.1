@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Aksl")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+21a54f38a5edcf3c3a8961ae2aaf394761747a28")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Aksl.Wpf.DragDrop")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Aksl.Wpf.DragDrop")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
