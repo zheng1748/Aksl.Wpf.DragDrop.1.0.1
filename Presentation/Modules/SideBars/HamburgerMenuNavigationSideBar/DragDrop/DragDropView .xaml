@@ -15,9 +15,9 @@
         <Style x:Key="dragDropItemContainerStyle"
                TargetType="{x:Type ContentPresenter}">
             <Setter Property="Canvas.Left"
-                    Value="{Binding Path=X,Mode=OneWay}" />
+                    Value="{Binding Path=X,Mode=TwoWay}" />
             <Setter Property="Canvas.Top"
-                    Value="{Binding Path=Y,Mode=OneWay}" />
+                    Value="{Binding Path=Y,Mode=TwoWay}" />
         </Style>
 
         <ItemsPanelTemplate x:Key="dragDropItemsPanelTemplate">

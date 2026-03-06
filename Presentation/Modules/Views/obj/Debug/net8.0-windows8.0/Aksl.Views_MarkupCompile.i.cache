@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 
-1-1613357428
+437366977
 
-4-1478920633
-2061871144396
-XNodeView\XNodeView.xaml;
+8-489948956
+2072060020802
+FixedSizeDialogWindow.xaml;FixedSizeDialogWindowIconButtonView.xaml;XNodeView\EditXNodeView.xaml;XNodeView\XNodeView.xaml;
 
-False
+True
 

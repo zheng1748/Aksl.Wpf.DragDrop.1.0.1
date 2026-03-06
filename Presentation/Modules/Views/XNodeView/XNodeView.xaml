@@ -8,7 +8,7 @@
              mc:Ignorable="d"
              d:DesignHeight="160"
              d:DesignWidth="240"
-             ContextMenu="{Binding Path=PopupMenu,Mode=OneWay}"
+             ContextMenu="{Binding Path=PopupMenu,Mode=OneWay}" 
              Name="XNoder">
     <UserControl.Resources>
         
@@ -133,37 +133,22 @@
         </Storyboard>
     </UserControl.Resources>
     <ei:Interaction.Triggers>
+        <!--<ei:EventTrigger EventName="Loaded"
+                         SourceObject="{Binding}">
+            <ei:CallMethodAction TargetObject="{Binding}"
+                                 MethodName="Loaded" />
+        </ei:EventTrigger>-->
         <ei:EventTrigger EventName="MouseEnter">
-            <!--<ei:ChangePropertyAction PropertyName="BorderVisible"
-                                     TargetObject="{Binding ElementName=XNoder}"
-                                     Value="Visible">
-            </ei:ChangePropertyAction>-->
             <ei:CallMethodAction TargetObject="{Binding}"
                                  MethodName="ExecuteMouseEnter" />
-            <!--<ei:ControlStoryboardAction ControlStoryboardOption="Play"
-                                        Storyboard="{StaticResource PolylineMarginOutStoryboard}" />
-            <ei:ControlStoryboardAction ControlStoryboardOption="Play"
-                                        Storyboard="{StaticResource PolylineColorOutStoryboard}" />-->
         </ei:EventTrigger>
         <ei:EventTrigger EventName="MouseLeave">
             <ei:CallMethodAction TargetObject="{Binding}"
                                  MethodName="ExecuteMouseLeave" />
-            <!--<ei:ControlStoryboardAction ControlStoryboardOption="Play"
-                                        Storyboard="{StaticResource PolylineMarginInStoryboard}" />
-            <ei:ControlStoryboardAction ControlStoryboardOption="Play"
-                                        Storyboard="{StaticResource PolylineColorInStoryboard}" />
-            <ei:ChangePropertyAction PropertyName="BorderVisible"
-                                     TargetObject="{Binding ElementName=XNoder}"
-                                     Value="Collapsed">
-            </ei:ChangePropertyAction>-->
         </ei:EventTrigger>
-        <ei:EventTrigger EventName="MouseLeftButtonDown">
+        <ei:EventTrigger EventName="PreviewMouseLeftButtonDown">
             <ei:CallMethodAction TargetObject="{Binding}"
-                                 MethodName="ExecuteMouseLeftButtonDown" />
-            <!--<ei:ChangePropertyAction PropertyName="Focused"
-                                     TargetObject="{Binding ElementName=XNoder}"
-                                     Value="True">
-            </ei:ChangePropertyAction>-->
+                                 MethodName="ExecutePreviewMouseLeftButtonDown" />
         </ei:EventTrigger>
     </ei:Interaction.Triggers>
     <!--<UserControl.Triggers>
@@ -175,7 +160,7 @@
         </EventTrigger>--><!--
     </UserControl.Triggers>-->
 
-    <Grid>
+    <Grid Background="Transparent">
         <Grid Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
@@ -246,9 +231,9 @@
                 VerticalAlignment="Center"
                 Margin="0,15,0,0">
             <ei:Interaction.Triggers>
-                <ei:EventTrigger EventName="MouseLeftButtonDown">
+                <ei:EventTrigger EventName="PreviewMouseLeftButtonDown">
                     <ei:CallMethodAction TargetObject="{Binding}"
-                                         MethodName="ExecuteOutputNodeMouseLeftButtonDown" />
+                                         MethodName="ExecuteOutputNodePreviewMouseLeftButtonDown" />
                 </ei:EventTrigger>
             </ei:Interaction.Triggers>
         </Border>

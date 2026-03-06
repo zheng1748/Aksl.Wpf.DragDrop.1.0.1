@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
              xmlns:ei="http://schemas.microsoft.com/xaml/behaviors"
-             x:Name="dragDropItemView"
+             x:Name="dragDropItemView" 
              d:DesignHeight="200"
              d:DesignWidth="500">
     <ei:Interaction.Triggers>
@@ -13,13 +13,13 @@
             <ei:CallMethodAction TargetObject="{Binding}"
                                  MethodName="ExecuteMouseLeftButtonDown" />
         </ei:EventTrigger>
-        <ei:EventTrigger EventName="PreviewMouseMove">
+        <ei:EventTrigger EventName="MouseMove">
             <ei:CallMethodAction TargetObject="{Binding}"
-                                 MethodName="ExecutePreviewMouseMove" />
+                                 MethodName="ExecuteMouseMove" />
         </ei:EventTrigger>
-        <ei:EventTrigger EventName="PreviewMouseLeftButtonUp">
+        <ei:EventTrigger EventName="MouseLeftButtonUp">
             <ei:CallMethodAction TargetObject="{Binding}"
-                                 MethodName="ExecutePreviewMouseLeftButtonUp" />
+                                 MethodName="ExecuteMouseLeftButtonUp" />
         </ei:EventTrigger>
     </ei:Interaction.Triggers>
     <UserControl.Resources>

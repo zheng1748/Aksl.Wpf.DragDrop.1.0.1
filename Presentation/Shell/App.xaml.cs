@@ -49,8 +49,11 @@ namespace Aksl.Wpf.Unity
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterDialogWindow<Aksl.Dialogs.FixedSizeDialogWindow>(name:nameof(Aksl.Dialogs.FixedSizeDialogWindow));
+
             containerRegistry.RegisterSingleton(typeof(IDialogService), typeof(DialogService));
             containerRegistry.RegisterSingleton(typeof(IDialogViewService), typeof(DialogViewService));
+
             containerRegistry.RegisterDialog<ConfirmView, ConfirmViewModel>();
 
             RegisterMenuFactoryAsync(containerRegistry).GetAwaiter().GetResult();

@@ -10,6 +10,7 @@ using Prism.Mvvm;
 using Prism.Unity;
 
 using Aksl.Toolkit.UI;
+using Aksl.Modules.HamburgerMenuNavigationSideBar.Views;
 
 namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 {
@@ -142,57 +143,59 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
         }
         #endregion
 
-        #region MouseLeftButtonDown Event
-        public void ExecuteMouseLeftButtonDown(object sender, MouseButtonEventArgs e) 
+        #region PreviewMouseLeftButtonDown Event
+        public void ExecuteMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             // Debug.Print($"DragDropItemView:MouseLeftButtonDown");
-
-            System.Windows.Controls.Canvas mainCanvas;
-            FindCanvas();
-
-            void FindCanvas()
+            if (sender is DragDropItemView dragDropItemView)
             {
-                if (sender is FrameworkElement element)
-                {
-                    VisualTreeFinder visualTreeFinder = new();
+                //System.Windows.Controls.Canvas mainCanvas;
+                //FindCanvas();
 
-                    var itemsControl = visualTreeFinder.FindVisualParent<ItemsControl>(element);
+                //void FindCanvas()
+                //{
+                //    VisualTreeFinder visualTreeFinder = new();
 
-                    var childsInItemsControl = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(itemsControl);
-                    mainCanvas = childsInItemsControl.FirstOrDefault(d => (d is System.Windows.Controls.Canvas) && (d as System.Windows.Controls.Canvas).Name == "MainCanvas") as System.Windows.Controls.Canvas;
-                }
+                //    mainCanvas = visualTreeFinder.FindVisualParent<System.Windows.Controls.Canvas>(dragDropItemView);
+                //}
+
+                IsDown = true;
+                OriginalElement = e.Source as UIElement;
+                StartPoint = e.GetPosition(OriginalElement);
+
+                //var mainCanvasPoint = MouseUtilities.GetMousePosition(mainCanvas);
+                //StartPoint = mainCanvasPoint;
+                //Debug.Print($"PreviewMouseLeftButtonDown.{OriginalElement.GetType()}.Point:{StartPoint}");
+                //Debug.Print($"PreviewMouseLeftButtonDown.mainCanvas.Point:{mainCanvasPPoint}");
+                //Point relativeToMainCanvasPoint = dragDropItemView.TranslatePoint(new Point(0, 0), mainCanvas);
+                //Debug.Print($"PreviewMouseLeftButtonDown.relativeToMainCanvas.Point:{relativeToMainCanvasPoint}");
+
+                //mainCanvas?.CaptureMouse();
+                OriginalElement.CaptureMouse();
+
+                IsSelected = true;
+
+                e.Handled = true;
             }
-
-            IsDown = true;
-            // StartPoint = e.GetPosition(mainCanvas);
-            OriginalElement = e.Source as UIElement;
-            StartPoint = e.GetPosition(OriginalElement);
-            //mainCanvas?.CaptureMouse();
-            OriginalElement.CaptureMouse();
-
-            IsSelected =true;
-
-            e.Handled = true;
         }
         #endregion
 
         #region MouseMove Event
-        public void ExecutePreviewMouseMove(object sender, MouseEventArgs e)
+        public void ExecuteMouseMove(object sender, MouseEventArgs e)
         {
             //Debug.Print($"DragDropItemView:MouseMove");
-
-            if (IsSelected && IsDown)
+            if (sender is DragDropItemView dragDropItemView)
             {
-                System.Windows.Controls.Canvas mainCanvas;
-
-                if (sender is FrameworkElement element)
+                if (IsSelected && IsDown)
                 {
+                    System.Windows.Controls.Canvas mainCanvas;
+
                     VisualTreeFinder visualTreeFinder = new();
 
-                    var itemsControl = visualTreeFinder.FindVisualParent<ItemsControl>(element);
-
-                    var childsInItemsControl = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(itemsControl);
-                    mainCanvas = childsInItemsControl.FirstOrDefault(d => (d is System.Windows.Controls.Canvas) && (d as System.Windows.Controls.Canvas).Name == "MainCanvas") as System.Windows.Controls.Canvas;
+                    //var itemsControl = visualTreeFinder.FindVisualParent<ItemsControl>(element);
+                    //var childsInItemsControl = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(itemsControl);
+                    //mainCanvas = childsInItemsControl.FirstOrDefault(d => (d is System.Windows.Controls.Canvas) && (d as System.Windows.Controls.Canvas).Name == "MainCanvas") as System.Windows.Controls.Canvas;
+                    mainCanvas = visualTreeFinder.FindVisualParent<System.Windows.Controls.Canvas>(dragDropItemView);
 
                     if (!this.IsDragging)
                     {
@@ -203,48 +206,49 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     {
                         DragMoved();
                     }
+
+
+                    void DragStarted()
+                    {
+                        this.IsDragging = true;
+                    }
+
+                    void DragMoved()
+                    {
+                        var mainCanvasPoint = Mouse.GetPosition(mainCanvas);
+
+                        this.X = mainCanvasPoint.X - this.StartPoint.X;
+                        this.Y = mainCanvasPoint.Y - this.StartPoint.Y;
+
+                        //Debug.Print($"X:{this.X} Y:{this.Y}");
+                        // 一旦靠近Left或Top边缘就停止移动
+                        if (this.X <= 0)
+                        {
+                            this.X = 0;
+                        }
+                        if (this.X >= mainCanvas.ActualWidth - this.Width)
+                        {
+                            this.X = mainCanvas.ActualWidth - this.Width;
+                        }
+
+                        if (this.Y <= 0)
+                        {
+                            this.Y = 0;
+                        }
+                        if (this.Y >= mainCanvas.ActualHeight - this.Height)
+                        {
+                            this.Y = mainCanvas.ActualHeight - this.Height;
+                        }
+                    }
                 }
 
-                void DragStarted()
-                {
-                    this.IsDragging = true;
-                }
-
-                void DragMoved()
-                {
-                    var mainCanvasPoint = Mouse.GetPosition(mainCanvas);
-
-                    this.X = mainCanvasPoint.X - this.StartPoint.X;
-                    this.Y = mainCanvasPoint.Y - this.StartPoint.Y;
-
-                    //Debug.Print($"X:{this.X} Y:{this.Y}");
-                    // 一旦靠近Left或Top边缘就停止移动
-                    if (this.X <= 0)
-                    {
-                        this.X = 0;
-                    }
-                    if (this.X >= mainCanvas.ActualWidth-this.Width)
-                    {
-                        this.X = mainCanvas.ActualWidth - this.Width;
-                    }
-
-                    if (this.Y <= 0)
-                    {
-                        this.Y = 0;
-                    }
-                    if (this.Y >= mainCanvas.ActualHeight- this.Height)
-                    {
-                        this.Y = mainCanvas.ActualHeight - this.Height;
-                    }
-                }
+                _mouseMove?.Invoke(sender, e);
             }
-
-            _mouseMove?.Invoke(sender, e);
         }
         #endregion
 
         #region MouseLeftButtonUp Event
-        public void ExecutePreviewMouseLeftButtonUp(object sender, MouseEventArgs e)
+        public void ExecuteMouseLeftButtonUp(object sender, MouseEventArgs e)
         {
             Debug.Print($"DragDropItemView:MouseLeftButtonUp");
 

@@ -104,7 +104,11 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                         //    {
                         //        System.Windows.DragDrop.DoDragDrop(dragSource: (System.Windows.DependencyObject)sender, data: _menuItem, allowedEffects: System.Windows.DragDropEffects.Copy);
                         //    }
+
+                        //    e.Handled = true;
                         //};
+                        //listViewItem.AddHandler(UIElement.PreviewMouseMoveEvent, new MouseEventHandler(ExecutePreviewMouseMove), true);
+                        //listViewItem.AddHandler(UIElement.QueryContinueDragEvent, new QueryContinueDragEventHandler(ExecuteQueryContinueDrag), true);
 
                         listViewItem.PreviewMouseMove += (sender, e) =>
                         {
@@ -112,10 +116,10 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                             {
                                 var parents = visualTreeFinder.FindVisualParents<System.Windows.FrameworkElement>(listViewItem);
                                 var grids = parents.Where(d => (d is System.Windows.Controls.Grid));
-                                var rootGrid = grids.FirstOrDefault(d => d.Name== "HamburgerMenuLayoutGrid");
+                                var rootGrid = grids.FirstOrDefault(d => d.Name == "HamburgerMenuLayoutGrid");
 
-                                var childsInListViewItem = visualTreeFinder.FindLogicalChilds<System.Windows.Controls.Label>(uc);
-                                var label = childsInListViewItem.FirstOrDefault(d => (d is System.Windows.Controls.Label)) as System.Windows.Controls.Label;
+                                //var childsInListViewItem = visualTreeFinder.FindLogicalChilds<System.Windows.Controls.Label>(uc);
+                                //var label = childsInListViewItem.FirstOrDefault(d => (d is System.Windows.Controls.Label)) as System.Windows.Controls.Label;
 
                                 //var adorner = new SimpleCircleAdorner(listViewItem);
                                 //_adornerLayer = AdornerLayer.GetAdornerLayer(rootGrid);

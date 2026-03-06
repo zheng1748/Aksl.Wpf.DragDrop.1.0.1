@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -25,13 +27,6 @@ namespace Aksl.ViewModels
         #endregion
 
         #region Properties
-        private bool _isLoading;
-        public bool IsLoading
-        {
-            get => _isLoading;
-            set => SetProperty<bool>(ref _isLoading, value);
-        }
-
         private Brush _headerBackgroundColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#7160E8"));
         public Brush HeaderBackgroundColor
         {
@@ -124,25 +119,40 @@ namespace Aksl.ViewModels
             remove { _mouseLeftButtonUp -= value; }
         }
 
-       private event EventHandler<MouseButtonEventArgs> _outputNodeMouseLeftButtonDown;
-        public event EventHandler<MouseButtonEventArgs> OutputNodeMouseLeftButtonDown
+        private event EventHandler<MouseButtonEventArgs> _outputNodePreviewMouseLeftButtonDown;
+        public event EventHandler<MouseButtonEventArgs> OutputNodePreviewMouseLeftButtonDown
         {
-            add { _outputNodeMouseLeftButtonDown += value; }
-            remove { _outputNodeMouseLeftButtonDown -= value; }
+            add { _outputNodePreviewMouseLeftButtonDown += value; }
+            remove { _outputNodePreviewMouseLeftButtonDown -= value; }
         }
         #endregion
 
+        #region Loaded Event
+        //public void Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    if (sender is System.Windows.Controls.UserControl uc)
+        //    {
+        //        VisualTreeFinder visualTreeFinder = new();
+        //        var borders = visualTreeFinder.FindVisualChilds<Border>(uc);
+        //        var outputNodeBorder= borders.FirstOrDefault(b=>b.Name== "OutputNode");
+        
+        //        uc.AddHandler(UIElement.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(ExecuteMouseLeftButtonDown),false);
+        //        outputNodeBorder.AddHandler(UIElement.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(ExecuteOutputNodeMouseLeftButtonDown), false);
+        //    }
+        //}
+        #endregion
+
         #region MouseLeftButtonDown Event
-        public void ExecuteMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public void ExecutePreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            IsFocused=true;
+            IsFocused = true;
         }
         #endregion
 
         #region ExecuteMouseEnter Event
         public void ExecuteMouseEnter(object sender, MouseEventArgs e)
         {
-            Debug.Print($"XNodeViewModel:MouseEnter");
+          // Debug.Print($"XNodeViewModel:MouseEnter");
 
             if (sender is UserControl uc)
             {
@@ -161,6 +171,7 @@ namespace Aksl.ViewModels
                 BorderVisible = Visibility.Visible;
             }
            
+            e.Handled= true;
         }
         #endregion
 
@@ -171,13 +182,15 @@ namespace Aksl.ViewModels
             {
                 BorderVisible = Visibility.Collapsed;
             }
+
+            e.Handled = true;
         }
         #endregion
 
         #region OutputNode MouseLeftButtonDown Event
-        public void ExecuteOutputNodeMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public void ExecuteOutputNodePreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            _outputNodeMouseLeftButtonDown?.Invoke(sender, e);
+            _outputNodePreviewMouseLeftButtonDown?.Invoke(sender, e);
         }
         #endregion
     }

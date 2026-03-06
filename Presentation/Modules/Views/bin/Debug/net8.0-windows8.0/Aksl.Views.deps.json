@@ -10,6 +10,7 @@
         "dependencies": {
           "Aksl.Infrastructure": "1.0.0",
           "Aksl.Toolkit": "1.0.0",
+          "Aksl.Toolkit.Controls": "1.0.0",
           "Prism.Core": "1.0.0",
           "Prism.Unity": "1.0.0",
           "Prism.Wpf": "1.0.0",
@@ -69,6 +70,11 @@
         },
         "runtime": {
           "Aksl.Toolkit.dll": {}
+        }
+      },
+      "Aksl.Toolkit.Controls/1.0.0": {
+        "runtime": {
+          "Aksl.Toolkit.Controls.dll": {}
         }
       },
       "Prism.Core/1.0.0": {
@@ -152,6 +158,11 @@
       "sha512": ""
     },
     "Aksl.Toolkit/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Aksl.Toolkit.Controls/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
