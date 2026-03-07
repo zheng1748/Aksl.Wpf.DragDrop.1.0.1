@@ -304,7 +304,6 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                 {
                     if (HasSelectedDragDropItem())
                     {
-                        // await _dialogViewService.ConfirmAsync(message: $"Edit.: \"{_selectedDragDropItem.ViewName}\"", title: "Message", okText: "确定", cancelText:"取消", callBack:null);
                         var dialogService = (PrismApplication.Current as PrismApplicationBase).Container.Resolve<Aksl.Services.Dialogs.DialogService>();
                         var parameters = new DialogParameters { { "IsConfirm", true }, { "Message", "message" }, { "Title", "Edit" }, { "OkText", "确定" }, { "CancelText", "取消" } };
 
