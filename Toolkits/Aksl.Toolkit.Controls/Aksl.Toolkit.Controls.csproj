@@ -8,4 +8,17 @@
 		<RootNamespace>Aksl.Toolkit.Controls</RootNamespace>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Prism Library\Prism.Wpf\Prism.Wpf.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Update="Dialogs\FixedSizeDialogWindow.xaml">
+	    <SubType>Designer</SubType>
+	  </Page>
+	  <Page Update="Dialogs\FixedSizeDialogWindowIconButtonView.xaml">
+	    <SubType>Designer</SubType>
+	  </Page>
+	</ItemGroup>
+
 </Project>

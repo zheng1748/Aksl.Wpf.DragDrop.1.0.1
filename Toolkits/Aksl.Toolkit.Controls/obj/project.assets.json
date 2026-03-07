@@ -1,11 +1,90 @@
 {
   "version": 3,
   "targets": {
-    "net8.0-windows7.0": {}
+    "net8.0-windows7.0": {
+      "Microsoft.Xaml.Behaviors.Wpf/1.1.77": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0-windows7.0/Microsoft.Xaml.Behaviors.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0-windows7.0/Microsoft.Xaml.Behaviors.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
+      "Prism.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Prism.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Prism.Core.dll": {}
+        }
+      },
+      "Prism.Wpf/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Microsoft.Xaml.Behaviors.Wpf": "1.1.77",
+          "Prism.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Prism.Wpf.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Prism.Wpf.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Microsoft.Xaml.Behaviors.Wpf/1.1.77": {
+      "sha512": "MCu674ZETgU18EbxfwIlRpUPJ02YbZenLsMCXTkpeA7KUBpXfFaOUDlEO+7UWu5AFnUoydg+aQENJkuaZPheMQ==",
+      "type": "package",
+      "path": "microsoft.xaml.behaviors.wpf/1.1.77",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net462/Design/Microsoft.Xaml.Behaviors.Design.dll",
+        "lib/net462/Design/Microsoft.Xaml.Behaviors.DesignTools.dll",
+        "lib/net462/Microsoft.Xaml.Behaviors.dll",
+        "lib/net462/Microsoft.Xaml.Behaviors.pdb",
+        "lib/net462/Microsoft.Xaml.Behaviors.xml",
+        "lib/net6.0-windows7.0/Design/Microsoft.Xaml.Behaviors.DesignTools.dll",
+        "lib/net6.0-windows7.0/Microsoft.Xaml.Behaviors.dll",
+        "lib/net6.0-windows7.0/Microsoft.Xaml.Behaviors.pdb",
+        "lib/net6.0-windows7.0/Microsoft.Xaml.Behaviors.xml",
+        "microsoft.xaml.behaviors.wpf.1.1.77.nupkg.sha512",
+        "microsoft.xaml.behaviors.wpf.nuspec",
+        "tools/Install.ps1"
+      ]
+    },
+    "Prism.Core/1.0.0": {
+      "type": "project",
+      "path": "../Prism Library/Prism.Core/Prism.Core.csproj",
+      "msbuildProject": "../Prism Library/Prism.Core/Prism.Core.csproj"
+    },
+    "Prism.Wpf/1.0.0": {
+      "type": "project",
+      "path": "../Prism Library/Prism.Wpf/Prism.Wpf.csproj",
+      "msbuildProject": "../Prism Library/Prism.Wpf/Prism.Wpf.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0-windows7.0": []
+    "net8.0-windows7.0": [
+      "Prism.Wpf >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\zheng\\.nuget\\packages\\": {},
@@ -38,7 +117,11 @@
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Toolkits\\Prism Library\\Prism.Wpf\\Prism.Wpf.csproj": {
+              "projectPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Toolkits\\Prism Library\\Prism.Wpf\\Prism.Wpf.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

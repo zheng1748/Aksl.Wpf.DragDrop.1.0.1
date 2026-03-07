@@ -7,12 +7,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="FixedSizeDialogWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="FixedSizeDialogWindowIconButtonView.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="XNodeView\EditXNodeView.xaml">
       <SubType>Designer</SubType>
     </Page>

@@ -16,5 +16,5 @@ TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 211-1562927679
 DragDrop\DragDropItemView.xaml;DragDrop\DragDropView .xaml;Views\GroupedMenusView.xaml;Views\GroupedMenuView.xaml;Views\HamburgerMenuNavigationSideBarHubView.xaml;Views\MenuContentView.xaml;Views\MenuItemHeader.xaml;Views\MenuItemView.xaml;
 
-True
+False
 

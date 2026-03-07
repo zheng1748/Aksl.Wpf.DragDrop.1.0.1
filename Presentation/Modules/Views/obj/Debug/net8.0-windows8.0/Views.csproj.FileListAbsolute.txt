@@ -31,9 +31,3 @@ C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Vie
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Views\obj\Debug\net8.0-windows8.0\XNodeView\EditXNodeView.g.cs
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Views\bin\Debug\net8.0-windows8.0\Aksl.Toolkit.Controls.dll
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Views\bin\Debug\net8.0-windows8.0\Aksl.Toolkit.Controls.pdb
-C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Views\obj\Debug\net8.0-windows8.0\GeneratedInternalTypeHelper.g.cs
-C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Views\obj\Debug\net8.0-windows8.0\Aksl.Views_MarkupCompile.lref
-C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Views\obj\Debug\net8.0-windows8.0\FixedSizeDialogWindowIconButtonView.baml
-C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Views\obj\Debug\net8.0-windows8.0\FixedSizeDialogWindow.g.cs
-C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Views\obj\Debug\net8.0-windows8.0\FixedSizeDialogWindowIconButtonView.g.cs
-C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Views\obj\Debug\net8.0-windows8.0\FixedSizeDialogWindow.baml

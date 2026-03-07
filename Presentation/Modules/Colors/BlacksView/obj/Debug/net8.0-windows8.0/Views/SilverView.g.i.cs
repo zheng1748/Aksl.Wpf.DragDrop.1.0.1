@@ -59,7 +59,7 @@ namespace Aksl.Modules.Blacks.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Aksl.Modules.Blacks;V1.0.0.0;component/views/silverview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Aksl.Modules.Blacks;component/views/silverview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\SilverView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

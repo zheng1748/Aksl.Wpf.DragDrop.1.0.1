@@ -75,6 +75,9 @@
         }
       },
       "Aksl.Toolkit.Controls/1.0.0": {
+        "dependencies": {
+          "Prism.Wpf": "1.0.0"
+        },
         "runtime": {
           "Aksl.Toolkit.Controls.dll": {}
         }

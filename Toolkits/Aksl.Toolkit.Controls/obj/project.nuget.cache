@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "iowg6K7rIp1G3h3N/VslUl2a6v+pEUGb/xWS6Lzid2RbfVgy7uVzZMok/7Jls5K7+fZACptBDlk+BXGgFP6aPA==",
+  "dgSpecHash": "MTvkaBmymbBwFlp5Sae3/o01QSUMPLJs5ZgOtbaO4na6+JzBp70pDxx8UYsfv1YqokDLRzHfOsG/BYvVK4a6sA==",
   "success": true,
   "projectFilePath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Toolkits\\Aksl.Toolkit.Controls\\Aksl.Toolkit.Controls.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\zheng\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.77\\microsoft.xaml.behaviors.wpf.1.1.77.nupkg.sha512"
+  ],
   "logs": []
 }

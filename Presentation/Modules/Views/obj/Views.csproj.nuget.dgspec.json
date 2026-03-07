@@ -178,7 +178,11 @@
         "frameworks": {
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Toolkits\\Prism Library\\Prism.Wpf\\Prism.Wpf.csproj": {
+                "projectPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Toolkits\\Prism Library\\Prism.Wpf\\Prism.Wpf.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
