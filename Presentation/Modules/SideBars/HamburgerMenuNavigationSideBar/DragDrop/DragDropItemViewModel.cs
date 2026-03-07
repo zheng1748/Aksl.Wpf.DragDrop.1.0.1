@@ -11,6 +11,7 @@ using Prism.Unity;
 
 using Aksl.Toolkit.UI;
 using Aksl.Modules.HamburgerMenuNavigationSideBar.Views;
+using Aksl.Views;
 
 namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 {
@@ -154,9 +155,14 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 
                 //void FindCanvas()
                 //{
-                //    VisualTreeFinder visualTreeFinder = new();
+                VisualTreeFinder visualTreeFinder = new();
 
-                //    mainCanvas = visualTreeFinder.FindVisualParent<System.Windows.Controls.Canvas>(dragDropItemView);
+                var nodeView = visualTreeFinder.FindVisualChild<XNodeView>(dragDropItemView);
+                if(nodeView is null)
+                {
+                    return;
+                }
+                //mainCanvas = visualTreeFinder.FindVisualParent<System.Windows.Controls.Canvas>(dragDropItemView);
                 //}
 
                 IsDown = true;
