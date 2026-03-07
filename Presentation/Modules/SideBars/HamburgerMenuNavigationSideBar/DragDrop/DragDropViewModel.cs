@@ -284,7 +284,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                 var nodeViewModel = nodeView.DataContext as XNodeViewModel;
                 nodeViewModel.PopupMenu = null;
 
-                if (!HasSelectedDragDropItem()) 
+                if (!HasSelectedDragDropItem())
                 {
                     e.Handled = true;
                     return;
@@ -299,7 +299,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 
                 ContextMenu contextMenu = new() { Visibility = HasSelectedDragDropItem() ? Visibility.Visible : Visibility.Collapsed };
 
-                var editNodeMenuItem = new MenuItem() { Header = "Edit Node",FontSize=13 };
+                var editNodeMenuItem = new MenuItem() { Header = "Edit Node", FontSize = 13 };
                 editNodeMenuItem.Click += (sender, e) =>
                 {
                     if (HasSelectedDragDropItem())
@@ -317,19 +317,19 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                             editXNodeViewModel.Content = nodeViewModel.Content;
                             editXNodeViewModel.LineWidth = nodeViewModel.LineWidth;
 
-                            dialogService.ShowDialog(editXNodeView, parameters: parameters, windowName: nameof(Toolkit.Dialogs.FixedSizeDialogWindow), callback: (result) => 
+                            dialogService.ShowDialog(editXNodeView, parameters: parameters, windowName: nameof(Toolkit.Dialogs.FixedSizeDialogWindow), callback: (result) =>
                             {
                                 if (result.Parameters.TryGetValue("NodeViewModel", out EditXNodeViewModel editNodeViewModel))
                                 {
                                     nodeViewModel.HeaderBackgroundColor = editNodeViewModel?.HeaderBackgroundColor;
-                                    nodeViewModel.Content = editNodeViewModel.Content ;
+                                    nodeViewModel.Content = editNodeViewModel.Content;
                                     nodeViewModel.LineWidth = editNodeViewModel.LineWidth;
                                 }
                             });
                         }
                     }
                 };
-              
+
                 contextMenu.Items.Add(editNodeMenuItem);
 
                 MenuItem deleteNodeMenuItem = new MenuItem() { Header = "Delete Node", FontSize = 13 };
