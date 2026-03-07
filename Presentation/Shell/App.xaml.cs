@@ -36,6 +36,9 @@ using Aksl.Modules.Account;
 using Aksl.Modules.Functions;
 using Aksl.Modules.FlowControls;
 
+using Aksl.Views;
+using Aksl.ViewModels;
+
 namespace Aksl.Wpf.Unity
 {
     public partial class App
@@ -49,12 +52,15 @@ namespace Aksl.Wpf.Unity
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterDialogWindow<Aksl.Dialogs.FixedSizeDialogWindow>(name:nameof(Aksl.Dialogs.FixedSizeDialogWindow));
+            containerRegistry.RegisterDialogWindow<FixedSizeDialogWindow>(name:nameof(FixedSizeDialogWindow));
 
             containerRegistry.RegisterSingleton(typeof(IDialogService), typeof(DialogService));
             containerRegistry.RegisterSingleton(typeof(IDialogViewService), typeof(DialogViewService));
 
             containerRegistry.RegisterDialog<ConfirmView, ConfirmViewModel>();
+
+            containerRegistry.RegisterDialog<EditXNodeView, EditXNodeViewModel>();
+            ViewModelLocationProvider.Register(typeof(EditXNodeView).ToString(), () => Container.Resolve<EditXNodeViewModel>());
 
             RegisterMenuFactoryAsync(containerRegistry).GetAwaiter().GetResult();
 

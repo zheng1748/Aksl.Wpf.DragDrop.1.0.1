@@ -98,6 +98,13 @@ namespace Aksl.ViewModels
         #endregion
 
         #region Events
+        private event EventHandler<MouseButtonEventArgs> _mouseRightButtonDown;
+        public event EventHandler<MouseButtonEventArgs> MouseRightButtonDown
+        {
+            add { _mouseRightButtonDown += value; }
+            remove { _mouseRightButtonDown -= value; }
+        }
+
         private event EventHandler<MouseButtonEventArgs> _mouseLeftButtonDown;
         public event EventHandler<MouseButtonEventArgs> MouseLeftButtonDown
         {
@@ -135,12 +142,19 @@ namespace Aksl.ViewModels
         //        VisualTreeFinder visualTreeFinder = new();
         //        var borders = visualTreeFinder.FindVisualChilds<Border>(uc);
         //        var outputNodeBorder= borders.FirstOrDefault(b=>b.Name== "OutputNode");
-        
+
         //        uc.AddHandler(UIElement.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(ExecuteMouseLeftButtonDown),false);
         //        outputNodeBorder.AddHandler(UIElement.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(ExecuteOutputNodeMouseLeftButtonDown), false);
         //    }
         //}
         #endregion
+
+        #region MouseRightButtonDown Event
+        public void ExecuteMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            _mouseRightButtonDown?.Invoke(sender, e);
+        }
+       #endregion
 
         #region MouseLeftButtonDown Event
         public void ExecutePreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

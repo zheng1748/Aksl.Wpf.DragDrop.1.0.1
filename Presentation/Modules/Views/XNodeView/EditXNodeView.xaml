@@ -3,64 +3,127 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ei="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:prism="http://prismlibrary.com/"
              mc:Ignorable="d"
-             d:DesignHeight="450"
-             d:DesignWidth="800"
+             Height="300"
+             Width="600"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <Grid>
+    <Grid Margin="10,20,10,10"
+          Grid.Row="0">
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition Height="5" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0"
-              Margin="0"
-              Background="WhiteSmoke">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <Label Margin="7"
-                   Grid.Row="0"
-                   Grid.Column="0"
-                   Content="名称"
-                   FontSize="16"
-                   Foreground="Black" />
-            <TextBlock Margin="10,0,0,0"
-                       Grid.Row="0"
-                       Grid.Column="1"
-                       Text="{Binding Path=Content}" 
-                       TextWrapping="Wrap"
-                       FontSize="16"
-                       Foreground="Black" />
-        </Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="6" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Horizontal"
-                    Grid.Row="2"
-                    HorizontalAlignment="Center">
+        <TextBlock Grid.Row="0"
+                   Grid.Column="0"
+                   Text="HeaderBackgroundColor:"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   Margin="5,0,5,0" />
+        <TextBox x:Name="HeaderBackgroundColorTextBox"
+                 Grid.Row="0"
+                 Grid.Column="2"
+                 Margin="5,2,5,2"
+                 Text="{Binding Path=HeaderBackgroundColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                 VerticalAlignment="Center" />
+
+        <TextBlock Grid.Row="1"
+                   Grid.Column="0"
+                   Text="HeaderForegroundColor:"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   Margin="5,0,5,0" />
+        <TextBox x:Name="HeaderForegroundColorTextBox"
+                 Grid.Row="1"
+                 Grid.Column="2"
+                 Margin="5,2,5,2"
+                 Text="{Binding Path=HeaderForegroundColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                 VerticalContentAlignment="Center">
+        </TextBox>
+
+        <TextBlock Grid.Row="2"
+                   Grid.Column="0"
+                   Text="ContentBackgroundColor:"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   Margin="5,0,5,0" />
+        <TextBox x:Name="ContentBackgroundColorTextBox"
+                 Grid.Row="2"
+                 Grid.Column="2"
+                 VerticalContentAlignment="Center"
+                 Margin="5,2,5,2"
+                 Text="{Binding Path=ContentBackgroundColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+
+        <TextBlock Grid.Row="3"
+                   Grid.Column="0"
+                   Text="Content:"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   Margin="5,0,5,0" />
+        <TextBox Grid.Row="3"
+                 Grid.Column="2"
+                 VerticalContentAlignment="Center"
+                 Margin="5,2,5,2"
+                 Text="{Binding Path=Content,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+
+        <TextBlock Grid.Row="4"
+                   Grid.Column="0"
+                   Text="LineWidth:"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   Margin="5,0,5,0" />
+        <TextBox Grid.Row="4"
+                 Grid.Column="2"
+                 VerticalContentAlignment="Center"
+                 Margin="5,2,5,2"
+                 Text="{Binding Path=LineWidth,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+
+        <TextBlock Grid.Row="5"
+                   Grid.Column="0"
+                   Text="Shrink:"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   Margin="5,0,5,0" />
+        <TextBox Grid.Row="5"
+                 Grid.Column="2"
+                 VerticalContentAlignment="Center"
+                 Margin="5,2,5,2"
+                 Text="{Binding Path=Shrink,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+
+        <StackPanel Grid.Row="6"  Grid.Column="0" Grid.ColumnSpan="3"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="0,20,0,0">
             <Button x:Name="OkButton"
                     Content="{Binding OkText}"
                     Command="{Binding OKCommand}"
-                    CommandParameter="true"
+                    CommandParameter="True"
                     Width="90"
                     Height="30"
                     HorizontalAlignment="Right"
-                    Margin="0,4,20,8">
+                    Margin="0,4,0,8">
             </Button>
             <Button x:Name="CancelButton"
                     Content="{Binding CancelText}"
                     Command="{Binding CancelCommand}"
-                    CommandParameter="false"
+                    CommandParameter="False"
                     Width="90"
                     Height="30"
                     HorizontalAlignment="Right"
-                    Margin="20,4,0,8">
+                    Margin="100,4,0,8">
             </Button>
         </StackPanel>
     </Grid>

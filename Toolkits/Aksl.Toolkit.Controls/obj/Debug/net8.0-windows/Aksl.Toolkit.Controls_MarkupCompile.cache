@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 
-3251157620
+1204305769
 
-7511397189
+51188281330
 201-1221361007
-Dialogs\FixedSizeDialogWindow.xaml;Dialogs\FixedSizeDialogWindowIconButtonView.xaml;Themes\Generic.xaml;
+Themes\Generic.xaml;
 
 False
 

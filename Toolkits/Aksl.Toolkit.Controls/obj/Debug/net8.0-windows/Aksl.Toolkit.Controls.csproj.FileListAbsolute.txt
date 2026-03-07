@@ -267,13 +267,9 @@ C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Toolkits\Aksl.Toolkit.Co
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Toolkits\Aksl.Toolkit.Controls\obj\Debug\net8.0-windows\Aksl.Toolkit.Controls.pdb
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Toolkits\Aksl.Toolkit.Controls\obj\Debug\net8.0-windows\ref\Aksl.Toolkit.Controls.dll
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Toolkits\Aksl.Toolkit.Controls\obj\Debug\net8.0-windows\Aksl.Toolkit.Controls.csproj.AssemblyReference.cache
-C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Toolkits\Aksl.Toolkit.Controls\obj\Debug\net8.0-windows\Dialogs\FixedSizeDialogWindow.g.cs
-C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Toolkits\Aksl.Toolkit.Controls\obj\Debug\net8.0-windows\Dialogs\FixedSizeDialogWindowIconButtonView.g.cs
-C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Toolkits\Aksl.Toolkit.Controls\obj\Debug\net8.0-windows\Dialogs\FixedSizeDialogWindow.baml
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Toolkits\Aksl.Toolkit.Controls\bin\Debug\net8.0-windows\Prism.dll
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Toolkits\Aksl.Toolkit.Controls\bin\Debug\net8.0-windows\Prism.Wpf.dll
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Toolkits\Aksl.Toolkit.Controls\bin\Debug\net8.0-windows\Prism.Wpf.pdb
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Toolkits\Aksl.Toolkit.Controls\bin\Debug\net8.0-windows\Prism.pdb
-C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Toolkits\Aksl.Toolkit.Controls\obj\Debug\net8.0-windows\Dialogs\FixedSizeDialogWindowIconButtonView.baml
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Toolkits\Aksl.Toolkit.Controls\obj\Debug\net8.0-windows\Aksl.Toolkit.Controls.sourcelink.json
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Toolkits\Aksl.Toolkit.Controls\obj\Debug\net8.0-windows\Aksl.Toolkit.Controls.csproj.CopyComplete

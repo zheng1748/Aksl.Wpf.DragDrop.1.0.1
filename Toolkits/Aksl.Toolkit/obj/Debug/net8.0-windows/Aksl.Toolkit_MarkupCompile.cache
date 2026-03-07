@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 
-1-966475090
+3-919623239
 
-21-1780667985
-204-1487016299
-Dialogs\ConfirmView.xaml;
+24-627061704
+205-1298139893
+Dialogs\ConfirmView.xaml;Dialogs\FixedSizeDialogWindow.xaml;Dialogs\FixedSizeDialogWindowIconButtonView.xaml;
 
 False
 

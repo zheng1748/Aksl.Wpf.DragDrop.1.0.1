@@ -150,6 +150,10 @@
             <ei:CallMethodAction TargetObject="{Binding}"
                                  MethodName="ExecutePreviewMouseLeftButtonDown" />
         </ei:EventTrigger>
+        <ei:EventTrigger EventName="MouseRightButtonDown">
+            <ei:CallMethodAction TargetObject="{Binding}"
+                                 MethodName="ExecuteMouseRightButtonDown" />
+        </ei:EventTrigger>
     </ei:Interaction.Triggers>
     <!--<UserControl.Triggers>
         <EventTrigger RoutedEvent="UIElement.MouseEnter">

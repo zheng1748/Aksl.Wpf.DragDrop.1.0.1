@@ -73,6 +73,22 @@
           }
         }
       },
+      "Aksl.Toolkit.Controls/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Prism.Wpf": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Aksl.Toolkit.Controls.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Aksl.Toolkit.Controls.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
       "Prism.Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -265,6 +281,11 @@
         "unity.container.nuspec"
       ]
     },
+    "Aksl.Toolkit.Controls/1.0.0": {
+      "type": "project",
+      "path": "../Aksl.Toolkit.Controls/Aksl.Toolkit.Controls.csproj",
+      "msbuildProject": "../Aksl.Toolkit.Controls/Aksl.Toolkit.Controls.csproj"
+    },
     "Prism.Core/1.0.0": {
       "type": "project",
       "path": "../Prism Library/Prism.Core/Prism.Core.csproj",
@@ -283,6 +304,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0-windows7.0": [
+      "Aksl.Toolkit.Controls >= 1.0.0",
       "Microsoft.Xaml.Behaviors.Wpf >= 1.1.77",
       "Prism.Core >= 1.0.0",
       "Prism.Unity >= 1.0.0",
@@ -321,6 +343,9 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
+            "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Toolkits\\Aksl.Toolkit.Controls\\Aksl.Toolkit.Controls.csproj": {
+              "projectPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Toolkits\\Aksl.Toolkit.Controls\\Aksl.Toolkit.Controls.csproj"
+            },
             "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Toolkits\\Prism Library\\Prism.Core\\Prism.Core.csproj": {
               "projectPath": "C:\\Users\\zheng\\Documents\\GitHub\\Aksl.Wpf.DragDrop.1.0.1\\Toolkits\\Prism Library\\Prism.Core\\Prism.Core.csproj"
             },

@@ -22,6 +22,9 @@ using Aksl.Views;
 
 using Aksl.Modules.HamburgerMenuNavigationSideBar.Views;
 using Prism.Services.Dialogs;
+using Prism.Commands;
+using System.Data.Common;
+using System.Windows.Documents;
 
 namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 {
@@ -106,7 +109,8 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     {
                         var nodeView = visualTreeFinder.FindLogicalChild<XNodeView>(dragDropItemViewModel.ViewElement);
                         var nodeModel = nodeView?.DataContext as XNodeViewModel;
-                        nodeModel.PopupMenu = CreateNodeContextMenu();
+                      //  nodeModel.PopupMenu = CreateNodeContextMenu();
+                        nodeModel.MouseRightButtonDown += ExecuteNodeMouseRightButtonDown;
                         nodeModel.OutputNodePreviewMouseLeftButtonDown += ExecuteOutputNodePreviewMouseLeftButtonDown;
 
                         var borders= visualTreeFinder.FindLogicalChilds<Border>(dragDropItemViewModel.ViewElement);
@@ -184,129 +188,86 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
             };
         }
 
-        ContextMenu CreateNodeContextMenu()
-        {
-            ContextMenu contextMenu = new ();
+        //private ContextMenu CreateNodeContextMenu()
+        //{
+        //    ContextMenu contextMenu = new();
 
-            MenuItem editNodeMenuItem = new MenuItem() { Header = "Edit Node" };
-            editNodeMenuItem.Click += async (sender, e) =>
-            {
-                if (_selectedDragDropItem is not null && (DragDropItems.Contains(_selectedDragDropItem)))
-                {
-                  // await _dialogViewService.ConfirmAsync(message: $"Edit.: \"{_selectedDragDropItem.ViewName}\"", title: "Message", okText: "确定", cancelText:"取消", callBack:null);
-                   var dialogService = (PrismApplication.Current as PrismApplicationBase).Container.Resolve<Prism.Services.Dialogs.IDialogService>();
-                    var parameters = new DialogParameters { { "IsConfirm", true }, { "Message", "message" }, { "Title", "Edit" }, { "OkText", "确定" }, { "CancelText", "取消" } };
-                    dialogService.ShowDialog(nameof(Aksl.Toolkit.Dialogs.ConfirmView),  parameters: parameters,callback:null, windowName: nameof(Aksl.Dialogs.FixedSizeDialogWindow));
-                }
-            };
-            contextMenu.Items.Add(editNodeMenuItem);
+        //    var editNodeMenuItem = new MenuItem() { Header = "Edit Node", Command = new DelegateCommand(ExecuteEditNodeCommand, CanExecuteEditNodeCommand) };
+        //    //editNodeMenuItem.Click +=  (sender, e) =>
+        //    //{
+        //    //    if (_selectedDragDropItem is not null && (DragDropItems.Contains(_selectedDragDropItem)))
+        //    //    {
+        //    //        // await _dialogViewService.ConfirmAsync(message: $"Edit.: \"{_selectedDragDropItem.ViewName}\"", title: "Message", okText: "确定", cancelText:"取消", callBack:null);
+        //    //        var dialogService = (PrismApplication.Current as PrismApplicationBase).Container.Resolve<Aksl.Services.Dialogs.DialogService>();
+        //    //        var parameters = new DialogParameters { { "IsConfirm", true }, { "Message", "message" }, { "Title", "Edit" }, { "OkText", "确定" }, { "CancelText", "取消" } };
 
-            MenuItem deleteNodeMenuItem = new MenuItem() { Header = "Delete Node" };
-            deleteNodeMenuItem.Click += (sender, e) =>
-            {
-                if (_selectedDragDropItem is not null && (DragDropItems.Contains(_selectedDragDropItem)))
-                {
-                    DragDropItems.Remove(_selectedDragDropItem);
-                }
-            };
-            contextMenu.Items.Add(deleteNodeMenuItem);
+        //    //        VisualTreeFinder visualTreeFinder = new();
+        //    //        var nodeView = visualTreeFinder.FindLogicalChild<XNodeView>(_selectedDragDropItem.ViewElement);
+        //    //        if (nodeView is not null)
+        //    //        {
+        //    //            var nodeViewModel = nodeView.DataContext as XNodeViewModel;
 
-           return contextMenu;
-        }
-        #endregion
+        //    //            EditXNodeView editXNodeView = new();
+        //    //            var editXNodeViewModel = editXNodeView.DataContext as EditXNodeViewModel;
+        //    //            editXNodeViewModel.HeaderBackgroundColor = nodeViewModel.HeaderBackgroundColor;
+        //    //            editXNodeViewModel.Content = nodeViewModel.Content;
 
-        #region OutputNode MouseLeftButtonDown Event
-        private void ExecuteOutputNodePreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is Border outputBorder)
-            {
-               // System.Windows.Controls.Canvas mainCanvas;
+        //    //            dialogService.ShowDialog(editXNodeView, parameters: parameters, callback: null, windowName: nameof(Toolkit.Dialogs.FixedSizeDialogWindow));
+        //    //        }
+        //    //    }
+        //    //};
+        //    contextMenu.Items.Add(editNodeMenuItem);
 
-                var startPoint = GetOutputPortCenter();
-                var endPoint = new System.Windows.Point(startPoint.X + 4, startPoint.Y + 4);
+        //    MenuItem deleteNodeMenuItem = new MenuItem() { Header = "Delete Node", Command = new DelegateCommand(ExecuteDeleteNodeCommand, CanExecuteEditNodeCommand) };
+        //    //deleteNodeMenuItem.Click += (sender, e) =>
+        //    //{
+        //    //    if (_selectedDragDropItem is not null && (DragDropItems.Contains(_selectedDragDropItem)))
+        //    //    {
+        //    //        DragDropItems.Remove(_selectedDragDropItem);
+        //    //    }
+        //    //};
+        //    contextMenu.Items.Add(deleteNodeMenuItem);
 
-                System.Windows.Shapes.Path currentPath = new()
-                {
-                    Stroke = Brushes.MediumPurple,
-                    StrokeThickness = 3d,
-                    Data = new PathGeometry()
-                };
-                //System.Windows.Shapes.Path currentPath = new();
-                var geometry = new PathGeometry();
-                PathFigure figure = new() { StartPoint = startPoint };
-                LineSegment lineSegment = new(endPoint, true) { IsSmoothJoin = true };
-                figure.Segments.Add(lineSegment);
-                geometry.Figures.Add(figure);
-                currentPath.Data = geometry;
+        //    void ExecuteEditNodeCommand()
+        //    {
+        //        if (_selectedDragDropItem is not null && (DragDropItems.Contains(_selectedDragDropItem)))
+        //        {
+        //            // await _dialogViewService.ConfirmAsync(message: $"Edit.: \"{_selectedDragDropItem.ViewName}\"", title: "Message", okText: "确定", cancelText:"取消", callBack:null);
+        //            var dialogService = (PrismApplication.Current as PrismApplicationBase).Container.Resolve<Aksl.Services.Dialogs.DialogService>();
+        //            var parameters = new DialogParameters { { "IsConfirm", true }, { "Message", "message" }, { "Title", "Edit" }, { "OkText", "确定" }, { "CancelText", "取消" } };
 
-                //  DragDropItem dragDropItem = new() { X = startPoint.X, Y = startPoint.Y, Width = currentPath.Data.Bounds.Width+4, Height = currentPath.Data.Bounds.Height+4 };
-                DragDropItem dragDropItemWithPath = new() { X = startPoint.X, Y = startPoint.Y, Width = currentPath.Width + 4, Height = currentPath.Height + 4 };
-                DragDropItemViewModel dragDropItemWithPathViewModel = new(dragDropItemWithPath) { ViewElement = currentPath };
-                //AddPropertyChanged(dragDropItemViewModel);
-                DragDropItems.Add(dragDropItemWithPathViewModel);
+        //            VisualTreeFinder visualTreeFinder = new();
+        //            var nodeView = visualTreeFinder.FindLogicalChild<XNodeView>(_selectedDragDropItem.ViewElement);
+        //            if (nodeView is not null)
+        //            {
+        //                var nodeViewModel = nodeView.DataContext as XNodeViewModel;
 
-                _connectionInformation.StartPoint = startPoint;
-                _connectionInformation.CurrentPath = currentPath;
-                _connectionInformation.IsConnecting = true;
-                _connectionInformation.OutputPortRef = outputBorder;
+        //                EditXNodeView editXNodeView = new();
+        //                var editXNodeViewModel = editXNodeView.DataContext as EditXNodeViewModel;
+        //                editXNodeViewModel.HeaderBackgroundColor = nodeViewModel.HeaderBackgroundColor;
+        //                editXNodeViewModel.Content = nodeViewModel.Content;
 
-                //currentPath.CaptureMouse();
+        //                dialogService.ShowDialog(editXNodeView, parameters: parameters, callback: null, windowName: nameof(Toolkit.Dialogs.FixedSizeDialogWindow));
+        //            }
+        //        }
+        //    }
 
-                System.Windows.Point GetOutputPortCenter()
-                {
-                    VisualTreeFinder visualTreeFinder = new();
-                    //   var itemsControl = visualTreeFinder.FindVisualParent<ItemsControl>(outputPort);
-                    //var childsInItemsControl = visualTreeFinder.FindVisualChilds<DependencyObject>(itemsControl);
-                    //mainCanvas = childsInItemsControl.FirstOrDefault(d => (d is Canvas) && (d as Canvas).Name == "MainCanvas") as Canvas;
-                    // var mainCanvas = visualTreeFinder.FindVisualChild<Canvas>(itemsControl);
-                    var mainCanvas = visualTreeFinder.FindVisualParent<Canvas>(outputBorder);
-                    var dragDropItemView = visualTreeFinder.FindVisualParent<DragDropItemView>(outputBorder);
-                    var dragDropItemViewModel = dragDropItemView.DataContext as DragDropItemViewModel;
-                   //var nodeView = visualTreeFinder.FindVisualChild<XNodeView>(dragDropItemView);
-                    var nodeView = visualTreeFinder.FindVisualParent<XNodeView>(outputBorder);
-                    var inputPorBorder = visualTreeFinder.FindVisualChilds<DependencyObject>(nodeView).FirstOrDefault(d => (d is Border) && (d as Border).Name == "InputNode");
+        //    bool CanExecuteEditNodeCommand()
+        //    {
+        //        bool canExecute = _selectedDragDropItem is not null && DragDropItems.Contains(_selectedDragDropItem);
+        //        return canExecute;
+        //    }
 
-              //     Debug.Print($"OutputNodeMouseLeftButtonDown.DragDropItemView:X={dragDropItemViewModel.X} Y={dragDropItemViewModel.Y}");
+        //    void ExecuteDeleteNodeCommand()
+        //    {
+        //        if (_selectedDragDropItem is not null && (DragDropItems.Contains(_selectedDragDropItem)))
+        //        {
+        //            DragDropItems.Remove(_selectedDragDropItem);
+        //        }
+        //    }
 
-                    var centerPoint = new System.Windows.Point(outputBorder.Width / 2, outputBorder.Height / 2);
-                    var outputLeftPoint = new System.Windows.Point(dragDropItemViewModel.X+nodeView.ActualWidth, dragDropItemViewModel.Y + nodeView.ActualHeight/ 2);
-                    var outputRelativeToCanvasPoint = outputBorder.TranslatePoint(centerPoint, mainCanvas);
-                    // 将当前点相对于port的坐标转换为当前点相对于Canvas的坐标位置,Canvas会先获取point左上角的位置，然后再偏移point.X,point.Y
-                    //  var position = outputPort.TranslatePoint(centerPoint, mainCanvas);
-                    var mainCanvasPoint= Mouse.GetPosition(mainCanvas);
-                    Debug.Print($"OutputNodeMouseLeftButtonDown.DragDropItemViewModel:X={dragDropItemViewModel.X} Y={dragDropItemViewModel.Y}");
-                    Debug.Print($"OutputNodeMouseLeftButtonDown.Canvast:X={mainCanvasPoint.X} Y={mainCanvasPoint.Y}");
-                    Debug.Print($"OutputNodeMouseLeftButtonDown.DragDropItemView+NodeView:X={dragDropItemViewModel.X+ nodeView.ActualWidth} Y={dragDropItemViewModel.Y+ nodeView.ActualHeight}");
-                    //   Debug.Print($"OutputNodeMouseLeftButtonDown.Canvas:X={mainCanvasPoint.X} Y={mainCanvasPoint.Y}");
-                    var dragDropItemViewPosition = Mouse.GetPosition(dragDropItemView);
-                    var nodeViewPosition = Mouse.GetPosition(nodeView);
-                    var outputPortPoint = Mouse.GetPosition(outputBorder);
-                   // Debug.Print($"OutputNodeMouseLeftButtonDown.OutputPort):X={outputPortPoint.X} Y={outputPortPoint.Y}");
-
-                    //var mainCanvasPosition = MouseUtilities.GetMousePosition(mainCanvas);
-                    //Debug.Print($"OutputNodeMouseLeftButtonDown.Canvast):X={mainCanvasPosition.X} Y={mainCanvasPosition.Y}");
-                   // var outputPortPosition = MouseUtilities.GetMousePosition(outputPort);
-                  //  Debug.Print($"OutputNodeMouseLeftButtonDown.OutputPort):X={outputPortPosition.X} Y={outputPortPosition.Y}");
-
-                    // var position = new System.Windows.Point(dragDropItemViewModel.X + centerPoint.X, dragDropItemViewModel.Y + centerPoint.Y);
-                    var dragDropItemPoint = new System.Windows.Point(dragDropItemViewModel.X, dragDropItemViewModel.Y);
-                    var dragDropItemViewPointRelativeToCanvasPoint = dragDropItemView.TranslatePoint(new Point(0, 0), mainCanvas);
-                 //   Debug.Print($"OutputNodeMouseLeftButtonDown.RelativeToCanvast:X={dragDropItemViewPointRelativeToCanvasPoint.X} Y={dragDropItemViewPointRelativeToCanvasPoint.Y}");
-                    var outputPortRelativeToCanvasPoint = outputBorder.TranslatePoint(new Point(0, 0), mainCanvas);
-                    //  Debug.Print($"OutputNodeMouseLeftButtonDown.OutputPortRelativeToCanvast:X={outputPortRelativeToCanvasPoint.X} Y={outputPortRelativeToCanvasPoint.Y}");
-                    //var positionRelativeToDragDropItemView = nodeView.TranslatePoint(positionRelativeToNodeView, dragDropItemView);
-                    //var positionRelativeToCanvas = dragDropItemView.TranslatePoint(dragDropItemPoint, mainCanvas);
-                    //var positionRelativeToItemsControl = dragDropItemView.TranslatePoint(dragDropItemPoint, itemsControl);
-
-                    var position = new System.Windows.Point(dragDropItemViewModel.X+ dragDropItemView.ActualWidth, dragDropItemViewModel.Y+ dragDropItemView.ActualHeight/ 2);
-                    //var position = new System.Windows.Point(dragDropItemViewModel.X - outputPortPoint.X, dragDropItemViewModel.Y - outputPortPoint.Y);
-
-                    return position;
-                }
-            }
-
-            e.Handled = true;
-        }
+        //    return contextMenu;
+        //}
         #endregion
 
         #region DragDropItemMouseMove Event
@@ -315,11 +276,89 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
         }
         #endregion
 
+        #region Node MouseRightButtonDown Event
+        public void ExecuteNodeMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.Source is XNodeView nodeView)
+            {
+                var nodeViewModel = nodeView.DataContext as XNodeViewModel;
+                nodeViewModel.PopupMenu = null;
+
+                if (!HasSelectedDragDropItem()) 
+                {
+                    e.Handled = true;
+                    return;
+                }
+
+                CreateContextMenu();
+            }
+
+            void CreateContextMenu()
+            {
+                var nodeViewModel = nodeView.DataContext as XNodeViewModel;
+
+                ContextMenu contextMenu = new() { Visibility = HasSelectedDragDropItem() ? Visibility.Visible : Visibility.Collapsed };
+
+                var editNodeMenuItem = new MenuItem() { Header = "Edit Node",FontSize=13 };
+                editNodeMenuItem.Click += (sender, e) =>
+                {
+                    if (HasSelectedDragDropItem())
+                    {
+                        // await _dialogViewService.ConfirmAsync(message: $"Edit.: \"{_selectedDragDropItem.ViewName}\"", title: "Message", okText: "确定", cancelText:"取消", callBack:null);
+                        var dialogService = (PrismApplication.Current as PrismApplicationBase).Container.Resolve<Aksl.Services.Dialogs.DialogService>();
+                        var parameters = new DialogParameters { { "IsConfirm", true }, { "Message", "message" }, { "Title", "Edit" }, { "OkText", "确定" }, { "CancelText", "取消" } };
+
+                        VisualTreeFinder visualTreeFinder = new();
+                        var nodeView = visualTreeFinder.FindLogicalChild<XNodeView>(_selectedDragDropItem.ViewElement);
+                        if (nodeView is not null)
+                        {
+                            EditXNodeView editXNodeView = new();
+                            var editXNodeViewModel = editXNodeView.DataContext as EditXNodeViewModel;
+                            editXNodeViewModel.HeaderBackgroundColor = nodeViewModel.HeaderBackgroundColor;
+                            editXNodeViewModel.Content = nodeViewModel.Content;
+                            editXNodeViewModel.LineWidth = nodeViewModel.LineWidth;
+
+                            dialogService.ShowDialog(editXNodeView, parameters: parameters, windowName: nameof(Toolkit.Dialogs.FixedSizeDialogWindow), callback: (result) => 
+                            {
+                                if (result.Parameters.TryGetValue("NodeViewModel", out EditXNodeViewModel editNodeViewModel))
+                                {
+                                    nodeViewModel.HeaderBackgroundColor = editNodeViewModel?.HeaderBackgroundColor;
+                                    nodeViewModel.Content = editNodeViewModel.Content ;
+                                    nodeViewModel.LineWidth = editNodeViewModel.LineWidth;
+                                }
+                            });
+                        }
+                    }
+                };
+              
+                contextMenu.Items.Add(editNodeMenuItem);
+
+                MenuItem deleteNodeMenuItem = new MenuItem() { Header = "Delete Node", FontSize = 13 };
+                deleteNodeMenuItem.Click += (sender, e) =>
+                {
+                    if (HasSelectedDragDropItem())
+                    {
+                        DragDropItems.Remove(_selectedDragDropItem);
+                    }
+                };
+                contextMenu.Items.Add(deleteNodeMenuItem);
+
+                nodeViewModel.PopupMenu = contextMenu;
+            }
+
+            bool HasSelectedDragDropItem() => _selectedDragDropItem is not null && (DragDropItems.Contains(_selectedDragDropItem));
+
+            e.Handled = true;
+        }
+        #endregion
+
         #region ItemsControl MouseRightButtonDown Event
         public void ExecuteMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.Source is ItemsControl itemsControl)
             {
+                PopupMenu =null;
+
                 var itemsControlPoint = Mouse.GetPosition(itemsControl);
 
                 CreateContextMenu(itemsControlPoint);
@@ -329,7 +368,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
             {
                 ContextMenu contextMenu = new();
 
-                System.Windows.Controls.MenuItem addNodeMenuItem = new() { Header = "Add Node" };
+                System.Windows.Controls.MenuItem addNodeMenuItem = new() { Header = "Add Node", FontSize = 13 };
 
                 addNodeMenuItem.Click += (sender, e) =>
                 {
@@ -345,7 +384,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     {
                         var nodeView = childsInNodeViewOwner.FirstOrDefault(d => (d is XNodeView)) as XNodeView;
                         var nodeModel = nodeView?.DataContext as XNodeViewModel;
-                        nodeModel.PopupMenu = CreateNodeContextMenu();
+                        nodeModel.MouseRightButtonDown += ExecuteNodeMouseRightButtonDown;
                         nodeModel.OutputNodePreviewMouseLeftButtonDown += ExecuteOutputNodePreviewMouseLeftButtonDown;
 
                         var inputPort = childsInNodeViewOwner.FirstOrDefault(d => (d is Border) && (d as Border).Name == "InputNode") as Border;
@@ -356,6 +395,8 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 
                 PopupMenu = contextMenu;
             }
+
+            e.Handled = true;
         }
         #endregion
 
@@ -430,6 +471,100 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     selectionRectangleViewModel.Y = _selectedRectangleStartPoint.Value.Y;
 
                     mainCanvas.CaptureMouse();
+                }
+            }
+
+            e.Handled = true;
+        }
+        #endregion
+
+        #region OutputNode MouseLeftButtonDown Event
+        private void ExecuteOutputNodePreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Border outputBorder)
+            {
+                // System.Windows.Controls.Canvas mainCanvas;
+
+                var startPoint = GetOutputPortCenter();
+                var endPoint = new System.Windows.Point(startPoint.X + 4, startPoint.Y + 4);
+
+                System.Windows.Shapes.Path currentPath = new()
+                {
+                    Stroke = Brushes.MediumPurple,
+                    StrokeThickness = 3d,
+                    Data = new PathGeometry()
+                };
+                //System.Windows.Shapes.Path currentPath = new();
+                var geometry = new PathGeometry();
+                PathFigure figure = new() { StartPoint = startPoint };
+                LineSegment lineSegment = new(endPoint, true) { IsSmoothJoin = true };
+                figure.Segments.Add(lineSegment);
+                geometry.Figures.Add(figure);
+                currentPath.Data = geometry;
+
+                //  DragDropItem dragDropItem = new() { X = startPoint.X, Y = startPoint.Y, Width = currentPath.Data.Bounds.Width+4, Height = currentPath.Data.Bounds.Height+4 };
+                DragDropItem dragDropItemWithPath = new() { X = startPoint.X, Y = startPoint.Y, Width = currentPath.Width + 4, Height = currentPath.Height + 4 };
+                DragDropItemViewModel dragDropItemWithPathViewModel = new(dragDropItemWithPath) { ViewElement = currentPath };
+                //AddPropertyChanged(dragDropItemViewModel);
+                DragDropItems.Add(dragDropItemWithPathViewModel);
+
+                _connectionInformation.StartPoint = startPoint;
+                _connectionInformation.CurrentPath = currentPath;
+                _connectionInformation.IsConnecting = true;
+                _connectionInformation.OutputPortRef = outputBorder;
+
+                //currentPath.CaptureMouse();
+
+                System.Windows.Point GetOutputPortCenter()
+                {
+                    VisualTreeFinder visualTreeFinder = new();
+                    //   var itemsControl = visualTreeFinder.FindVisualParent<ItemsControl>(outputPort);
+                    //var childsInItemsControl = visualTreeFinder.FindVisualChilds<DependencyObject>(itemsControl);
+                    //mainCanvas = childsInItemsControl.FirstOrDefault(d => (d is Canvas) && (d as Canvas).Name == "MainCanvas") as Canvas;
+                    // var mainCanvas = visualTreeFinder.FindVisualChild<Canvas>(itemsControl);
+                    var mainCanvas = visualTreeFinder.FindVisualParent<Canvas>(outputBorder);
+                    var dragDropItemView = visualTreeFinder.FindVisualParent<DragDropItemView>(outputBorder);
+                    var dragDropItemViewModel = dragDropItemView.DataContext as DragDropItemViewModel;
+                    //var nodeView = visualTreeFinder.FindVisualChild<XNodeView>(dragDropItemView);
+                    var nodeView = visualTreeFinder.FindVisualParent<XNodeView>(outputBorder);
+                    var inputPorBorder = visualTreeFinder.FindVisualChilds<DependencyObject>(nodeView).FirstOrDefault(d => (d is Border) && (d as Border).Name == "InputNode");
+
+                    //     Debug.Print($"OutputNodeMouseLeftButtonDown.DragDropItemView:X={dragDropItemViewModel.X} Y={dragDropItemViewModel.Y}");
+
+                    var centerPoint = new System.Windows.Point(outputBorder.Width / 2, outputBorder.Height / 2);
+                    var outputLeftPoint = new System.Windows.Point(dragDropItemViewModel.X + nodeView.ActualWidth, dragDropItemViewModel.Y + nodeView.ActualHeight / 2);
+                    var outputRelativeToCanvasPoint = outputBorder.TranslatePoint(centerPoint, mainCanvas);
+                    // 将当前点相对于port的坐标转换为当前点相对于Canvas的坐标位置,Canvas会先获取point左上角的位置，然后再偏移point.X,point.Y
+                    //  var position = outputPort.TranslatePoint(centerPoint, mainCanvas);
+                    var mainCanvasPoint = Mouse.GetPosition(mainCanvas);
+                    Debug.Print($"OutputNodeMouseLeftButtonDown.DragDropItemViewModel:X={dragDropItemViewModel.X} Y={dragDropItemViewModel.Y}");
+                    Debug.Print($"OutputNodeMouseLeftButtonDown.Canvast:X={mainCanvasPoint.X} Y={mainCanvasPoint.Y}");
+                    Debug.Print($"OutputNodeMouseLeftButtonDown.DragDropItemView+NodeView:X={dragDropItemViewModel.X + nodeView.ActualWidth} Y={dragDropItemViewModel.Y + nodeView.ActualHeight}");
+                    //   Debug.Print($"OutputNodeMouseLeftButtonDown.Canvas:X={mainCanvasPoint.X} Y={mainCanvasPoint.Y}");
+                    var dragDropItemViewPosition = Mouse.GetPosition(dragDropItemView);
+                    var nodeViewPosition = Mouse.GetPosition(nodeView);
+                    var outputPortPoint = Mouse.GetPosition(outputBorder);
+                    // Debug.Print($"OutputNodeMouseLeftButtonDown.OutputPort):X={outputPortPoint.X} Y={outputPortPoint.Y}");
+
+                    //var mainCanvasPosition = MouseUtilities.GetMousePosition(mainCanvas);
+                    //Debug.Print($"OutputNodeMouseLeftButtonDown.Canvast):X={mainCanvasPosition.X} Y={mainCanvasPosition.Y}");
+                    // var outputPortPosition = MouseUtilities.GetMousePosition(outputPort);
+                    //  Debug.Print($"OutputNodeMouseLeftButtonDown.OutputPort):X={outputPortPosition.X} Y={outputPortPosition.Y}");
+
+                    // var position = new System.Windows.Point(dragDropItemViewModel.X + centerPoint.X, dragDropItemViewModel.Y + centerPoint.Y);
+                    var dragDropItemPoint = new System.Windows.Point(dragDropItemViewModel.X, dragDropItemViewModel.Y);
+                    var dragDropItemViewPointRelativeToCanvasPoint = dragDropItemView.TranslatePoint(new Point(0, 0), mainCanvas);
+                    //   Debug.Print($"OutputNodeMouseLeftButtonDown.RelativeToCanvast:X={dragDropItemViewPointRelativeToCanvasPoint.X} Y={dragDropItemViewPointRelativeToCanvasPoint.Y}");
+                    var outputPortRelativeToCanvasPoint = outputBorder.TranslatePoint(new Point(0, 0), mainCanvas);
+                    //  Debug.Print($"OutputNodeMouseLeftButtonDown.OutputPortRelativeToCanvast:X={outputPortRelativeToCanvasPoint.X} Y={outputPortRelativeToCanvasPoint.Y}");
+                    //var positionRelativeToDragDropItemView = nodeView.TranslatePoint(positionRelativeToNodeView, dragDropItemView);
+                    //var positionRelativeToCanvas = dragDropItemView.TranslatePoint(dragDropItemPoint, mainCanvas);
+                    //var positionRelativeToItemsControl = dragDropItemView.TranslatePoint(dragDropItemPoint, itemsControl);
+
+                    var position = new System.Windows.Point(dragDropItemViewModel.X + dragDropItemView.ActualWidth, dragDropItemViewModel.Y + dragDropItemView.ActualHeight / 2);
+                    //var position = new System.Windows.Point(dragDropItemViewModel.X - outputPortPoint.X, dragDropItemViewModel.Y - outputPortPoint.Y);
+
+                    return position;
                 }
             }
 
