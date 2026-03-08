@@ -13,6 +13,7 @@ using Prism;
 using Prism.Ioc;
 using Prism.Mvvm;
 using Prism.Unity;
+using Prism.Services.Dialogs;
 using Unity;
 
 using Aksl.Toolkit.Services;
@@ -21,10 +22,6 @@ using Aksl.ViewModels;
 using Aksl.Views;
 
 using Aksl.Modules.HamburgerMenuNavigationSideBar.Views;
-using Prism.Services.Dialogs;
-using Prism.Commands;
-using System.Data.Common;
-using System.Windows.Documents;
 
 namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 {
