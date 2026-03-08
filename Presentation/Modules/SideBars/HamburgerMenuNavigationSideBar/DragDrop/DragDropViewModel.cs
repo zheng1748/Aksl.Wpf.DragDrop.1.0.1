@@ -487,9 +487,10 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                 geometry.Figures.Add(figure);
                 currentPath.Data = geometry;
 
-             // DragDropItem dragDropItemWithPath = new() { X = startPoint.X, Y = startPoint.Y, Width = currentPath.Data.Bounds.Width+4, Height = currentPath.Data.Bounds.Height+4 };
-             //  DragDropItem dragDropItemWithPath = new() { X = startPoint.X, Y = startPoint.Y, Width = currentPath.Data.Bounds.Width + 4, Height = currentPath.Data.Bounds.Height + 4 };
-                DragDropItem dragDropItemWithPath = new() { X = startPoint.X, Y = startPoint.Y, Width = currentPath.Width + 4, Height = currentPath.Height + 4 };
+                // DragDropItem dragDropItemWithPath = new() { X = startPoint.X, Y = startPoint.Y, Width = currentPath.Data.Bounds.Width+4, Height = currentPath.Data.Bounds.Height+4 };
+                //  DragDropItem dragDropItemWithPath = new() { X = startPoint.X, Y = startPoint.Y, Width = currentPath.Data.Bounds.Width + 4, Height = currentPath.Data.Bounds.Height + 4 };
+                DragDropItem dragDropItemWithPath = new() { X = startPoint.X+ currentPath.Data.Bounds.X, Y = startPoint.Y+ currentPath.Data.Bounds.Y, Width = currentPath.Width + 4, Height = currentPath.Height + 4 };
+              //  DragDropItem dragDropItemWithPath = new() { X = startPoint.X, Y = startPoint.Y, Width = currentPath.Width + 4, Height = currentPath.Height + 4 };
                 DragDropItemViewModel dragDropItemWithPathViewModel = new(dragDropItemWithPath) { ViewElement = currentPath };
                 //AddPropertyChanged(dragDropItemViewModel);
                 DragDropItems.Add(dragDropItemWithPathViewModel);
