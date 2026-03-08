@@ -156,7 +156,6 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                 //void FindCanvas()
                 //{
                 VisualTreeFinder visualTreeFinder = new();
-
                 var nodeView = visualTreeFinder.FindVisualChild<XNodeView>(dragDropItemView);
                 if(nodeView is null)
                 {

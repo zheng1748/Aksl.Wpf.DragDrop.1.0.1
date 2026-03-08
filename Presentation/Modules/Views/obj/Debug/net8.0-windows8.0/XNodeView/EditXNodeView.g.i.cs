@@ -96,7 +96,7 @@ namespace Aksl.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Aksl.Views;V1.0.0.0;component/xnodeview/editxnodeview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Aksl.Views;component/xnodeview/editxnodeview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\XNodeView\EditXNodeView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
