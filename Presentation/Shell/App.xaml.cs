@@ -60,9 +60,9 @@ namespace Aksl.Wpf.Unity
             containerRegistry.RegisterDialog<ConfirmView, ConfirmViewModel>();
 
             containerRegistry.RegisterDialog<EditXNodeView, EditXNodeViewModel>();
-            ViewModelLocationProvider.Register(typeof(EditXNodeView).ToString(), () => Container.Resolve<EditXNodeViewModel>());
+            ViewModelLocationProvider.Register(typeof(EditXNodeView).ToString(),() => Container.Resolve<EditXNodeViewModel>());
 
-            RegisterMenuFactoryAsync(containerRegistry).GetAwaiter().GetResult();
+            RegisterMenuFactoryAsync(containerRegistry).Await();
 
             RegisterBuildWorkspaceViewEventAsync();
         }

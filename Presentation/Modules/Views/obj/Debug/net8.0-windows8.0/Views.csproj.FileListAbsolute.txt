@@ -31,3 +31,9 @@ C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Vie
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Views\obj\Debug\net8.0-windows8.0\XNodeView\EditXNodeView.g.cs
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Views\bin\Debug\net8.0-windows8.0\Aksl.Toolkit.Controls.dll
 C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Views\bin\Debug\net8.0-windows8.0\Aksl.Toolkit.Controls.pdb
+C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Views\obj\Debug\net8.0-windows8.0\PathView.baml
+C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Views\obj\Debug\net8.0-windows8.0\PolyLineSegmentView.baml
+C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Views\obj\Debug\net8.0-windows8.0\PathView.g.cs
+C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Views\obj\Debug\net8.0-windows8.0\PolyLineSegmentView.g.cs
+C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Views\obj\Debug\net8.0-windows8.0\BezierView.baml
+C:\Users\zheng\Documents\GitHub\Aksl.Wpf.DragDrop.1.0.1\Presentation\Modules\Views\obj\Debug\net8.0-windows8.0\BezierView.g.cs

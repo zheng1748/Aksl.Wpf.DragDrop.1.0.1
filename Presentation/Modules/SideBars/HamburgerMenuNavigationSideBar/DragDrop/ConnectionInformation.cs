@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels;
+using Aksl.ViewModels;
+using Prism.Mvvm;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,8 +28,14 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar
 
         public Border OutputPortRef { get; set; }
 
-        public System.Windows.Shapes.Path CurrentPath { get; set; }
-
+        //public System.Windows.Shapes.Path CurrentPath { get; set; }
+       // public DragDropItemViewModel DragDropItemViewModelToBezier { get; set; }
+        public DragDropItemViewModel CurrentDragDropItemViewModel{ get; set; }
+        public FrameworkElement CurrentViewElement { get; set; }
+        public BindableBase CurrentViewModel { get; set; }
+        public BezierViewModel BezierViewModel { get; set; }
+        public PathViewModel PathViewModel { get; set; }
+        public PolyLineSegmentViewModel PolyLineSegmentViewModel { get; set; }
         public FrameworkElement FromPort { get; set; }
         public List<Connection> Connections { get; set; }
 

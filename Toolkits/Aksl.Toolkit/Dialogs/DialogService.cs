@@ -13,10 +13,10 @@ using Unity;
 
 namespace Aksl.Services.Dialogs
 {
-    public class DialogService 
+    public class DialogService
     {
         private readonly IUnityContainer _container;
-     
+
         public DialogService()
         {
             _container = (PrismApplication.Current as PrismApplicationBase).Container.Resolve<IUnityContainer>();
@@ -27,7 +27,7 @@ namespace Aksl.Services.Dialogs
             ShowDialogInternal(dialogContent, parameters, callback, true, windowName);
         }
 
-        void ShowDialogInternal(FrameworkElement dialogContent, IDialogParameters parameters, Action<IDialogResult> callback, bool isModal, string windowName = null)
+        void ShowDialogInternal(FrameworkElement dialogContent,IDialogParameters parameters, Action<IDialogResult> callback, bool isModal, string windowName = null)
         {
             if (parameters == null)
             {

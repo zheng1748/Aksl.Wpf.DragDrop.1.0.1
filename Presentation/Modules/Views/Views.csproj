@@ -18,5 +18,14 @@
     <ProjectReference Include="..\..\..\Toolkits\Prism Library\Prism.Unity.Wpf\Prism.Unity.Wpf.csproj" />
     <ProjectReference Include="..\..\..\Toolkits\Prism Library\Prism.Wpf\Prism.Wpf.csproj" />
   </ItemGroup>
+	
+  <ItemGroup>
+    <Compile Update="PathView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PolyLineSegmentView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
 
 </Project>
