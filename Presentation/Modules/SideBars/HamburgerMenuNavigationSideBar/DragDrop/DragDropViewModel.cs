@@ -26,6 +26,7 @@ using Prism.Commands;
 using System.Data;
 using System.Net;
 using System.Reflection;
+using Prism.Regions;
 
 namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 {
@@ -487,12 +488,21 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                 VisualTreeFinder visualTreeFinder = new();
                 var mainCanvas = visualTreeFinder.FindVisualParent<Canvas>(outputBorder);
 
-                //var centerPoint = new System.Windows.Point(outputBorder.Width / 2, outputBorder.Height / 2);
-                //var startPoint = outputBorder.TranslatePoint(centerPoint, mainCanvas);
+                var centerPoint = new System.Windows.Point(outputBorder.Width / 2, outputBorder.Height / 2);
+                var startPoint = outputBorder.TranslatePoint(centerPoint, mainCanvas);
+                //   var endPoint = new System.Windows.Point(startPoint.X + 1, startPoint.Y + 1);
 
-                var startPoint = GetOutputPortCenter();
-                var endPoint = new System.Windows.Point(startPoint.X + 1, startPoint.Y + 1);
+             //   Debug.Print($"OutputNode:MouseLeftButtonDown{startPoint}");
 
+                //var startPoint = GetOutputPortCenter(); 
+                //System.Windows.Point GetOutputPortCenter()
+                //{
+                //    var centerPoint = new System.Windows.Point(outputBorder.Width / 2, outputBorder.Height / 2);
+                //    var pointRelativeTo = outputBorder.TranslatePoint(centerPoint, mainCanvas);
+                //    return pointRelativeTo;
+                //}
+
+                #region Method
                 //System.Windows.Shapes.Path currentPath = new()
                 //{
                 //    Stroke = Brushes.MediumPurple,
@@ -508,33 +518,56 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                 //figure.Segments.Add(lineSegment);
                 //geometry.Figures.Add(figure);
                 //currentPath.Data = geometry;
+                #endregion
 
-                var bezierview = (PrismApplication.Current as PrismApplicationBase).Container.Resolve(typeof(BezierView)) as FrameworkElement;
-                var bezierviewModel = bezierview?.DataContext as BezierViewModel;
-                bezierviewModel.Stretch = Stretch.Fill;
-                bezierviewModel.Stroke = Brushes.MediumPurple;
-                bezierviewModel.StrokeThickness = 3d;
-                bezierviewModel.StrokeDashCap = PenLineCap.Flat;
-                bezierviewModel.StartPoint = startPoint;
-                bezierviewModel.Point1 = startPoint;
-                bezierviewModel.Point2 = startPoint;
-                bezierviewModel.Point3 = endPoint;
-                DragDropItem dragDropItemToBezier = new() { X = startPoint.X, Y = startPoint.Y, Width = 100, Height = 100 };
-                DragDropItemViewModel dragDropItemViewModelToBezier = new(dragDropItemToBezier) { ViewElement = bezierview };
-              //  DragDropItems.Add(dragDropItemViewModelToBezier);
+                DoBezier(); 
+                void DoBezier()
+                {
+                    var bezierview = (PrismApplication.Current as PrismApplicationBase).Container.Resolve(typeof(BezierView)) as FrameworkElement;
+                    var bezierviewModel = bezierview?.DataContext as BezierViewModel;
+                    bezierviewModel.Stretch = Stretch.Fill;
+                    bezierviewModel.Stroke = Brushes.MediumPurple;
+                    bezierviewModel.StrokeThickness = 3d;
+                    bezierviewModel.StrokeDashCap = PenLineCap.Round;
+                    bezierviewModel.StartPoint = startPoint;
+                    bezierviewModel.Point1 = startPoint;
+                    bezierviewModel.Point2 = startPoint;
+                    bezierviewModel.Point3 = startPoint;
 
-                var points = CreatePolyPoints(startPoint, startPoint);
-                var polyLineSegmentView = (PrismApplication.Current as PrismApplicationBase).Container.Resolve(typeof(PolyLineSegmentView)) as FrameworkElement;
-                var polyLineSegmentViewModel = polyLineSegmentView?.DataContext as PolyLineSegmentViewModel;
-                polyLineSegmentViewModel.Stretch = Stretch.Fill;
-                polyLineSegmentViewModel.Stroke = Brushes.MediumPurple;
-                polyLineSegmentViewModel.StrokeThickness = 3d;
-                polyLineSegmentViewModel.StrokeDashCap = PenLineCap.Flat;
-                polyLineSegmentViewModel.Points = points;
-                DragDropItem dragDropItemToPoly = new() { X = startPoint.X, Y = startPoint.Y, Width = 1, Height = 1 };
-                DragDropItemViewModel dragDropItemViewModelToPoly = new(dragDropItemToPoly) { ViewElement = polyLineSegmentView };
-                DragDropItems.Add(dragDropItemViewModelToPoly);
+                    DragDropItem dragDropItemToBezier = new() { X = startPoint.X, Y = startPoint.Y, Width = 0, Height = 0 };
+                    DragDropItemViewModel dragDropItemViewModelToBezier = new(dragDropItemToBezier) { ViewElement = bezierview };
+                    DragDropItems.Add(dragDropItemViewModelToBezier);
 
+                    _connectionInformation.CurrentDragDropItemViewModel = dragDropItemViewModelToBezier;
+                    _connectionInformation.CurrentViewElement = bezierview;
+                    _connectionInformation.CurrentViewModel = bezierviewModel;
+                }
+
+               // DoDoPolyLineSegment();
+                void DoPolyLineSegment()
+                {
+                    var points = CreatePolyPoints(startPoint, startPoint);
+                    var polyLineSegmentView = (PrismApplication.Current as PrismApplicationBase).Container.Resolve(typeof(PolyLineSegmentView)) as FrameworkElement;
+                    var polyLineSegmentViewModel = polyLineSegmentView?.DataContext as PolyLineSegmentViewModel;
+                    polyLineSegmentViewModel.Stretch = Stretch.Fill;
+                    polyLineSegmentViewModel.Stroke = Brushes.MediumPurple;
+                    polyLineSegmentViewModel.StrokeThickness = 3d;
+                    polyLineSegmentViewModel.StrokeDashCap = PenLineCap.Flat;
+                    polyLineSegmentViewModel.Points = points;
+                    DragDropItem dragDropItemToPoly = new() { X = startPoint.X, Y = startPoint.Y, Width = 1, Height = 1 };
+                    DragDropItemViewModel dragDropItemViewModelToPoly = new(dragDropItemToPoly) { ViewElement = polyLineSegmentView };
+                    DragDropItems.Add(dragDropItemViewModelToPoly);
+
+                    _connectionInformation.CurrentDragDropItemViewModel = dragDropItemViewModelToPoly;
+                    _connectionInformation.CurrentViewElement = polyLineSegmentView;
+                    _connectionInformation.CurrentViewModel = polyLineSegmentViewModel;
+                }
+
+                _connectionInformation.IsConnecting = true;
+                _connectionInformation.StartPoint = startPoint;
+                _connectionInformation.OutputPortRef = outputBorder;
+
+                #region Method
                 //var pathView = (PrismApplication.Current as PrismApplicationBase).Container.Resolve(typeof(PathView)) as FrameworkElement;
                 //var pathViewModel = pathView?.DataContext as PathViewModel;
                 //var geometry = new PathGeometry();
@@ -549,23 +582,17 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                 // DragDropItemViewModel dragDropItemWithPathViewModel = new(dragDropItemWithPath) { ViewElement = currentPath };
                 //AddPropertyChanged(dragDropItemViewModel);
 
-                _connectionInformation.IsConnecting = true;
-                _connectionInformation.StartPoint = startPoint;
-              //  _connectionInformation.CurrentPath = currentPath;
-                //_connectionInformation.CurrentDragDropItemViewModel = dragDropItemViewModelToBezier;
-                //_connectionInformation.CurrentViewElement = bezierview;
-                //_connectionInformation.CurrentViewModel = bezierviewModel;
-                _connectionInformation.CurrentDragDropItemViewModel = dragDropItemViewModelToPoly;
-                _connectionInformation.CurrentViewElement = polyLineSegmentView;
-                _connectionInformation.CurrentViewModel = polyLineSegmentViewModel;
-                _connectionInformation.OutputPortRef = outputBorder;
-
-                System.Windows.Point GetOutputPortCenter()
-                {
-                    var centerPoint = new System.Windows.Point(outputBorder.Width / 2, outputBorder.Height / 2);
-                    var pointRelativeTo = outputBorder.TranslatePoint(centerPoint, mainCanvas);
-                    return pointRelativeTo;
-                }
+                // _connectionInformation.IsConnecting = true;
+                // _connectionInformation.StartPoint = startPoint;
+                //// _connectionInformation.CurrentPath = currentPath;
+                // _connectionInformation.CurrentDragDropItemViewModel = dragDropItemViewModelToBezier;
+                // _connectionInformation.CurrentViewElement = bezierview;
+                // _connectionInformation.CurrentViewModel = bezierviewModel;
+                // //_connectionInformation.CurrentDragDropItemViewModel = dragDropItemViewModelToPoly;
+                // //_connectionInformation.CurrentViewElement = polyLineSegmentView;
+                // //_connectionInformation.CurrentViewModel = polyLineSegmentViewModel;
+                // _connectionInformation.OutputPortRef = outputBorder;
+                #endregion
 
                 #region Method
                 //System.Windows.Point GetOutputPortCenter()
@@ -630,10 +657,10 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
         }
         #endregion
 
-        #region MouseMove Event
+        #region ItemsControl MouseMove Event
         public void ExecutePreviewMouseMove(object sender, MouseEventArgs e)
         {
-            //Debug.Print($"DragDropView:MouseMove");
+         //   Debug.Print($"ItemsControl:MouseMove{_connectionInformation.StartPoint}");
             Canvas mainCanvas;
 
             if (_selectedDragDropItem is not null && (_selectedDragDropItem.IsDown || _selectedDragDropItem.IsDragging))
@@ -661,6 +688,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                         return;
                     }
 
+                    #region Method
                     //var pathViewModel = _connectionInformation.PathViewModel;
                     //var geometry = new PathGeometry();
                     //PathFigure figure = new() { StartPoint = _connectionInformation.StartPoint };
@@ -682,31 +710,61 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     //dragDropItemViewModelWithPath.X = mainCanvasPoint.X;
                     //dragDropItemViewModelWithPath.Y = mainCanvasPoint.Y;
 
-                    //var bezierviewModel = _connectionInformation.CurrentViewModel as BezierViewModel;
-                    //bezierviewModel.Stretch = Stretch.Fill;
-                    //bezierviewModel.Stroke = Brushes.MediumPurple;
-                    //bezierviewModel.StrokeThickness = 3d;
-                    //bezierviewModel.StrokeDashCap = PenLineCap.Flat;
-                    //bezierviewModel.StartPoint = _connectionInformation.StartPoint;
-                    //bezierviewModel.Point1 = new(_connectionInformation.StartPoint.X + 50, _connectionInformation.StartPoint.Y);
-                    //bezierviewModel.Point2 = new(endPoint.X - 50, endPoint.Y);
-                    //bezierviewModel.Point3 = endPoint;
+                    #endregion
 
-                    var points = CreatePolyPoints(_connectionInformation.StartPoint, currentPoint);
-                    var polyLineSegmentViewModel = _connectionInformation.CurrentViewModel as PolyLineSegmentViewModel;
-                    polyLineSegmentViewModel.Stretch = Stretch.Fill;
-                    polyLineSegmentViewModel.Stroke = Brushes.MediumPurple;
-                    polyLineSegmentViewModel.StrokeThickness = 3d;
-                    polyLineSegmentViewModel.StrokeDashCap = PenLineCap.Flat;
-                    polyLineSegmentViewModel.StartPoint = _connectionInformation.StartPoint;
-                    polyLineSegmentViewModel.Points = points;
+                    DoBezier();
+                    void DoBezier()
+                    {
+                        var bezierviewModel = _connectionInformation.CurrentViewModel as BezierViewModel;
+                        //bezierviewModel.Stretch = Stretch.Fill;
+                        //bezierviewModel.Stroke = Brushes.MediumPurple;
+                        //bezierviewModel.StrokeThickness = 3d;
+                        //bezierviewModel.StrokeDashCap = PenLineCap.Round;
+                        bezierviewModel.StartPoint = _connectionInformation.StartPoint;
+                        bezierviewModel.Point1 = new(_connectionInformation.StartPoint.X + 50, _connectionInformation.StartPoint.Y);
+                        bezierviewModel.Point2 = new(currentPoint.X - 50, currentPoint.Y);
+                        bezierviewModel.Point3 = currentPoint;
+                        //if (currentOffset.X >0d && currentOffset.Y > 0d)
+                        //{
+                        //    bezierviewModel.StartPoint = _connectionInformation.StartPoint;
+                        //    bezierviewModel.Point1 = new(_connectionInformation.StartPoint.X + 50, _connectionInformation.StartPoint.Y);
+                        //    bezierviewModel.Point2 = new(currentPoint.X - 50, currentPoint.Y);
+                        //    bezierviewModel.Point3 = currentPoint;
+                        //}
+                        //if (currentOffset.X > 0d && currentOffset.Y< 0d)
+                        //{
+                        //    bezierviewModel.StartPoint = _connectionInformation.StartPoint;
+                        //    bezierviewModel.Point1 = new(_connectionInformation.StartPoint.X + 50, _connectionInformation.StartPoint.Y);
+                        //    bezierviewModel.Point2 = new(currentPoint.X - 50, currentPoint.Y);
+                        //    bezierviewModel.Point3 = currentPoint;
+                        //}
+                    }
 
+                   // DoPolyLineSegment();
+                    void DoPolyLineSegment()
+                    {
+                        var points = CreatePolyPoints(_connectionInformation.StartPoint, currentPoint);
+                        var polyLineSegmentViewModel = _connectionInformation.CurrentViewModel as PolyLineSegmentViewModel;
+                        //  polyLineSegmentViewModel.Stretch = Stretch.Fill;
+                        polyLineSegmentViewModel.Stroke = Brushes.MediumPurple;
+                        polyLineSegmentViewModel.StrokeThickness = 3d;
+                        polyLineSegmentViewModel.StrokeDashCap = PenLineCap.Flat;
+                        polyLineSegmentViewModel.StartPoint = _connectionInformation.StartPoint;
+                        polyLineSegmentViewModel.Points = points;
+                    }
+
+                    double moveX = Math.Min(currentPoint.X, _connectionInformation.StartPoint.X);
+                    double moveY = Math.Min(currentPoint.Y, _connectionInformation.StartPoint.Y);
                     double moveWidth = Math.Abs(currentPoint.X - _connectionInformation.StartPoint.X);
                     double moveHeight = Math.Abs(currentPoint.Y - _connectionInformation.StartPoint.Y);
+                    _connectionInformation.CurrentDragDropItemViewModel.X = moveX;
+                    _connectionInformation.CurrentDragDropItemViewModel.Y = moveY;
                     _connectionInformation.CurrentDragDropItemViewModel.Width = moveWidth;
                     _connectionInformation.CurrentDragDropItemViewModel.Height = moveHeight;
+                    _connectionInformation.CurrentViewElement.Width = moveWidth;
+                    _connectionInformation.CurrentViewElement.Height = moveHeight;
 
-                   // Debug.Print($"MouseMove.Canvas:X={endPoint.X} Y={endPoint.Y}");
+                    // Debug.Print($"MouseMove.Canvas:X={endPoint.X} Y={endPoint.Y}");
                 }
             }
            
@@ -960,25 +1018,25 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                         //geometry.Figures.Add(figure);
                         //pathViewModel.Data = geometry;
 
-                        //var bezierviewModel = _connectionInformation.CurrentViewModel as BezierViewModel;
-                        ////bezierviewModel.Stretch = Stretch.Fill;
-                        ////bezierviewModel.Stroke = Brushes.MediumPurple;
-                        ////bezierviewModel.StrokeThickness = 3d;
-                        //bezierviewModel.StartPoint = _connectionInformation.StartPoint;
-                        //bezierviewModel.Point1 = new Point(_connectionInformation.StartPoint.X + 50, _connectionInformation.StartPoint.Y);
-                        //bezierviewModel.Point2 = new Point(endPoint.X - 50, endPoint.Y);
-                        //bezierviewModel.Point3 = endPoint;
-
                         var endPoint = GetInputPortCenter(inputPortBorder);
 
-                        var points = CreatePolyPoints(_connectionInformation.StartPoint, endPoint);
-                        var polyLineSegmentViewModel = _connectionInformation.CurrentViewModel as PolyLineSegmentViewModel;
-                        polyLineSegmentViewModel.Stretch = Stretch.Fill;
-                        polyLineSegmentViewModel.Stroke = Brushes.MediumPurple;
-                        polyLineSegmentViewModel.StrokeThickness = 3d;
-                        polyLineSegmentViewModel.StrokeDashCap = PenLineCap.Flat;
-                        polyLineSegmentViewModel.StartPoint = _connectionInformation.StartPoint;
-                        polyLineSegmentViewModel.Points = points;
+                        var bezierviewModel = _connectionInformation.CurrentViewModel as BezierViewModel;
+                        //bezierviewModel.Stretch = Stretch.Fill;
+                        //bezierviewModel.Stroke = Brushes.MediumPurple;
+                        //bezierviewModel.StrokeThickness = 3d;
+                        bezierviewModel.StartPoint = _connectionInformation.StartPoint;
+                        bezierviewModel.Point1 = new Point(_connectionInformation.StartPoint.X + 50, _connectionInformation.StartPoint.Y);
+                        bezierviewModel.Point2 = new Point(endPoint.X - 50, endPoint.Y);
+                        bezierviewModel.Point3 = endPoint;
+
+                        //var points = CreatePolyPoints(_connectionInformation.StartPoint, endPoint);
+                        //var polyLineSegmentViewModel = _connectionInformation.CurrentViewModel as PolyLineSegmentViewModel;
+                        //polyLineSegmentViewModel.Stretch = Stretch.Fill;
+                        //polyLineSegmentViewModel.Stroke = Brushes.MediumPurple;
+                        //polyLineSegmentViewModel.StrokeThickness = 3d;
+                        //polyLineSegmentViewModel.StrokeDashCap = PenLineCap.Flat;
+                        //polyLineSegmentViewModel.StartPoint = _connectionInformation.StartPoint;
+                        //polyLineSegmentViewModel.Points = points;
 
                         double moveWidth = Math.Abs(endPoint.X - _connectionInformation.StartPoint.X);
                         double moveHeight = Math.Abs(endPoint.Y - _connectionInformation.StartPoint.Y);
