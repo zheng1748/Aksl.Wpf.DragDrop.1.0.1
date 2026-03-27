@@ -269,12 +269,12 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
         #endregion
 
         #region INavigationAware
-        public void OnNavigatedTo(NavigationContext navigationContext)
+        public async void OnNavigatedTo(NavigationContext navigationContext)
         {
             var parameters = navigationContext.Parameters;
             if (parameters is not null)
             {
-                CreateGroupedMenusViewModelAsync().GetAwaiter().GetResult();
+                CreateGroupedMenusViewModelAsync().Await();
             }
         }
 

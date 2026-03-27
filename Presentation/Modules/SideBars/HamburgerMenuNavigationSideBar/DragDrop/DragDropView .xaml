@@ -55,10 +55,10 @@
                 <ei:CallMethodAction TargetObject="{Binding}"
                                      MethodName="ExecutePreviewMouseLeftButtonUp" />
             </ei:EventTrigger>
-            <ei:EventTrigger EventName="MouseRightButtonDown">
+            <!--<ei:EventTrigger EventName="MouseRightButtonDown">
                 <ei:CallMethodAction TargetObject="{Binding}"
                                      MethodName="ExecuteMouseRightButtonDown" />
-            </ei:EventTrigger>
+            </ei:EventTrigger>-->
         </ei:Interaction.Triggers>
     </ItemsControl>
 </UserControl>

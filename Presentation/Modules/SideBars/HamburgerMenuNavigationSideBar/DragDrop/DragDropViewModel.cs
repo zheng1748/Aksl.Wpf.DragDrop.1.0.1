@@ -27,6 +27,7 @@ using System.Data;
 using System.Net;
 using System.Reflection;
 using Prism.Regions;
+using System.Threading.Tasks;
 
 namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 {
@@ -96,33 +97,36 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     VisualTreeFinder visualTreeFinder = new();
 
                     var mainCanvas = visualTreeFinder.FindVisualChild<Canvas>(itemsControl);
-                    var mainCanvasPoint = e.GetPosition(mainCanvas);
-                   // Debug.Print($"ExecuteDrop.Canvas:X={mainCanvasPoint.X} Y={mainCanvasPoint.Y}");
+                    var centerPoint = e.GetPosition(mainCanvas);
 
-                    DragDropItem dragDropItem = new() { X = mainCanvasPoint.X, Y = mainCanvasPoint.Y, Width = menuItem.Width, Height = menuItem.Height, ViewName = menuItem.ViewName };
-                    DragDropItemViewModel dragDropItemViewModel = new(dragDropItem);
-                    dragDropItemViewModel.MouseMove += DragDropItemMouseMove;
-                    AddPropertyChanged(dragDropItemViewModel);
-                    DragDropItems.Add(dragDropItemViewModel);
-
-                    if (dragDropItemViewModel.ViewElement is not null)
+                    DoDrop();
+                    void DoDrop()
                     {
-                        var nodeView = visualTreeFinder.FindLogicalChild<XNodeView>(dragDropItemViewModel.ViewElement);
-                       // nodeView.PopupMenu = CreateNodeContextMenu();
-                        var nodeModel = nodeView?.DataContext as XNodeViewModel;
-                       //nodeModel.PopupMenu = CreateNodeContextMenu();
-                       nodeModel.MouseRightButtonDown += ExecuteNodeMouseRightButtonDown;
-                        nodeModel.OutputNodePreviewMouseLeftButtonDown += ExecuteOutputNodePreviewMouseLeftButtonDown;
+                        DragDropItem dragDropItem = new() { X = centerPoint.X, Y = centerPoint.Y, Width = menuItem.Width, Height = menuItem.Height, ViewName = menuItem.ViewName };
+                        DragDropItemViewModel dragDropItemViewModel = new(dragDropItem);
+                        dragDropItemViewModel.MouseMove += DragDropItemMouseMove;
+                        AddPropertyChanged(dragDropItemViewModel);
+                        DragDropItems.Add(dragDropItemViewModel);
 
-                        var borders= visualTreeFinder.FindLogicalChilds<Border>(dragDropItemViewModel.ViewElement);
-                        var inputPortBorder = borders.FirstOrDefault(b =>b.Name == "InputNode");
-                        _connectionInformation.InputPorts.Add(inputPortBorder);
+                        if (dragDropItemViewModel.ViewElement is not null)
+                        {
+                            var nodeView = visualTreeFinder.FindLogicalChild<XNodeView>(dragDropItemViewModel.ViewElement);
+                            // nodeView.PopupMenu = CreateNodeContextMenu();
+                            var nodeModel = nodeView?.DataContext as XNodeViewModel;
+                            //nodeModel.PopupMenu = CreateNodeContextMenu();
+                            nodeModel.MouseRightButtonDown += ExecuteNodeMouseRightButtonDown;
+                            nodeModel.OutputNodePreviewMouseLeftButtonDown += ExecuteOutputNodePreviewMouseLeftButtonDown;
+
+                            var borders = visualTreeFinder.FindLogicalChilds<Border>(dragDropItemViewModel.ViewElement);
+                            var inputPortBorder = borders.FirstOrDefault(b => b.Name == "InputNode");
+                            _connectionInformation.InputPorts.Add(inputPortBorder);
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
-                _dialogViewService.AlertAsync(message: $"ExecuteDrop Error.: \"{ex.Message}\"", title: "Error").GetAwaiter().GetResult();
+                _dialogViewService.AlertAsync(message: $"ExecuteDrop Error: \"{ex.Message}\"", title: "Error").Await();
             }
         }
 
@@ -520,7 +524,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                 //currentPath.Data = geometry;
                 #endregion
 
-                DoBezier(); 
+                //DoBezier(); 
                 void DoBezier()
                 {
                     var bezierview = (PrismApplication.Current as PrismApplicationBase).Container.Resolve(typeof(BezierView)) as FrameworkElement;
@@ -543,7 +547,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     _connectionInformation.CurrentViewModel = bezierviewModel;
                 }
 
-               // DoDoPolyLineSegment();
+                DoPolyLineSegment();
                 void DoPolyLineSegment()
                 {
                     var points = CreatePolyPoints(startPoint, startPoint);
@@ -680,7 +684,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     VisualTreeFinder visualTreeFinder = new();
 
                     var mainCanvas = visualTreeFinder.FindVisualChild<Canvas>(itemsControl);
-                    Point currentPoint = e.GetPosition(mainCanvas);
+                    var currentPoint = e.GetPosition(mainCanvas);
 
                     Vector currentOffset = currentPoint - _connectionInformation.StartPoint;
                     if (Math.Abs(currentOffset.X) < 0.5d && Math.Abs(currentOffset.Y) < 0.5d)
@@ -712,7 +716,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 
                     #endregion
 
-                    DoBezier();
+                   // DoBezier();
                     void DoBezier()
                     {
                         var bezierviewModel = _connectionInformation.CurrentViewModel as BezierViewModel;
@@ -740,29 +744,33 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                         //}
                     }
 
-                   // DoPolyLineSegment();
+                    DoPolyLineSegment();
                     void DoPolyLineSegment()
                     {
                         var points = CreatePolyPoints(_connectionInformation.StartPoint, currentPoint);
                         var polyLineSegmentViewModel = _connectionInformation.CurrentViewModel as PolyLineSegmentViewModel;
                         //  polyLineSegmentViewModel.Stretch = Stretch.Fill;
-                        polyLineSegmentViewModel.Stroke = Brushes.MediumPurple;
-                        polyLineSegmentViewModel.StrokeThickness = 3d;
-                        polyLineSegmentViewModel.StrokeDashCap = PenLineCap.Flat;
+                        //polyLineSegmentViewModel.Stroke = Brushes.MediumPurple;
+                        //polyLineSegmentViewModel.StrokeThickness = 3d;
+                        //polyLineSegmentViewModel.StrokeDashCap = PenLineCap.Flat;
                         polyLineSegmentViewModel.StartPoint = _connectionInformation.StartPoint;
                         polyLineSegmentViewModel.Points = points;
                     }
 
-                    double moveX = Math.Min(currentPoint.X, _connectionInformation.StartPoint.X);
-                    double moveY = Math.Min(currentPoint.Y, _connectionInformation.StartPoint.Y);
-                    double moveWidth = Math.Abs(currentPoint.X - _connectionInformation.StartPoint.X);
-                    double moveHeight = Math.Abs(currentPoint.Y - _connectionInformation.StartPoint.Y);
-                    _connectionInformation.CurrentDragDropItemViewModel.X = moveX;
-                    _connectionInformation.CurrentDragDropItemViewModel.Y = moveY;
-                    _connectionInformation.CurrentDragDropItemViewModel.Width = moveWidth;
-                    _connectionInformation.CurrentDragDropItemViewModel.Height = moveHeight;
-                    _connectionInformation.CurrentViewElement.Width = moveWidth;
-                    _connectionInformation.CurrentViewElement.Height = moveHeight;
+                    DoDragDropItem();
+                    void DoDragDropItem()
+                    {
+                        double moveX = Math.Min(currentPoint.X, _connectionInformation.StartPoint.X);
+                        double moveY = Math.Min(currentPoint.Y, _connectionInformation.StartPoint.Y);
+                        double moveWidth = Math.Abs(currentPoint.X - _connectionInformation.StartPoint.X);
+                        double moveHeight = Math.Abs(currentPoint.Y - _connectionInformation.StartPoint.Y);
+                        _connectionInformation.CurrentDragDropItemViewModel.X = moveX;
+                        _connectionInformation.CurrentDragDropItemViewModel.Y = moveY;
+                        _connectionInformation.CurrentDragDropItemViewModel.Width = moveWidth;
+                        _connectionInformation.CurrentDragDropItemViewModel.Height = moveHeight;
+                        _connectionInformation.CurrentViewElement.Width = moveWidth;
+                        _connectionInformation.CurrentViewElement.Height = moveHeight;
+                    }
 
                     // Debug.Print($"MouseMove.Canvas:X={endPoint.X} Y={endPoint.Y}");
                 }
@@ -937,137 +945,159 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     VisualTreeFinder visualTreeFinder = new();
 
                     mainCanvas = visualTreeFinder.FindVisualChild<Canvas>(itemsControl);
+                    var currentPoint = Mouse.GetPosition(mainCanvas);
 
-                    //var originalDragDropItemView = visualTreeFinder.FindVisualParent<DragDropItemView>(_connectionInformation.OutputPortRef);
-                    //var originalDragDropItemViewModel = originalDragDropItemView.DataContext as DragDropItemViewModel;
-                    //var nodeView = visualTreeFinder.FindVisualChilds<XNodeView>(originalDragDropItemView).FirstOrDefault();
-                    // var inputNodeBorder = visualTreeFinder.FindVisualChilds<Border>(nodeView).FirstOrDefault(d => (d is Border) && (d as Border).Name == "InputNode");
-
-                    var mainCanvasPoint = Mouse.GetPosition(mainCanvas);
-                    //var centerPoint = new System.Windows.Point(inputNodeBorder.Width / 2, inputNodeBorder.Height / 2);
-                    //var endPoint = inputNodeBorder.TranslatePoint(centerPoint, mainCanvas);
+                    var nodeView = visualTreeFinder.FindVisualParent<XNodeView>(_connectionInformation.OutputPortRef);
+                    var inputNodeRef = visualTreeFinder.FindVisualChilds<Border>(nodeView).FirstOrDefault(d => (d is Border) && (d as Border).Name == "InputNode");
 
                     FrameworkElement nearestPort = null;
                     double minDist = double.MaxValue;
 
-                    DependencyObject hitObject = mainCanvas.InputHitTest(mainCanvasPoint) as DependencyObject;
-                    var hitObject1 = VisualTreeHelper.HitTest(mainCanvas, mainCanvasPoint);
-
-                    var borders = visualTreeFinder.FindVisualChilds<Border>(mainCanvas);
-                    var inputPortBorder = borders.FirstOrDefault(d =>d.Name == "InputNode" && hitObject==d);
-
-                    //foreach (var inputPort in _connectionInformation.InputPorts)
-                    //{
-                    //    if (inputPort == inputNodeRef)
-                    //    {
-                    //        continue;
-                    //    }
-
-                    //    var toDragDropItemView = visualTreeFinder.FindVisualParent<DragDropItemView>(inputPort);
-                    //    var toDropItemViewModel = originalDragDropItemView.DataContext as DragDropItemViewModel;
-
-                    //    var portCenter = new System.Windows.Point(toDropItemViewModel.X, toDropItemViewModel.Y + toDragDropItemView.ActualHeight / 2);
-
-                    //    //   Point portCenter = GetPortCenter(port);
-                    //    //var portCenter = mainCanvasPosition - _connectionInformation.StartPoint;
-
-                    //    double dist = ((Point)portCenter - mainCanvasPosition).Length;
-                    //    if (dist < minDist)
-                    //    {
-                    //        minDist = dist;
-                    //        nearestPort = inputPort;
-                    //    }
-                    //}
-
-                    //if (nearestPort != null && minDist < 10) // 连线和接口的可吸附距离
-                    //{
-                    //   // Point endPoint = GetPortCenter(nearestPort);
-                    //    var endPoint = mainCanvasPosition - _connectionInformation.StartPoint;
-
-                    //    var pathDragDropItemView = visualTreeFinder.FindVisualParent<DragDropItemView>(_connectionInformation.CurrentPath);
-                    //    var pathDragDropItemViewModel = pathDragDropItemView.DataContext as DragDropItemViewModel;
-
-                    //    var geometry = new PathGeometry();
-                    //    var figure = new PathFigure { StartPoint = _connectionInformation.StartPoint };
-                    //    var segment = CreateSegment("polyline", _connectionInformation.StartPoint, (Point)endPoint);
-                    //    figure.Segments.Add(segment);
-                    //    geometry.Figures.Add(figure);
-                    //    _connectionInformation.CurrentPath.Data = geometry;
-
-                    //    pathDragDropItemViewModel.X = endPoint.X;
-                    //    pathDragDropItemViewModel.Y = endPoint.Y;
-
-                    //    _connectionInformation.Connections.Add(new Connection
-                    //    {
-                    //        FromPort = _connectionInformation.OutputPortRef,
-                    //        ToPort = nearestPort,
-                    //        Path = _connectionInformation.CurrentPath
-                    //    });
-                    //}
-
-                    //var dragDropItemViewWithPath = visualTreeFinder.FindVisualParent<DragDropItemView>(_connectionInformation.CurrentPath);
-                    //var dragDropItemViewModelWithPath = dragDropItemViewWithPath.DataContext as DragDropItemViewModel;
-                    var bezierview = _connectionInformation.CurrentDragDropItemViewModel.ViewElement as FrameworkElement;
-
-                    if (inputPortBorder is not  null)
+                    #region NearestPort Method
+                    foreach (var inputPort in _connectionInformation.InputPorts)
                     {
-                        //var pathViewModel = _connectionInformation.PathViewModel;
-                        //var geometry = new PathGeometry();
-                        //PathFigure figure = new() { StartPoint = _connectionInformation.StartPoint };
-                        //var Data = CreateSegment("Bezier", _connectionInformation.StartPoint, mainCanvasPoint);
-                        //geometry.Figures.Add(figure);
-                        //pathViewModel.Data = geometry;
+                        if (inputPort == inputNodeRef)
+                        {
+                            continue;
+                        }
 
-                        var endPoint = GetInputPortCenter(inputPortBorder);
+                        Point portCenter = GetInputPortCenter(inputPort);
 
-                        var bezierviewModel = _connectionInformation.CurrentViewModel as BezierViewModel;
-                        //bezierviewModel.Stretch = Stretch.Fill;
-                        //bezierviewModel.Stroke = Brushes.MediumPurple;
-                        //bezierviewModel.StrokeThickness = 3d;
-                        bezierviewModel.StartPoint = _connectionInformation.StartPoint;
-                        bezierviewModel.Point1 = new Point(_connectionInformation.StartPoint.X + 50, _connectionInformation.StartPoint.Y);
-                        bezierviewModel.Point2 = new Point(endPoint.X - 50, endPoint.Y);
-                        bezierviewModel.Point3 = endPoint;
+                        double dist = ((Point)portCenter - currentPoint).Length;
+                        if (dist < minDist)
+                        {
+                            minDist = dist;
+                            nearestPort = inputPort;
+                        }
+                    }
 
-                        //var points = CreatePolyPoints(_connectionInformation.StartPoint, endPoint);
-                        //var polyLineSegmentViewModel = _connectionInformation.CurrentViewModel as PolyLineSegmentViewModel;
-                        //polyLineSegmentViewModel.Stretch = Stretch.Fill;
-                        //polyLineSegmentViewModel.Stroke = Brushes.MediumPurple;
-                        //polyLineSegmentViewModel.StrokeThickness = 3d;
-                        //polyLineSegmentViewModel.StrokeDashCap = PenLineCap.Flat;
-                        //polyLineSegmentViewModel.StartPoint = _connectionInformation.StartPoint;
-                        //polyLineSegmentViewModel.Points = points;
+                    if (nearestPort != null && minDist < 10) // 连线和接口的可吸附距离
+                    {
+                        var endPoint = GetInputPortCenter(nearestPort);
 
-                        double moveWidth = Math.Abs(endPoint.X - _connectionInformation.StartPoint.X);
-                        double moveHeight = Math.Abs(endPoint.Y - _connectionInformation.StartPoint.Y);
-                        _connectionInformation.CurrentDragDropItemViewModel.Width = moveWidth;
-                        _connectionInformation.CurrentDragDropItemViewModel.Height = moveHeight;
+                       //DoBezier();
+                        void DoBezier()
+                        {
+                            var bezierviewModel = _connectionInformation.CurrentViewModel as BezierViewModel;
+                            //bezierviewModel.Stretch = Stretch.Fill;
+                            //bezierviewModel.Stroke = Brushes.MediumPurple;
+                            //bezierviewModel.StrokeThickness = 3d;
+                            bezierviewModel.StartPoint = _connectionInformation.StartPoint;
+                            bezierviewModel.Point1 = new Point(_connectionInformation.StartPoint.X + 50, _connectionInformation.StartPoint.Y);
+                            bezierviewModel.Point2 = new Point(endPoint.X - 50, endPoint.Y);
+                            bezierviewModel.Point3 = endPoint;
+                        }
 
-                        //var geometry = new PathGeometry();
-                        //var figure = new PathFigure { StartPoint = _connectionInformation.StartPoint };
-                        ////LineSegment lineSegment = new(mainCanvasPoint, true) { IsSmoothJoin = true };
-                        ////figure.Segments.Add(lineSegment);
-                        ////geometry.Figures.Add(figure);
-                        //var segment = CreateSegment("BezierSegment", _connectionInformation.StartPoint, inputNodeBorderRelativeToCanvas);
-                        //geometry.Figures.Add(figure);
-                        //_connectionInformation.CurrentPath.Data = geometry;
+                        DoPolyLineSegment();
+                        void DoPolyLineSegment()
+                        {
+                            var points = CreatePolyPoints(_connectionInformation.StartPoint, endPoint);
+                            var polyLineSegmentViewModel = _connectionInformation.CurrentViewModel as PolyLineSegmentViewModel;
+                            //polyLineSegmentViewModel.Stretch = Stretch.Fill;
+                            //polyLineSegmentViewModel.Stroke = Brushes.MediumPurple;
+                            //polyLineSegmentViewModel.StrokeThickness = 3d;
+                            //polyLineSegmentViewModel.StrokeDashCap = PenLineCap.Flat;
+                            polyLineSegmentViewModel.StartPoint = _connectionInformation.StartPoint;
+                            polyLineSegmentViewModel.Points = points;
+                        }
 
-                        //dragDropItemViewModelWithPath.X = inputNodeBorderRelativeToCanvas.X;
-                        //dragDropItemViewModelWithPath.Y = inputNodeBorderRelativeToCanvas.Y;
+                        DoDragDropItem();
+                        void DoDragDropItem()
+                        {
+                            double moveX = Math.Min(currentPoint.X, _connectionInformation.StartPoint.X);
+                            double moveY = Math.Min(currentPoint.Y, _connectionInformation.StartPoint.Y);
+                            double moveWidth = Math.Abs(endPoint.X - _connectionInformation.StartPoint.X);
+                            double moveHeight = Math.Abs(endPoint.Y - _connectionInformation.StartPoint.Y);
+                            _connectionInformation.CurrentDragDropItemViewModel.X = moveX;
+                            _connectionInformation.CurrentDragDropItemViewModel.Y = moveY;
+                            _connectionInformation.CurrentDragDropItemViewModel.Width = moveWidth;
+                            _connectionInformation.CurrentDragDropItemViewModel.Height = moveHeight;
+                            _connectionInformation.CurrentViewElement.Width = moveWidth;
+                            _connectionInformation.CurrentViewElement.Height = moveHeight;
+                        }
+
+                        _connectionInformation.Connections.Add(new Connection
+                        {
+                            FromPort = _connectionInformation.OutputPortRef,
+                            ToPort = nearestPort,
+                            DragDropItemViewModel = _connectionInformation.CurrentDragDropItemViewModel,
+                            ViewElement = _connectionInformation.CurrentViewElement
+                        });
                     }
                     else
                     {
                         // 拖空则移除
-                        // DragDropItems.Remove(dragDropItemViewModelWithPath);
                         DragDropItems.Remove(_connectionInformation.CurrentDragDropItemViewModel);
                     }
+                    #endregion
+
+                    #region HitTes Method
+                    //DependencyObject hitObject = mainCanvas.InputHitTest(currentPoint) as DependencyObject;
+                    //var hitObject1 = VisualTreeHelper.HitTest(mainCanvas, currentPoint);
+
+                    //var borders = visualTreeFinder.FindVisualChilds<Border>(mainCanvas);
+                    //var inputPortBorder = borders.FirstOrDefault(d => d.Name == "InputNode" && hitObject == d);
+                    Border inputPortBorder = null;
+                    if (inputPortBorder is not  null)
+                    {
+                        var endPoint = GetInputPortCenter(inputPortBorder);
+
+                        DoBezier();
+                        void DoBezier()
+                        {
+                            var bezierviewModel = _connectionInformation.CurrentViewModel as BezierViewModel;
+                            //bezierviewModel.Stretch = Stretch.Fill;
+                            //bezierviewModel.Stroke = Brushes.MediumPurple;
+                            //bezierviewModel.StrokeThickness = 3d;
+                            bezierviewModel.StartPoint = _connectionInformation.StartPoint;
+                            bezierviewModel.Point1 = new Point(_connectionInformation.StartPoint.X + 50, _connectionInformation.StartPoint.Y);
+                            bezierviewModel.Point2 = new Point(endPoint.X - 50, endPoint.Y);
+                            bezierviewModel.Point3 = endPoint;
+                        }
+
+                       // DoPolyLineSegment();
+                        void DoPolyLineSegment()
+                        {
+                            var points = CreatePolyPoints(_connectionInformation.StartPoint, endPoint);
+                            var polyLineSegmentViewModel = _connectionInformation.CurrentViewModel as PolyLineSegmentViewModel;
+                            //polyLineSegmentViewModel.Stretch = Stretch.Fill;
+                            //polyLineSegmentViewModel.Stroke = Brushes.MediumPurple;
+                            //polyLineSegmentViewModel.StrokeThickness = 3d;
+                            //polyLineSegmentViewModel.StrokeDashCap = PenLineCap.Flat;
+                            polyLineSegmentViewModel.StartPoint = _connectionInformation.StartPoint;
+                            polyLineSegmentViewModel.Points = points;
+                        }
+
+                        DoDragDropItem();
+                        void DoDragDropItem()
+                        {
+                            double moveX = Math.Min(currentPoint.X, _connectionInformation.StartPoint.X);
+                            double moveY = Math.Min(currentPoint.Y, _connectionInformation.StartPoint.Y);
+                            double moveWidth = Math.Abs(endPoint.X - _connectionInformation.StartPoint.X);
+                            double moveHeight = Math.Abs(endPoint.Y - _connectionInformation.StartPoint.Y);
+                            _connectionInformation.CurrentDragDropItemViewModel.X = moveX;
+                            _connectionInformation.CurrentDragDropItemViewModel.Y = moveY;
+                            _connectionInformation.CurrentDragDropItemViewModel.Width = moveWidth;
+                            _connectionInformation.CurrentDragDropItemViewModel.Height = moveHeight;
+                            _connectionInformation.CurrentViewElement.Width = moveWidth;
+                            _connectionInformation.CurrentViewElement.Height = moveHeight;
+                        }
+                    }
+                    //else
+                    //{
+                    //    // 拖空则移除
+                    //    DragDropItems.Remove(_connectionInformation.CurrentDragDropItemViewModel);
+                    //}
+                    #endregion
 
                     _connectionInformation.IsConnecting = false;
                     _connectionInformation.CurrentDragDropItemViewModel= null;
+                    _connectionInformation.CurrentViewElement = null;
+                    _connectionInformation.CurrentViewModel = null;
                     //_connectionInformation.CurrentPath = null;
                 }
 
-                System.Windows.Point GetInputPortCenter(Border inputPortBorder)
+                System.Windows.Point GetInputPortCenter(FrameworkElement inputPortBorder)
                 {
                     var centerPoint = new System.Windows.Point(inputPortBorder.Width / 2, inputPortBorder.Height / 2);
                     var pointRelativeTo = inputPortBorder.TranslatePoint(centerPoint, mainCanvas);

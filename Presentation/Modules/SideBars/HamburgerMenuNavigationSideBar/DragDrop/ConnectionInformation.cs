@@ -23,23 +23,19 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar
 
         #region Properties
         public bool IsConnecting { get; set; }
-
         public Point StartPoint { get; set; }
-
         public Border OutputPortRef { get; set; }
-
+        public Border InputNodeRef { get; set; }
         //public System.Windows.Shapes.Path CurrentPath { get; set; }
-       // public DragDropItemViewModel DragDropItemViewModelToBezier { get; set; }
+        // public DragDropItemViewModel DragDropItemViewModelToBezier { get; set; }
         public DragDropItemViewModel CurrentDragDropItemViewModel{ get; set; }
         public FrameworkElement CurrentViewElement { get; set; }
         public BindableBase CurrentViewModel { get; set; }
-        public BezierViewModel BezierViewModel { get; set; }
-        public PathViewModel PathViewModel { get; set; }
-        public PolyLineSegmentViewModel PolyLineSegmentViewModel { get; set; }
-        public FrameworkElement FromPort { get; set; }
+        //public BezierViewModel BezierViewModel { get; set; }
+        //public PathViewModel PathViewModel { get; set; }
+        //public PolyLineSegmentViewModel PolyLineSegmentViewModel { get; set; }
         public List<Connection> Connections { get; set; }
-
-        public List<FrameworkElement> InputPorts { get; set; }
+        public List<Border> InputPorts { get; set; }
         #endregion
     }
 
@@ -48,5 +44,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar
         public FrameworkElement FromPort { get; set; }
         public FrameworkElement ToPort { get; set; }
         public System.Windows.Shapes.Path Path { get; set; }
+        public DragDropItemViewModel DragDropItemViewModel { get; set; }
+        public FrameworkElement ViewElement { get; set; }
     }
 }
