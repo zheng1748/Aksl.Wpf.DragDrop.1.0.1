@@ -111,7 +111,8 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                 {
                     if (!_isSelected)
                     {
-                        IsDown = false;
+                        IsDown = false; 
+                        IsDragging = false;
                         StartPoint = new Point(0, 0);
                         OriginalElement = null;
                     }
@@ -147,35 +148,19 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
         #region PreviewMouseLeftButtonDown Event
         public void ExecuteMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            // Debug.Print($"DragDropItemView:MouseLeftButtonDown");
             if (sender is DragDropItemView dragDropItemView)
             {
-                //System.Windows.Controls.Canvas mainCanvas;
-                //FindCanvas();
-
-                //void FindCanvas()
-                //{
                 VisualTreeFinder visualTreeFinder = new();
                 var nodeView = visualTreeFinder.FindVisualChild<XNodeView>(dragDropItemView);
                 if(nodeView is null)
                 {
                     return;
                 }
-                //mainCanvas = visualTreeFinder.FindVisualParent<System.Windows.Controls.Canvas>(dragDropItemView);
-                //}
 
                 IsDown = true;
                 OriginalElement = e.Source as UIElement;
                 StartPoint = e.GetPosition(OriginalElement);
 
-                //var mainCanvasPoint = MouseUtilities.GetMousePosition(mainCanvas);
-                //StartPoint = mainCanvasPoint;
-                //Debug.Print($"PreviewMouseLeftButtonDown.{OriginalElement.GetType()}.Point:{StartPoint}");
-                //Debug.Print($"PreviewMouseLeftButtonDown.mainCanvas.Point:{mainCanvasPPoint}");
-                //Point relativeToMainCanvasPoint = dragDropItemView.TranslatePoint(new Point(0, 0), mainCanvas);
-                //Debug.Print($"PreviewMouseLeftButtonDown.relativeToMainCanvas.Point:{relativeToMainCanvasPoint}");
-
-                //mainCanvas?.CaptureMouse();
                 OriginalElement.CaptureMouse();
 
                 IsSelected = true;
@@ -188,19 +173,12 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
         #region MouseMove Event
         public void ExecuteMouseMove(object sender, MouseEventArgs e)
         {
-            //Debug.Print($"DragDropItemView:MouseMove");
             if (sender is DragDropItemView dragDropItemView)
             {
                 if (IsSelected && IsDown)
                 {
-                    System.Windows.Controls.Canvas mainCanvas;
-
                     VisualTreeFinder visualTreeFinder = new();
-
-                    //var itemsControl = visualTreeFinder.FindVisualParent<ItemsControl>(element);
-                    //var childsInItemsControl = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(itemsControl);
-                    //mainCanvas = childsInItemsControl.FirstOrDefault(d => (d is System.Windows.Controls.Canvas) && (d as System.Windows.Controls.Canvas).Name == "MainCanvas") as System.Windows.Controls.Canvas;
-                    mainCanvas = visualTreeFinder.FindVisualParent<System.Windows.Controls.Canvas>(dragDropItemView);
+                    System.Windows.Controls.Canvas mainCanvas = visualTreeFinder.FindVisualParent<System.Windows.Controls.Canvas>(dragDropItemView);
 
                     if (!this.IsDragging)
                     {
@@ -211,7 +189,6 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     {
                         DragMoved();
                     }
-
 
                     void DragStarted()
                     {
@@ -267,11 +244,6 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                 OriginalElement.ReleaseMouseCapture();
                 Mouse.Capture(null);
 
-                //if (this.IsDragging)
-                //{
-                //    this.X = this.X;
-                //    this.Y = this.Y;
-                //}
                 this.IsDragging = false;
                 this.IsDown = false;
             }
