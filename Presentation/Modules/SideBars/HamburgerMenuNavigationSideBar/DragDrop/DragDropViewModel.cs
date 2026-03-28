@@ -140,29 +140,30 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     {
                         if (ddivm.IsSelected)
                         {
-                            if (_selectedDragDropItem is null)
+                            SetSelectedDragDropItem();
+                            void SetSelectedDragDropItem()
                             {
-                                _selectedDragDropItem = ddivm;
-                            }
-
-                            if (_selectedDragDropItem is not null && _selectedDragDropItem != ddivm)
-                            {
-                                var previewSelectedDragDropItem = _selectedDragDropItem;
-
-                                VisualTreeFinder visualTreeFinder = new();
-                                var previewSelectedNodeView = visualTreeFinder.FindVisualChild<XNodeView>(previewSelectedDragDropItem.ViewElement);
-                                //var previewSelectedNodeView = visualTreeFinder.FindVisualChild<XNodeView> (previewSelectedDragDropItem.OriginalElement);
-                                //var childsInDragDropItemView = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(previewSelectedDragDropItem.OriginalElement);
-                                //var previewSelectedNodeView = childsInDragDropItemView.FirstOrDefault(d => (d is XNodeView)) as XNodeView;
-                                if (previewSelectedNodeView is not null)
+                                if (_selectedDragDropItem is null)
                                 {
-                                    var previewSelectedNodeModel = previewSelectedNodeView.DataContext as XNodeViewModel;
-                                    previewSelectedNodeModel.IsFocused = false;
+                                    _selectedDragDropItem = ddivm;
                                 }
 
-                                previewSelectedDragDropItem.IsSelected = false;
+                                if (_selectedDragDropItem is not null && _selectedDragDropItem != ddivm)
+                                {
+                                    var previewSelectedDragDropItem = _selectedDragDropItem;
 
-                                _selectedDragDropItem = ddivm;
+                                    VisualTreeFinder visualTreeFinder = new();
+                                    var previewSelectedNodeView = visualTreeFinder.FindVisualChild<XNodeView>(previewSelectedDragDropItem.ViewElement);
+                                    if (previewSelectedNodeView is not null)
+                                    {
+                                        var previewSelectedNodeModel = previewSelectedNodeView.DataContext as XNodeViewModel;
+                                        previewSelectedNodeModel.IsFocused = false;
+                                    }
+
+                                    previewSelectedDragDropItem.IsSelected = false;
+
+                                    _selectedDragDropItem = ddivm;
+                                }
                             }
                         }
                         else
@@ -278,7 +279,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
         }
         #endregion
 
-        #region DragDropItemMouseMove Event
+        #region DragDropItem MouseMove Event
         private void DragDropItemMouseMove(object sender, MouseEventArgs e)
         {
         }
@@ -418,29 +419,40 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 
             System.Windows.Controls.Canvas mainCanvas = default;
 
-            var otherDragDropItems = _isFocusedDragDropItems.Where(dd => dd != _selectedDragDropItem).ToList();
-            if (otherDragDropItems.Any())
-            {
-                foreach (var ddim in otherDragDropItems)
-                {
-                    var nodeModel = FindNodeModel(ddim.ViewElement);
-                    if (nodeModel is not null)
-                    {
-                        nodeModel.IsFocused = false;
-                    }
-                }
-            }
+            //var otherDragDropItems = _isFocusedDragDropItems.Where(dd => dd != _selectedDragDropItem).ToList();
+            //if (otherDragDropItems.Any())
+            //{
+            //    foreach (var ddim in otherDragDropItems)
+            //    {
+            //        var nodeModel = FindNodeModel(ddim.ViewElement);
+            //        if (nodeModel is not null)
+            //        {
+            //            nodeModel.IsFocused = false;
+            //        }
+            //    }
+            //}
 
             if (_selectedDragDropItem is not null && (!_selectedDragDropItem.IsDown || !_selectedDragDropItem.IsDragging))
             {
-                var nodeModel = FindNodeModel(_selectedDragDropItem.ViewElement);
-                if (nodeModel is not null)
+                //var nodeModel = FindNodeModel(_selectedDragDropItem.ViewElement);
+                //if (nodeModel is not null)
+                //{
+                //    nodeModel.IsFocused = false;
+                //}
+                ClearSelectedDragDropItem();
+                void ClearSelectedDragDropItem()
                 {
-                    nodeModel.IsFocused = false;
-                }
+                    VisualTreeFinder visualTreeFinder = new();
+                    var nodeView = visualTreeFinder.FindVisualChild<XNodeView>(_selectedDragDropItem.ViewElement);
+                    if (nodeView is not null)
+                    {
+                        var nodeModel = nodeView.DataContext as XNodeViewModel;
+                        nodeModel.IsFocused = false;
+                    }
 
-                _selectedDragDropItem.IsSelected = false;
-                _selectedDragDropItem = null;
+                    _selectedDragDropItem.IsSelected = false;
+                    _selectedDragDropItem = null;
+                }
 
                 return;
             }
@@ -450,8 +462,9 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                 if (e.Source is ItemsControl itemsControl)
                 {
                     VisualTreeFinder visualTreeFinder = new();
-                    var allChilds = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(viewElement);
-                    var nodeView = allChilds.FirstOrDefault(d => (d is XNodeView)) as XNodeView;
+                    var nodeView = visualTreeFinder.FindVisualChild<XNodeView>(viewElement);
+                    //var allChilds = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(viewElement);
+                    //var nodeView = allChilds.FirstOrDefault(d => (d is XNodeView)) as XNodeView;
                     var nodeModel = nodeView.DataContext as XNodeViewModel;
 
                     return nodeModel;
