@@ -255,17 +255,15 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
         #region MouseLeftButtonUp Event
         public void ExecuteMouseLeftButtonUp(object sender, MouseEventArgs e)
         {
-            Debug.Print($"DragDropItemView:MouseLeftButtonUp");
-
             if (IsSelected && this.IsDown && this.IsDragging)
             {
                 DragFinished();
             }
 
-            e.Handled = true;
-
             void DragFinished(bool cancelled = false)
             {
+                Debug.Print($"DragDropItemView:MouseLeftButtonUp");
+
                 OriginalElement.ReleaseMouseCapture();
                 Mouse.Capture(null);
 
@@ -277,6 +275,8 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                 this.IsDragging = false;
                 this.IsDown = false;
             }
+
+            e.Handled = true;
         }
         #endregion
     }

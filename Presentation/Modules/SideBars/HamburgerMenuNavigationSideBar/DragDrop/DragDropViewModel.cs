@@ -69,7 +69,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                 DragDropItems.Add(dragDropItemViewModel);
             }
 
-            _connectionInformation= new();
+            _connectionInformation = new();
         }
         #endregion
 
@@ -150,13 +150,15 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                                 var previewSelectedDragDropItem = _selectedDragDropItem;
 
                                 VisualTreeFinder visualTreeFinder = new();
-                                var childsInDragDropItemView = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(previewSelectedDragDropItem.OriginalElement);
-                                var previewSelectedNodeView = childsInDragDropItemView.FirstOrDefault(d => (d is XNodeView)) as XNodeView;
+                                var previewSelectedNodeView = visualTreeFinder.FindVisualChild<XNodeView>(previewSelectedDragDropItem.ViewElement);
+                                //var previewSelectedNodeView = visualTreeFinder.FindVisualChild<XNodeView> (previewSelectedDragDropItem.OriginalElement);
+                                //var childsInDragDropItemView = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(previewSelectedDragDropItem.OriginalElement);
+                                //var previewSelectedNodeView = childsInDragDropItemView.FirstOrDefault(d => (d is XNodeView)) as XNodeView;
                                 var previewSelectedNodeModel = previewSelectedNodeView.DataContext as XNodeViewModel;
-                                previewSelectedNodeModel.IsFocused= false;
+                                previewSelectedNodeModel.IsFocused = false;
 
                                 previewSelectedDragDropItem.IsSelected = false;
-                              
+
                                 _selectedDragDropItem = ddivm;
                             }
                         }
@@ -293,7 +295,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 
                 if (!HasSelectedDragDropItem())
                 {
-                 
+
                     return;
                 }
 
@@ -312,7 +314,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     if (HasSelectedDragDropItem())
                     {
                         var dialogService = (PrismApplication.Current as PrismApplicationBase).Container.Resolve<Aksl.Services.Dialogs.DialogService>();
-                       
+
                         VisualTreeFinder visualTreeFinder = new();
                         var nodeView = visualTreeFinder.FindLogicalChild<XNodeView>(_selectedDragDropItem.ViewElement);
                         if (nodeView is not null)
@@ -362,7 +364,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 
             if (e.Source is ItemsControl itemsControl)
             {
-                PopupMenu =null;
+                PopupMenu = null;
 
                 var itemsControlPoint = Mouse.GetPosition(itemsControl);
 
@@ -390,7 +392,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                         var nodeView = childsInNodeViewOwner.FirstOrDefault(d => (d is XNodeView)) as XNodeView;
                         //nodeView.PopupMenu = CreateNodeContextMenu();
                         var nodeModel = nodeView?.DataContext as XNodeViewModel;
-                       nodeModel.MouseRightButtonDown += ExecuteNodeMouseRightButtonDown;
+                        nodeModel.MouseRightButtonDown += ExecuteNodeMouseRightButtonDown;
                         nodeModel.OutputNodePreviewMouseLeftButtonDown += ExecuteOutputNodePreviewMouseLeftButtonDown;
 
                         var inputPort = childsInNodeViewOwner.FirstOrDefault(d => (d is Border) && (d as Border).Name == "InputNode") as Border;
@@ -411,14 +413,14 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
         {
             //Debug.Print($"DragDropView:MouseLeftButtonDown");
 
-            System.Windows.Controls.Canvas mainCanvas=default;
+            System.Windows.Controls.Canvas mainCanvas = default;
 
             var otherDragDropItems = _isFocusedDragDropItems.Where(dd => dd != _selectedDragDropItem).ToList();
             if (otherDragDropItems.Any())
             {
                 foreach (var ddim in otherDragDropItems)
                 {
-                    var nodeModel=  FindNodeModel(ddim.ViewElement);
+                    var nodeModel = FindNodeModel(ddim.ViewElement);
                     if (nodeModel is not null)
                     {
                         nodeModel.IsFocused = false;
@@ -445,9 +447,9 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                 if (e.Source is ItemsControl itemsControl)
                 {
                     VisualTreeFinder visualTreeFinder = new();
-                    var childsInViewElement = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(viewElement);
-                    var childsInNodeViewOwner = childsInViewElement.FirstOrDefault(d => (d is XNodeView)) as XNodeView;
-                    var nodeModel = childsInNodeViewOwner.DataContext as XNodeViewModel;
+                    var allChilds = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(viewElement);
+                    var nodeView = allChilds.FirstOrDefault(d => (d is XNodeView)) as XNodeView;
+                    var nodeModel = nodeView.DataContext as XNodeViewModel;
 
                     return nodeModel;
                 }
@@ -455,7 +457,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                 return null;
             }
 
-           // InitializeRectangle();
+            // InitializeRectangle();
             void InitializeRectangle()
             {
                 if (e.Source is ItemsControl element)
@@ -496,7 +498,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                 var startPoint = outputBorder.TranslatePoint(centerPoint, mainCanvas);
                 //   var endPoint = new System.Windows.Point(startPoint.X + 1, startPoint.Y + 1);
 
-             //   Debug.Print($"OutputNode:MouseLeftButtonDown{startPoint}");
+                //   Debug.Print($"OutputNode:MouseLeftButtonDown{startPoint}");
 
                 //var startPoint = GetOutputPortCenter(); 
                 //System.Windows.Point GetOutputPortCenter()
@@ -664,7 +666,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
         #region ItemsControl MouseMove Event
         public void ExecutePreviewMouseMove(object sender, MouseEventArgs e)
         {
-         //   Debug.Print($"ItemsControl:MouseMove{_connectionInformation.StartPoint}");
+            //   Debug.Print($"ItemsControl:MouseMove{_connectionInformation.StartPoint}");
             Canvas mainCanvas;
 
             if (_selectedDragDropItem is not null && (_selectedDragDropItem.IsDown || _selectedDragDropItem.IsDragging))
@@ -716,7 +718,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 
                     #endregion
 
-                   // DoBezier();
+                    // DoBezier();
                     void DoBezier()
                     {
                         var bezierviewModel = _connectionInformation.CurrentViewModel as BezierViewModel;
@@ -775,7 +777,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     // Debug.Print($"MouseMove.Canvas:X={endPoint.X} Y={endPoint.Y}");
                 }
             }
-           
+
             //if (_selectedRectangleStartPoint.HasValue && e.LeftButton == MouseButtonState.Pressed)
             //{
             //    DragMovedRectangle();
@@ -813,7 +815,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
         #endregion
 
         #region CreateSegment Method
-        private PathSegment CreateSegment(string type,Point startPoint,Point endPoint) 
+        private PathSegment CreateSegment(string type, Point startPoint, Point endPoint)
         {
             if (string.IsNullOrEmpty(type))
             {
@@ -926,7 +928,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
         }
         #endregion
 
-        #region MouseLeftButtonUp Event
+        #region ItemsControl MouseLeftButtonUp Event
         public void ExecutePreviewMouseLeftButtonUp(object sender, MouseEventArgs e)
         {
             //Debug.Print($"DragDropView:MouseLeftButtonUp");
@@ -936,7 +938,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                 return;
             }
 
-           Canvas mainCanvas;
+            Canvas mainCanvas;
 
             if (_connectionInformation.IsConnecting && _connectionInformation.CurrentDragDropItemViewModel is not null)
             {
@@ -975,7 +977,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     {
                         var endPoint = GetInputPortCenter(nearestPort);
 
-                       //DoBezier();
+                        //DoBezier();
                         void DoBezier()
                         {
                             var bezierviewModel = _connectionInformation.CurrentViewModel as BezierViewModel;
@@ -1037,52 +1039,52 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 
                     //var borders = visualTreeFinder.FindVisualChilds<Border>(mainCanvas);
                     //var inputPortBorder = borders.FirstOrDefault(d => d.Name == "InputNode" && hitObject == d);
-                    Border inputPortBorder = null;
-                    if (inputPortBorder is not  null)
-                    {
-                        var endPoint = GetInputPortCenter(inputPortBorder);
 
-                        DoBezier();
-                        void DoBezier()
-                        {
-                            var bezierviewModel = _connectionInformation.CurrentViewModel as BezierViewModel;
-                            //bezierviewModel.Stretch = Stretch.Fill;
-                            //bezierviewModel.Stroke = Brushes.MediumPurple;
-                            //bezierviewModel.StrokeThickness = 3d;
-                            bezierviewModel.StartPoint = _connectionInformation.StartPoint;
-                            bezierviewModel.Point1 = new Point(_connectionInformation.StartPoint.X + 50, _connectionInformation.StartPoint.Y);
-                            bezierviewModel.Point2 = new Point(endPoint.X - 50, endPoint.Y);
-                            bezierviewModel.Point3 = endPoint;
-                        }
+                    //if (inputPortBorder is not  null)
+                    //{
+                    //    var endPoint = GetInputPortCenter(inputPortBorder);
 
-                       // DoPolyLineSegment();
-                        void DoPolyLineSegment()
-                        {
-                            var points = CreatePolyPoints(_connectionInformation.StartPoint, endPoint);
-                            var polyLineSegmentViewModel = _connectionInformation.CurrentViewModel as PolyLineSegmentViewModel;
-                            //polyLineSegmentViewModel.Stretch = Stretch.Fill;
-                            //polyLineSegmentViewModel.Stroke = Brushes.MediumPurple;
-                            //polyLineSegmentViewModel.StrokeThickness = 3d;
-                            //polyLineSegmentViewModel.StrokeDashCap = PenLineCap.Flat;
-                            polyLineSegmentViewModel.StartPoint = _connectionInformation.StartPoint;
-                            polyLineSegmentViewModel.Points = points;
-                        }
+                    //    DoBezier();
+                    //    void DoBezier()
+                    //    {
+                    //        var bezierviewModel = _connectionInformation.CurrentViewModel as BezierViewModel;
+                    //        //bezierviewModel.Stretch = Stretch.Fill;
+                    //        //bezierviewModel.Stroke = Brushes.MediumPurple;
+                    //        //bezierviewModel.StrokeThickness = 3d;
+                    //        bezierviewModel.StartPoint = _connectionInformation.StartPoint;
+                    //        bezierviewModel.Point1 = new Point(_connectionInformation.StartPoint.X + 50, _connectionInformation.StartPoint.Y);
+                    //        bezierviewModel.Point2 = new Point(endPoint.X - 50, endPoint.Y);
+                    //        bezierviewModel.Point3 = endPoint;
+                    //    }
 
-                        DoDragDropItem();
-                        void DoDragDropItem()
-                        {
-                            double moveX = Math.Min(currentPoint.X, _connectionInformation.StartPoint.X);
-                            double moveY = Math.Min(currentPoint.Y, _connectionInformation.StartPoint.Y);
-                            double moveWidth = Math.Abs(endPoint.X - _connectionInformation.StartPoint.X);
-                            double moveHeight = Math.Abs(endPoint.Y - _connectionInformation.StartPoint.Y);
-                            _connectionInformation.CurrentDragDropItemViewModel.X = moveX;
-                            _connectionInformation.CurrentDragDropItemViewModel.Y = moveY;
-                            _connectionInformation.CurrentDragDropItemViewModel.Width = moveWidth;
-                            _connectionInformation.CurrentDragDropItemViewModel.Height = moveHeight;
-                            _connectionInformation.CurrentViewElement.Width = moveWidth;
-                            _connectionInformation.CurrentViewElement.Height = moveHeight;
-                        }
-                    }
+                    //   // DoPolyLineSegment();
+                    //    void DoPolyLineSegment()
+                    //    {
+                    //        var points = CreatePolyPoints(_connectionInformation.StartPoint, endPoint);
+                    //        var polyLineSegmentViewModel = _connectionInformation.CurrentViewModel as PolyLineSegmentViewModel;
+                    //        //polyLineSegmentViewModel.Stretch = Stretch.Fill;
+                    //        //polyLineSegmentViewModel.Stroke = Brushes.MediumPurple;
+                    //        //polyLineSegmentViewModel.StrokeThickness = 3d;
+                    //        //polyLineSegmentViewModel.StrokeDashCap = PenLineCap.Flat;
+                    //        polyLineSegmentViewModel.StartPoint = _connectionInformation.StartPoint;
+                    //        polyLineSegmentViewModel.Points = points;
+                    //    }
+
+                    //    DoDragDropItem();
+                    //    void DoDragDropItem()
+                    //    {
+                    //        double moveX = Math.Min(currentPoint.X, _connectionInformation.StartPoint.X);
+                    //        double moveY = Math.Min(currentPoint.Y, _connectionInformation.StartPoint.Y);
+                    //        double moveWidth = Math.Abs(endPoint.X - _connectionInformation.StartPoint.X);
+                    //        double moveHeight = Math.Abs(endPoint.Y - _connectionInformation.StartPoint.Y);
+                    //        _connectionInformation.CurrentDragDropItemViewModel.X = moveX;
+                    //        _connectionInformation.CurrentDragDropItemViewModel.Y = moveY;
+                    //        _connectionInformation.CurrentDragDropItemViewModel.Width = moveWidth;
+                    //        _connectionInformation.CurrentDragDropItemViewModel.Height = moveHeight;
+                    //        _connectionInformation.CurrentViewElement.Width = moveWidth;
+                    //        _connectionInformation.CurrentViewElement.Height = moveHeight;
+                    //    }
+                    //}
                     //else
                     //{
                     //    // 拖空则移除
@@ -1091,7 +1093,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     #endregion
 
                     _connectionInformation.IsConnecting = false;
-                    _connectionInformation.CurrentDragDropItemViewModel= null;
+                    _connectionInformation.CurrentDragDropItemViewModel = null;
                     _connectionInformation.CurrentViewElement = null;
                     _connectionInformation.CurrentViewModel = null;
                     //_connectionInformation.CurrentPath = null;
