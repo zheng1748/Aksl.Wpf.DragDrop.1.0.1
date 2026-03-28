@@ -154,8 +154,11 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                                 //var previewSelectedNodeView = visualTreeFinder.FindVisualChild<XNodeView> (previewSelectedDragDropItem.OriginalElement);
                                 //var childsInDragDropItemView = visualTreeFinder.FindVisualChilds<System.Windows.DependencyObject>(previewSelectedDragDropItem.OriginalElement);
                                 //var previewSelectedNodeView = childsInDragDropItemView.FirstOrDefault(d => (d is XNodeView)) as XNodeView;
-                                var previewSelectedNodeModel = previewSelectedNodeView.DataContext as XNodeViewModel;
-                                previewSelectedNodeModel.IsFocused = false;
+                                if (previewSelectedNodeView is not null)
+                                {
+                                    var previewSelectedNodeModel = previewSelectedNodeView.DataContext as XNodeViewModel;
+                                    previewSelectedNodeModel.IsFocused = false;
+                                }
 
                                 previewSelectedDragDropItem.IsSelected = false;
 

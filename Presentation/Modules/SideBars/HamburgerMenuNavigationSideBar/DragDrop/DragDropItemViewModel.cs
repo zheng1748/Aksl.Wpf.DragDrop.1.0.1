@@ -255,7 +255,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
         #region MouseLeftButtonUp Event
         public void ExecuteMouseLeftButtonUp(object sender, MouseEventArgs e)
         {
-            if (IsSelected && this.IsDown && this.IsDragging)
+            if (IsSelected && this.IsDown)
             {
                 DragFinished();
             }
