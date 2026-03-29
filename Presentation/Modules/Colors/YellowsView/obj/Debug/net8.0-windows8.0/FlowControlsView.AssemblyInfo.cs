@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Aksl")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+37d9e64844de5ac25037c217523984034dbf7910")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+738bbf56a70d45fd932168aaca8b6d12552928d9")]
 [assembly: System.Reflection.AssemblyProductAttribute("Aksl.Modules.FlowControls")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Aksl.Modules.FlowControls")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

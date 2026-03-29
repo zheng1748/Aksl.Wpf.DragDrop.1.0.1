@@ -1,34 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
+using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using Unity;
 
 using Prism;
 using Prism.Ioc;
 using Prism.Mvvm;
-using Prism.Unity;
 using Prism.Services.Dialogs;
-using Unity;
+using Prism.Unity;
 
+using Aksl.Modules.HamburgerMenuNavigationSideBar.Views;
 using Aksl.Toolkit.Services;
 using Aksl.Toolkit.UI;
 using Aksl.ViewModels;
 using Aksl.Views;
-
-using Aksl.Modules.HamburgerMenuNavigationSideBar.Views;
-using Prism.Commands;
-using System.Data;
-using System.Net;
-using System.Reflection;
-using Prism.Regions;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 {
@@ -462,6 +455,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                 var childs = visualTreeFinder.FindVisualChilds<DependencyObject>(parent);
                 return childs.Contains(child);
             }
+
             // bool HasSelectedDragDropItem() => _selectedDragDropItem is not null && (DragDropItems.Contains(_selectedDragDropItem));
 
             e.Handled = true;
