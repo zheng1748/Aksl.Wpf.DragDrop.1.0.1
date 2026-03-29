@@ -1,4 +1,5 @@
 ﻿using Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels;
+using Aksl.Modules.HamburgerMenuNavigationSideBar.Views;
 using Aksl.ViewModels;
 using Prism.Mvvm;
 using System;
@@ -16,35 +17,37 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar
         #region Constructors
         public ConnectionInformation()
         {
-            Connections = new();
-            InputPorts = new();
+            // Connections = new();
+            //InputPorts = new();
         }
         #endregion
 
         #region Properties
         public bool IsConnecting { get; set; }
         public Point StartPoint { get; set; }
-        public Border OutputPortRef { get; set; }
-        public Border InputNodeRef { get; set; }
+        public Border OutputPort { get; set; }
+        //public Border InputNodeRef { get; set; }
         //public System.Windows.Shapes.Path CurrentPath { get; set; }
         // public DragDropItemViewModel DragDropItemViewModelToBezier { get; set; }
-        public DragDropItemViewModel CurrentDragDropItemViewModel{ get; set; }
-        public FrameworkElement CurrentViewElement { get; set; }
-        public BindableBase CurrentViewModel { get; set; }
+     //   public DragDropItemView DragDropItemView { get; set; }
+        public DragDropItemViewModel DragDropItemViewModel { get; set; }
+        public FrameworkElement ShapeElement { get; set; }
+        public BindableBase ShapeElementViewModel { get; set; }
         //public BezierViewModel BezierViewModel { get; set; }
         //public PathViewModel PathViewModel { get; set; }
         //public PolyLineSegmentViewModel PolyLineSegmentViewModel { get; set; }
-        public List<Connection> Connections { get; set; }
-        public List<Border> InputPorts { get; set; }
+        //  public List<Connection> Connections { get; set; }
+
         #endregion
     }
 
     public class Connection
     {
+       // public DragDropItemView DragDropItemView { get; set; }
         public FrameworkElement FromPort { get; set; }
         public FrameworkElement ToPort { get; set; }
-        public System.Windows.Shapes.Path Path { get; set; }
         public DragDropItemViewModel DragDropItemViewModel { get; set; }
-        public FrameworkElement ViewElement { get; set; }
+        public FrameworkElement ShapeElement { get; set; }
+        public BindableBase ShapeElementViewModel { get; set; }
     }
 }
