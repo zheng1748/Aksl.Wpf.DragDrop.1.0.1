@@ -8,8 +8,15 @@
              xmlns:views="clr-namespace:Aksl.Modules.HamburgerMenuNavigationSideBar.Views"
              mc:Ignorable="d"
              d:DesignHeight="450"
-             d:DesignWidth="800"
+             d:DesignWidth="800" 
              prism:ViewModelLocator.AutoWireViewModel="True">
+    <ei:Interaction.Triggers>
+        <ei:EventTrigger EventName="Loaded"
+                        >
+            <ei:CallMethodAction TargetObject="{Binding}"
+                                 MethodName="ExecuteLoaded" />
+        </ei:EventTrigger>
+    </ei:Interaction.Triggers>
     <UserControl.Resources>
 
         <Style x:Key="dragDropItemContainerStyle"

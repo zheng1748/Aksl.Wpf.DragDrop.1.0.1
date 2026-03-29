@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Linq;
+using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
 
 using Prism;
@@ -12,11 +15,6 @@ using Aksl.Infrastructure;
 using Aksl.Toolkit.Controls;
 using Aksl.Toolkit.Services;
 using Aksl.Toolkit.UI;
-using System.Windows;
-using System.Diagnostics;
-using System.Windows.Documents;
-using Aksl.Views;
-using System.Linq;
 
 namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 {
@@ -148,7 +146,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    await _dialogViewService.AlertAsync(message: $"Loaded Error: \"{ex.Message}\"", title: "Error");
+                   await _dialogViewService.AlertAsync(message: $"Loaded Error: \"{ex.Message}\"", title: "Error");
                 }
             }
         }

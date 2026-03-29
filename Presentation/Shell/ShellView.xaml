@@ -8,6 +8,7 @@
         xmlns:prism="http://prismlibrary.com/"
         xmlns:materialDesign="clr-namespace:Aksl.Toolkit.Controls;assembly=Aksl.Toolkit.Controls"
         xmlns:inf="clr-namespace:Aksl.Infrastructure;assembly=Aksl.Infrastructure"
+        x:Name="WindowOfShell"
         Width="1600"
         Height="960"
         Title="{StaticResource AppName}"
