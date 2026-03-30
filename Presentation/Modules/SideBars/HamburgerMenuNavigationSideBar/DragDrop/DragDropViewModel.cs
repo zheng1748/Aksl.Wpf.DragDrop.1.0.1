@@ -17,13 +17,13 @@ using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using Prism.Unity;
 
-using Aksl.Modules.HamburgerMenuNavigationSideBar.Views;
 using Aksl.Toolkit.Services;
 using Aksl.Toolkit.UI;
 using Aksl.ViewModels;
 using Aksl.Views;
 using Aksl.Infrastructure;
 
+using Aksl.Modules.HamburgerMenuNavigationSideBar.Views;
 
 namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 {
@@ -1317,15 +1317,17 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 
                     if (shell is not null)
                     {
-                        shell.KeyDown += (sender, e) =>
+                        shell.KeyDown += async (sender, e) =>
                         {
                             if (e.Key == Key.S && Keyboard.Modifiers == ModifierKeys.Control)
                             {
-                                var saveFileDialog = new Microsoft.Win32.SaveFileDialog();
-                                bool? flag = saveFileDialog.ShowDialog();
-                                if (flag == null || flag.Value == false) return;
-                                string filePath = saveFileDialog.FileName;
+                                //var saveFileDialog = new Microsoft.Win32.SaveFileDialog();
+                                //bool? flag = saveFileDialog.ShowDialog();
+                                //if (flag == null || flag.Value == false) return;
+                                //string filePath = saveFileDialog.FileName;
                                 //   SaveCanvasAsImage(MainCanvas, filePath);
+
+                                await Connections.ToAdjacencyListAsync();
                             }
                             else if (e.Key == Key.Delete && _currentViewElement is not null)
                             {

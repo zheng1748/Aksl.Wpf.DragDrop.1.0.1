@@ -43,7 +43,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 
             _menuService = _container.Resolve<IMenuService>();
 
-            SelectedDisplayMode = SplitViewDisplayMode.Inline;
+            SelectedDisplayMode = SplitViewDisplayMode.CompactInline;
             IsPaneOpen = true;
             SelectedPlacement = SplitViewPanePlacement.Left;
 

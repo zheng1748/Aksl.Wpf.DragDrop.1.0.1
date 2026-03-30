@@ -101,14 +101,14 @@ namespace Aksl.Wpf.Unity
 
             return Task.CompletedTask;
         }
-  
+
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
             _ = moduleCatalog.AddModule(nameof(AccountModule), typeof(AccountModule).AssemblyQualifiedName, InitializationMode.WhenAvailable);
 
             _ = moduleCatalog.AddModule(typeof(HamburgerMenuNavigationSideBarModule).Name, typeof(HamburgerMenuNavigationSideBarModule).AssemblyQualifiedName, InitializationMode.WhenAvailable);
-            _ = moduleCatalog.AddModule(typeof(ShellModule).Name, typeof(ShellModule).AssemblyQualifiedName, InitializationMode.WhenAvailable, typeof(HamburgerMenuNavigationSideBarModule).Name);
+            _ = moduleCatalog.AddModule(typeof(ShellModule).Name, typeof(ShellModule).AssemblyQualifiedName, InitializationMode.WhenAvailable, dependsOn: typeof(HamburgerMenuNavigationSideBarModule).Name);
 
             _ = moduleCatalog.AddModule(nameof(FlowControlsModule), typeof(FlowControlsModule).AssemblyQualifiedName, InitializationMode.WhenAvailable);
             _ = moduleCatalog.AddModule(nameof(FunctionsModule), typeof(FunctionsModule).AssemblyQualifiedName, InitializationMode.WhenAvailable);

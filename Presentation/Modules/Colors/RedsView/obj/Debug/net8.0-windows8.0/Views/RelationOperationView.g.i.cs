@@ -68,7 +68,7 @@ namespace Aksl.Modules.Functions.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Aksl.Modules.Functions;component/views/relationoperationview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Aksl.Modules.Functions;V1.0.0.0;component/views/relationoperationview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\RelationOperationView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
