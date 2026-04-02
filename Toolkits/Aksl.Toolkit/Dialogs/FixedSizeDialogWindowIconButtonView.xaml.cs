@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Aksl.Toolkit.Dialogs
+namespace Aksl.Dialogs.Views
 {
     public partial class FixedSizeDialogWindowIconButtonView : UserControl
     {

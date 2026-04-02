@@ -59,7 +59,7 @@ namespace Aksl.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Aksl.Views;V1.0.0.0;component/bezierview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Aksl.Views;component/bezierview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\BezierView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

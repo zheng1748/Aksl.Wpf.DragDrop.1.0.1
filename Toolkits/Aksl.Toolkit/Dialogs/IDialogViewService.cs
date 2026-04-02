@@ -3,13 +3,15 @@ using System.Threading.Tasks;
 
 using Prism.Services.Dialogs;
 
-namespace Aksl.Toolkit.Services
+using Aksl.Dialogs.Views;
+
+namespace Aksl.Dialogs.Services
 {
     public interface IDialogViewService
     {
-        Task AlertAsync(string message, string title = null, string okText = "Ok", Action<IDialogResult> callBack = null,string windowName = null);
+        Task AlertAsync(string message, string title = null, string okText = "Ok", string windowName = null, Action<IDialogResult> callBack = null);
 
-        Task ConfirmAsync(string message, string title = null, string okText = "Ok", string cancelText = "Cancel", Action<IDialogResult> callBack = null,string windowName = null);
+        Task ConfirmAsync(string message, string title = null, string okText = "Ok", string cancelText = "Cancel",string windowName = null, Action<IDialogResult> callBack = null);
     }
 
     public class DialogViewService : IDialogViewService
@@ -25,16 +27,16 @@ namespace Aksl.Toolkit.Services
         }
         #endregion
 
-        public Task AlertAsync(string message, string title = null, string okText = "Ok", Action<IDialogResult> callBack = null,string windowName = nameof(Toolkit.Dialogs.FixedSizeDialogWindow))
+        public Task AlertAsync(string message, string title = null, string okText = "Ok", string windowName = null, Action<IDialogResult> callBack = null)
         {
-            _dialogService.Alert(message: message, title: title, okText: okText, callBack: callBack, windowName: windowName);
+            _dialogService.Alert(message: message, title: title, okText: okText, callBack: callBack, windowName: nameof(FixedSizeDialogWindow));
 
             return Task.CompletedTask;
         }
 
-        public Task ConfirmAsync(string message, string title = null, string okText = "Ok", string cancelText = "Cancel", Action<IDialogResult> callBack = null,string windowName = nameof(Toolkit.Dialogs.FixedSizeDialogWindow))
+        public Task ConfirmAsync(string message, string title = null, string okText = "Ok", string cancelText = "Cancel",string windowName = null, Action<IDialogResult> callBack = null)
         {
-            _dialogService.Confirm(title: title, message: message, okText: okText, cancelText: cancelText, callBack: callBack, windowName: windowName);
+            _dialogService.Confirm(title: title, message: message, okText: okText, cancelText: cancelText, callBack: callBack, windowName: nameof(FixedSizeDialogWindow));
 
             return Task.CompletedTask;
         }

@@ -5,7 +5,7 @@ using System.Windows.Shell;
 
 using Prism.Services.Dialogs;
 
-namespace Aksl.Toolkit.Dialogs
+namespace Aksl.Dialogs.Views
 {
     public partial class FixedSizeDialogWindow : Window, IDialogWindow
     {

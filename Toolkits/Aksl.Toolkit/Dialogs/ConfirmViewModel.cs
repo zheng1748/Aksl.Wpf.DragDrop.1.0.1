@@ -4,7 +4,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 
-namespace Aksl.Toolkit.Dialogs
+namespace Aksl.Dialogs.ViewModels
 {
     public class ConfirmViewModel : BindableBase, IDialogAware
     {
@@ -49,6 +49,20 @@ namespace Aksl.Toolkit.Dialogs
         {
             get => _title;
             set => SetProperty(ref _title, value);
+        }
+
+        private double _width=300d;
+        public double Width
+        {
+            get => _width;
+            set => SetProperty<double>(ref _width, value);
+        }
+
+        private double _height=150d;
+        public double Height
+        {
+            get => _height;
+            set => SetProperty<double>(ref _height, value);
         }
         #endregion
 

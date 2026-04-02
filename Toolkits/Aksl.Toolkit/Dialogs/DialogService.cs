@@ -2,8 +2,9 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Threading.Tasks;
 using System.Windows;
-using Aksl.Toolkit.Services;
+
 using Prism;
 using Prism.Common;
 using Prism.Ioc;
@@ -11,7 +12,7 @@ using Prism.Services.Dialogs;
 using Prism.Unity;
 using Unity;
 
-namespace Aksl.Services.Dialogs
+namespace Aksl.Dialogs.Services
 {
     public class DialogService
     {
@@ -22,12 +23,12 @@ namespace Aksl.Services.Dialogs
             _container = (PrismApplication.Current as PrismApplicationBase).Container.Resolve<IUnityContainer>();
         }
 
-        public void ShowDialog(FrameworkElement dialogContent, IDialogParameters parameters, Action<IDialogResult> callback, string windowName)
+        public void ShowDialog(FrameworkElement dialogContent, IDialogParameters parameters,  string windowName, Action<IDialogResult> callback)
         {
-            ShowDialogInternal(dialogContent, parameters, callback, true, windowName);
+            ShowDialogInternal(dialogContent, parameters,  true, windowName, callback);
         }
 
-        void ShowDialogInternal(FrameworkElement dialogContent,IDialogParameters parameters, Action<IDialogResult> callback, bool isModal, string windowName = null)
+        void ShowDialogInternal(FrameworkElement dialogContent,IDialogParameters parameters, bool isModal, string windowName = null, Action<IDialogResult> callback = null)
         {
             if (parameters == null)
             {

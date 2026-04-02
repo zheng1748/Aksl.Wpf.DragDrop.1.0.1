@@ -11,10 +11,10 @@ using Prism.Mvvm;
 using Prism.Unity;
 using Unity;
 
-using Aksl.Infrastructure;
+using Aksl.Dialogs.Services;
 using Aksl.Toolkit.Controls;
-using Aksl.Toolkit.Services;
 using Aksl.Toolkit.UI;
+using Aksl.Infrastructure;
 
 namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 {

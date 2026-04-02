@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Aksl.Toolkit.Dialogs.FixedSizeDialogWindowIconButtonView"
+﻿<UserControl x:Class="Aksl.Dialogs.Views.FixedSizeDialogWindowIconButtonView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"

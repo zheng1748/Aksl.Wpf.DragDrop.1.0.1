@@ -17,13 +17,14 @@ using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using Prism.Unity;
 
-using Aksl.Toolkit.Services;
+using Aksl.Dialogs.Services;
 using Aksl.Toolkit.UI;
 using Aksl.ViewModels;
 using Aksl.Views;
-using Aksl.Infrastructure;
 
 using Aksl.Modules.HamburgerMenuNavigationSideBar.Views;
+using System.Xml.Linq;
+using Aksl.Dialogs.Views;
 
 namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 {
@@ -197,7 +198,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
             {
                 if (HasSelectedDragDropItem())
                 {
-                    var dialogService = (PrismApplication.Current as PrismApplicationBase).Container.Resolve<Aksl.Services.Dialogs.DialogService>();
+                    var dialogService = (PrismApplication.Current as PrismApplicationBase).Container.Resolve<Aksl.Dialogs.Services.DialogService >();
 
                     VisualTreeFinder visualTreeFinder = new();
                     var nodeView = visualTreeFinder.FindLogicalChild<XNodeView>(_selectedDragDropItem.ViewElement);
@@ -212,7 +213,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                         editXNodeViewModel.LineWidth = nodeViewModel.LineWidth;
 
                         var parameters = new DialogParameters { { "Title", $"Edit:{editXNodeViewModel.Content}" }, { "OkText", "确定" }, { "CancelText", "取消" } };
-                        dialogService.ShowDialog(editXNodeView, parameters: parameters, windowName: nameof(Toolkit.Dialogs.FixedSizeDialogWindow), callback: (result) =>
+                        dialogService.ShowDialog(editXNodeView, parameters: parameters, windowName: nameof(Dialogs.Views.FixedSizeDialogWindow), callback: (result) =>
                         {
                             if (result.Parameters.TryGetValue("NodeViewModel", out EditXNodeViewModel editNodeViewModel))
                             {
@@ -384,7 +385,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                 {
                     //if (HasSelectedDragDropItem())
                     //{
-                    var dialogService = (PrismApplication.Current as PrismApplicationBase).Container.Resolve<Aksl.Services.Dialogs.DialogService>();
+                    var dialogService = (PrismApplication.Current as PrismApplicationBase).Container.Resolve<Dialogs.Services.DialogService>();
 
                     //var nodeView = visualTreeFinder.FindLogicalChild<XNodeView>(_selectedDragDropItem.ViewElement);
                     //if (nodeView is not null)
@@ -396,7 +397,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     editXNodeViewModel.LineWidth = nodeViewModel.LineWidth;
 
                     var parameters = new DialogParameters { { "Title", $"Edit:{editXNodeViewModel.Content}" }, { "OkText", "确定" }, { "CancelText", "取消" } };
-                    dialogService.ShowDialog(editXNodeView, parameters: parameters, windowName: nameof(Toolkit.Dialogs.FixedSizeDialogWindow), callback: (result) =>
+                    dialogService.ShowDialog(editXNodeView, parameters: parameters, windowName: nameof(Dialogs.Views.FixedSizeDialogWindow), callback: (result) =>
                     {
                         if (result.Parameters.TryGetValue("NodeViewModel", out EditXNodeViewModel editNodeViewModel))
                         {
@@ -419,7 +420,16 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     Border inputNodeRef = borders.FirstOrDefault(d => d.Name == "InputNode");
                     Border outputNodeRef = borders.FirstOrDefault(d => d.Name == "OutputNode");
 
-                    DoConnections();
+                    _dialogViewService.ConfirmAsync(message: $"Are You Sure Delete \"{nodeViewModel.Content}\" Node ?", title: $"Delete This Node", callBack:(result) => 
+                    {
+                        if (result.Result == ButtonResult.OK)
+                        {
+                            DoConnections(); 
+                            DoDeleteOther();
+                        }
+                    }).Await();
+
+                 
                     void DoConnections()
                     {
                         if (Connections.Any())
@@ -443,8 +453,11 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                         }
                     }
 
-                    InputPorts.Remove(inputNodeRef);
-                    DragDropItems.Remove(dragDropItemViewModel);
+                    void DoDeleteOther()
+                    {
+                        InputPorts.Remove(inputNodeRef);
+                        DragDropItems.Remove(dragDropItemViewModel);
+                    }
 
                     //if (HasSelectedDragDropItem())
                     //{

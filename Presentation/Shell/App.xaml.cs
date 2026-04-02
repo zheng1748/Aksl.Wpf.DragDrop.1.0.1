@@ -19,9 +19,6 @@ using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using Prism.Events;
 
-using Aksl.Toolkit.Dialogs;
-using Aksl.Toolkit.Services;
-
 using Aksl.Infrastructure;
 using Aksl.Infrastructure.Events;
 
@@ -52,12 +49,11 @@ namespace Aksl.Wpf.Unity
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterDialogWindow<FixedSizeDialogWindow>(name:nameof(FixedSizeDialogWindow));
+            containerRegistry.RegisterDialogWindow<Dialogs.Views.FixedSizeDialogWindow>(name:nameof(Dialogs.Views.FixedSizeDialogWindow));
+            containerRegistry.RegisterDialog<Dialogs.Views.ConfirmView, Dialogs.ViewModels.ConfirmViewModel>();
 
-            containerRegistry.RegisterSingleton(typeof(IDialogService), typeof(DialogService));
-            containerRegistry.RegisterSingleton(typeof(IDialogViewService), typeof(DialogViewService));
-
-            containerRegistry.RegisterDialog<ConfirmView, ConfirmViewModel>();
+            //  containerRegistry.RegisterSingleton(typeof(IDialogService), typeof(DialogService));
+            containerRegistry.RegisterSingleton(typeof(Dialogs.Services.IDialogViewService), typeof(Dialogs.Services.DialogViewService));
 
             containerRegistry.RegisterDialog<EditXNodeView, EditXNodeViewModel>();
             ViewModelLocationProvider.Register(typeof(EditXNodeView).ToString(),() => Container.Resolve<EditXNodeViewModel>());
