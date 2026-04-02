@@ -420,11 +420,11 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     Border inputNodeRef = borders.FirstOrDefault(d => d.Name == "InputNode");
                     Border outputNodeRef = borders.FirstOrDefault(d => d.Name == "OutputNode");
 
-                    _dialogViewService.ConfirmAsync(message: $"Are You Sure Delete \"{nodeViewModel.Content}\" Node ?", title: $"Delete This Node", callBack:(result) => 
+                    _dialogViewService.ConfirmAsync(message: $"Are You Sure Delete \"{nodeViewModel.Content}\" Node ?", title: $"Delete Node", width:360d,height:150,okText:"是", cancelText:"否", callBack:(result) =>
                     {
                         if (result.Result == ButtonResult.OK)
                         {
-                            DoConnections(); 
+                            DoConnections();
                             DoDeleteOther();
                         }
                     }).Await();
@@ -465,7 +465,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     //}
                 };
                 contextMenu.Items.Add(deleteNodeMenuItem);
-
+              
                 nodeViewModel.PopupMenu = contextMenu;
             }
 

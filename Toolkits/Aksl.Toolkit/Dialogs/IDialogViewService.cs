@@ -4,14 +4,15 @@ using System.Threading.Tasks;
 using Prism.Services.Dialogs;
 
 using Aksl.Dialogs.Views;
+using System.Windows.Media.Media3D;
 
 namespace Aksl.Dialogs.Services
 {
     public interface IDialogViewService
     {
-        Task AlertAsync(string message, string title = null, string okText = "Ok", string windowName = null, Action<IDialogResult> callBack = null);
+        Task AlertAsync(string message, string title = null, double width = 300d, double height = 150d,string okText = "Ok",  string windowName = null, Action<IDialogResult> callBack = null);
 
-        Task ConfirmAsync(string message, string title = null, string okText = "Ok", string cancelText = "Cancel",string windowName = null, Action<IDialogResult> callBack = null);
+        Task ConfirmAsync(string message, string title = null, double width = 300d, double height = 150d,  string okText = "Ok", string cancelText = "Cancel",string windowName = null, Action<IDialogResult> callBack = null);
     }
 
     public class DialogViewService : IDialogViewService
@@ -27,16 +28,16 @@ namespace Aksl.Dialogs.Services
         }
         #endregion
 
-        public Task AlertAsync(string message, string title = null, string okText = "Ok", string windowName = null, Action<IDialogResult> callBack = null)
+        public Task AlertAsync(string message, string title = null, double width = 300d, double height = 150d,  string okText = "Ok", string windowName = null, Action<IDialogResult> callBack = null)
         {
-            _dialogService.Alert(message: message, title: title, okText: okText, callBack: callBack, windowName: nameof(FixedSizeDialogWindow));
+            _dialogService.Alert(message: message, title: title, width: width, height: height, okText: okText, callBack: callBack, windowName: nameof(FixedSizeDialogWindow));
 
             return Task.CompletedTask;
         }
 
-        public Task ConfirmAsync(string message, string title = null, string okText = "Ok", string cancelText = "Cancel",string windowName = null, Action<IDialogResult> callBack = null)
+        public Task ConfirmAsync(string message, string title = null, double width = 300d, double height = 150d, string okText = "Ok", string cancelText = "Cancel", string windowName = null, Action<IDialogResult> callBack = null)
         {
-            _dialogService.Confirm(title: title, message: message, okText: okText, cancelText: cancelText, callBack: callBack, windowName: nameof(FixedSizeDialogWindow));
+            _dialogService.Confirm(message: message, title: title, width: width, height: height, okText: okText, cancelText: cancelText, callBack: callBack, windowName: nameof(FixedSizeDialogWindow));
 
             return Task.CompletedTask;
         }
@@ -48,7 +49,7 @@ namespace Aksl.Dialogs.Services
         {
             if (!string.IsNullOrEmpty(message) || !string.IsNullOrWhiteSpace(message))
             {
-                await dialogViewService.AlertAsync(message, title);
+                await dialogViewService.AlertAsync(message,title: title);
             }
         }
 
@@ -56,7 +57,7 @@ namespace Aksl.Dialogs.Services
         {
             if (!string.IsNullOrEmpty(message) || !string.IsNullOrWhiteSpace(message))
             {
-                await dialogViewService.AlertAsync(message, title, okText: okText);
+                await dialogViewService.AlertAsync(message,title: title, okText: okText);
             }
         }
     }

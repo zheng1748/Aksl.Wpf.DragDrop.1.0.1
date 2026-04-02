@@ -4,19 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:prism="http://prismlibrary.com/"
-             xmlns:converters="clr-namespace:Aksl.Toolkit.Converters"
-             mc:Ignorable="d"
              Width="{Binding Path=Width}"
              Height="{Binding Path=Height}"
+             xmlns:converters="clr-namespace:Aksl.Toolkit.Converters"
+             mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <UserControl.Resources>
         <converters:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
         <converters:BooleanNegationToVisibilityConverter x:Key="booleanNegationToVisibilityConverter" />
     </UserControl.Resources>
-    <Grid x:Name="LayoutRoot"
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
           Margin="0">
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition Height="*"/>
             <RowDefinition Height="5" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -24,7 +24,7 @@
                 Margin="0"
                 Background="WhiteSmoke"
                 CornerRadius="5"
-                BorderThickness="2"
+                BorderThickness="3"
                 BorderBrush="WhiteSmoke">
             <TextBlock Margin="7"
                        Text="{Binding Message}"

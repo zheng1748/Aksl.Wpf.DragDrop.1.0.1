@@ -48,9 +48,9 @@
 
                 <TextBlock Grid.Column="1"
                            VerticalAlignment="Center"
-                           FontSize="20"
+                           FontSize="15"
                            FontWeight="Black"
-                           Margin="20,2,0,0"
+                           Margin="20,5,0,0"
                            Text="{Binding Title,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}"
                            Background="{Binding Path=(Grid.Background),RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}}}"
                            Foreground="{Binding Path=(Window.Foreground),RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}">

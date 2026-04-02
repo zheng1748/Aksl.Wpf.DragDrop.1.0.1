@@ -23,12 +23,12 @@ namespace Aksl.Dialogs.Services
             _container = (PrismApplication.Current as PrismApplicationBase).Container.Resolve<IUnityContainer>();
         }
 
-        public void ShowDialog(FrameworkElement dialogContent, IDialogParameters parameters,  string windowName, Action<IDialogResult> callback)
+        public void ShowDialog(FrameworkElement dialogContent, IDialogParameters parameters, string windowName, Action<IDialogResult> callback)
         {
-            ShowDialogInternal(dialogContent, parameters,  true, windowName, callback);
+            ShowDialogInternal(dialogContent, parameters, true, windowName, callback);
         }
 
-        void ShowDialogInternal(FrameworkElement dialogContent,IDialogParameters parameters, bool isModal, string windowName = null, Action<IDialogResult> callback = null)
+        private void ShowDialogInternal(FrameworkElement dialogContent, IDialogParameters parameters, bool isModal, string windowName = null, Action<IDialogResult> callback = null)
         {
             if (parameters == null)
             {
