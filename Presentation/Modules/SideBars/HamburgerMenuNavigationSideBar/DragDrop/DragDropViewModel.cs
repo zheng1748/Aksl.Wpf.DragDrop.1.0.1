@@ -395,7 +395,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     editXNodeViewModel.LineWidth = nodeViewModel.LineWidth;
 
                     var parameters = new DialogParameters { { "Title", $"Edit:{editXNodeViewModel.Content}" }, { "OkText", "确定" }, { "CancelText", "取消" } };
-                    dialogService.ShowDialog(editXNodeView, parameters: parameters, windowName: nameof(Dialogs.Views.FixedSizeDialogWindow), callback: (result) =>
+                    dialogService.ShowDialog(editXNodeView, parameters: parameters, callback: (result) =>
                     {
                         if (result.Parameters.TryGetValue("NodeViewModel", out EditXNodeViewModel editNodeViewModel))
                         {
@@ -418,7 +418,7 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     Border inputNodeRef = borders.FirstOrDefault(d => d.Name == "InputNode");
                     Border outputNodeRef = borders.FirstOrDefault(d => d.Name == "OutputNode");
 
-                    _dialogViewService.ConfirmAsync(message: $"Are You Sure Delete \"{nodeViewModel.Content}\" Node ?", title: $"Delete Node", width:360d,height:150,okText:"是", cancelText:"否", callBack:(dr) =>
+                    _dialogViewService.ConfirmAsync(message: $"Are You Sure Delete \"{nodeViewModel.Content}\" Node ?", title: $"Delete Node", width:600d,height:260,okText:"是", cancelText:"否", callBack:(dr) =>
                     {
                         if (dr.Result == ButtonResult.OK)
                         {

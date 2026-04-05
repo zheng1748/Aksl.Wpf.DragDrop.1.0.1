@@ -12,6 +12,8 @@ using Prism.Services.Dialogs;
 using Prism.Unity;
 using Unity;
 
+using Aksl.Dialogs.Views;
+
 namespace Aksl.Dialogs.Services
 {
     public class DialogService
@@ -23,7 +25,7 @@ namespace Aksl.Dialogs.Services
             _container = (PrismApplication.Current as PrismApplicationBase).Container.Resolve<IUnityContainer>();
         }
 
-        public void ShowDialog(FrameworkElement dialogContent, IDialogParameters parameters, string windowName, Action<IDialogResult> callback)
+        public void ShowDialog(FrameworkElement dialogContent, IDialogParameters parameters, string windowName= nameof(FixedSizeDialogWindow), Action<IDialogResult> callback = null)
         {
             ShowDialogInternal(dialogContent, parameters, true, windowName, callback);
         }
