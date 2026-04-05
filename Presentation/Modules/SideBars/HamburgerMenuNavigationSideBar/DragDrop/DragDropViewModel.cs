@@ -404,8 +404,6 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                             nodeViewModel.LineWidth = editNodeViewModel.LineWidth;
                         }
                     });
-                    //}
-                    //}
                 };
                 contextMenu.Items.Add(editNodeMenuItem);
 
