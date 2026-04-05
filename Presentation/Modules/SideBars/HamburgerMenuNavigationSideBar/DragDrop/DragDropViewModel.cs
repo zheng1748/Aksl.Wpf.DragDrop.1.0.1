@@ -23,8 +23,6 @@ using Aksl.ViewModels;
 using Aksl.Views;
 
 using Aksl.Modules.HamburgerMenuNavigationSideBar.Views;
-using System.Xml.Linq;
-using Aksl.Dialogs.Views;
 
 namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
 {
@@ -420,9 +418,9 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.ViewModels
                     Border inputNodeRef = borders.FirstOrDefault(d => d.Name == "InputNode");
                     Border outputNodeRef = borders.FirstOrDefault(d => d.Name == "OutputNode");
 
-                    _dialogViewService.ConfirmAsync(message: $"Are You Sure Delete \"{nodeViewModel.Content}\" Node ?", title: $"Delete Node", width:360d,height:150,okText:"是", cancelText:"否", callBack:(result) =>
+                    _dialogViewService.ConfirmAsync(message: $"Are You Sure Delete \"{nodeViewModel.Content}\" Node ?", title: $"Delete Node", width:360d,height:150,okText:"是", cancelText:"否", callBack:(dr) =>
                     {
-                        if (result.Result == ButtonResult.OK)
+                        if (dr.Result == ButtonResult.OK)
                         {
                             DoConnections();
                             DoDeleteOther();

@@ -60,7 +60,7 @@ namespace Aksl.Wpf.Unity
 
             RegisterMenuFactoryAsync(containerRegistry).Await();
 
-            RegisterBuildWorkspaceViewEventAsync();
+            RegisterBuildWorkspaceViewEventAsync().Await();
         }
 
         protected async Task RegisterMenuFactoryAsync(IContainerRegistry containerRegistry)
