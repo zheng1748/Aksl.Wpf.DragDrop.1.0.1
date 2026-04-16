@@ -73,8 +73,8 @@ namespace Aksl.Modules.HamburgerMenuNavigationSideBar.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Aksl.Modules.HamburgerMenuNavigationSideBar;component/dragdrop/dragdropview%20.x" +
-                    "aml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Aksl.Modules.HamburgerMenuNavigationSideBar;V1.0.0.0;component/dragdrop/dragdrop" +
+                    "view%20.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\DragDrop\DragDropView .xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

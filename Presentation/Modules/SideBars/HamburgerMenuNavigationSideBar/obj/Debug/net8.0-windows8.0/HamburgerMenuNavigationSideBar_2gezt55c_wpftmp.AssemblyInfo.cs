@@ -13,14 +13,13 @@ using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("Aksl")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyDescriptionAttribute("Dialog Assistant")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
-[assembly: System.Reflection.AssemblyProductAttribute("Wpf Dialog")]
-[assembly: System.Reflection.AssemblyTitleAttribute("Aksl.DialogAssistant")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3a722768968a68cf1e458332c3170d76277f59d8")]
+[assembly: System.Reflection.AssemblyProductAttribute("Aksl.Modules.HamburgerMenuNavigationSideBar")]
+[assembly: System.Reflection.AssemblyTitleAttribute("Aksl.Modules.HamburgerMenuNavigationSideBar")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
-[assembly: System.Runtime.Versioning.TargetPlatformAttribute("Windows7.0")]
-[assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Windows7.0")]
+[assembly: System.Runtime.Versioning.TargetPlatformAttribute("Windows8.0")]
+[assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Windows8.0")]
 
 // 由 MSBuild WriteCodeFragment 类生成。
 
